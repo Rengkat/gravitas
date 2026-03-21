@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://gravitas.ng"),
 
   title: {
-    default: "Gravitas — Pass JAMB, WAEC & Every Nigerian Exam",
+    default: "Gravitas - Pass JAMB, WAEC & Every Nigerian Exam",
     template: "%s | Gravitas",
   },
   description:
