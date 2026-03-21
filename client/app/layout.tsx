@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@gravitasng",
     creator: "@gravitasng",
-    title: "Gravitas — Pass JAMB, WAEC & Every Nigerian Exam",
+    title: "Gravitas — Pass JAMB, WAEC, ICAN & Every Nigerian Exam",
     description: "AI-powered CBT simulation. Works offline. Explains in Pidgin.",
     images: ["/og/default.png"],
   },

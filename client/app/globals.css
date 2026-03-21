@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap");
+@source "../app";
+@source "../components";
 
 /* ─────────────────────────────────────────────────────────
-   GRAVITAS DESIGN TOKENS  (Tailwind v4 — @theme inline)
-   Fonts: Sora · DM Serif Display · JetBrains Mono
+   THEME
 ───────────────────────────────────────────────────────── */
-@theme inline {
+@theme {
+    /* ── Spacing — restores p-*, m-*, gap-*, w-*, h-* etc. ── */
+    --spacing: 0.25rem;
+
     /* ── Fonts ── */
     --font-sans: var(--font-sora);
     --font-serif: var(--font-dm-serif);
@@ -51,68 +54,73 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   BASE RESET
+   BASE
+   Kept inside @layer base so @layer utilities (Tailwind's
+   p-*, m-*, gap-* etc.) always win over the reset.
 ───────────────────────────────────────────────────────── */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+@layer base {
 
-html {
-    scroll-behavior: smooth;
-    height: 100%;
-}
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-body {
-    font-family: var(--font-sora), 'Sora', sans-serif;
-    background: var(--color-cream);
-    color: var(--color-text-main);
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+    html {
+        scroll-behavior: smooth;
+        height: 100%;
+    }
 
-h1,
-h2,
-h3 {
-    font-family: var(--font-serif), 'DM Serif Display', serif;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-}
+    body {
+        font-family: var(--font-sora), 'Sora', sans-serif;
+        background: var(--color-cream);
+        color: var(--color-text-main);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 
-/* Noise texture overlay */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-}
+    h1,
+    h2,
+    h3 {
+        font-family: var(--font-serif), 'DM Serif Display', serif;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+    }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-    width: 6px;
-}
+    /* Noise texture overlay */
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.4;
+    }
 
-::-webkit-scrollbar-track {
-    background: var(--color-cream-dark);
-}
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
 
-::-webkit-scrollbar-thumb {
-    background: var(--color-green-400);
-    border-radius: 3px;
-}
+    ::-webkit-scrollbar-track {
+        background: var(--color-cream-dark);
+    }
 
-/* Focus ring */
-:focus-visible {
-    outline: 2px solid var(--color-green-500);
-    outline-offset: 2px;
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-green-400);
+        border-radius: 3px;
+    }
+
+    /* Focus ring */
+    :focus-visible {
+        outline: 2px solid var(--color-green-500);
+        outline-offset: 2px;
+    }
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -322,7 +330,8 @@ body::before {
 .reveal {
     opacity: 0;
     transform: translateY(28px);
-    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transition:
+        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -344,10 +353,8 @@ body::before {
 }
 
 /* ─────────────────────────────────────────────────────────
-   UTILITY — from File 1 (kept for Gravitas UI components)
+   UTILITY CLASSES
 ───────────────────────────────────────────────────────── */
-
-/* Grid pattern background */
 .grid-pattern {
     background-image:
         linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
@@ -355,7 +362,6 @@ body::before {
     background-size: 48px 48px;
 }
 
-/* Section label */
 .section-label {
     display: inline-flex;
     align-items: center;
@@ -376,7 +382,6 @@ body::before {
     border-radius: 2px;
 }
 
-/* Form input */
 .g-input {
     width: 100%;
     padding: 0.875rem 1rem;
@@ -409,7 +414,6 @@ body::before {
     border-color: var(--color-green-500);
 }
 
-/* Custom checkbox */
 .g-checkbox {
     appearance: none;
     -webkit-appearance: none;
@@ -436,7 +440,6 @@ body::before {
     box-shadow: 0 0 0 3px rgba(26, 74, 46, 0.15);
 }
 
-/* Skeleton loader */
 .skeleton {
     background: linear-gradient(90deg,
             rgba(26, 74, 46, 0.06) 25%,
