@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="apps/web/public/logo.svg" alt="Gravitas Logo" width="80" height="80" />
+<img src="public/logo.svg" alt="Gravitas Logo" width="80" height="80" />
 
 # Gravitas
 
