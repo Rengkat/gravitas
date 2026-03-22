@@ -113,7 +113,7 @@ export const NAV_EXAMS: NavItemData[] = [
     title: "ICAN",
     badge: null,
     badgeStyle: null,
-    desc: "2025/26 syllabus — MCQ + essay with AI marking for all levels.",
+    desc: "Syllabus — MCQ + essay with AI marking for all levels.",
   },
   {
     icon: Stethoscope,
