@@ -6,6 +6,7 @@ import StatsBar from "./Components/home/StatsBar";
 import Features from "./Components/home/Features";
 import ExamModules from "./Components/home/ExamModules";
 import HowItWorks from "./Components/home/HowItWorks";
+import AITutor from "./Components/home/AITutor";
 
 export default function GravitasHomepage() {
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function GravitasHomepage() {
       <Features />
       <ExamModules />
       <HowItWorks />
+      <AITutor />
     </>
   );
 }
