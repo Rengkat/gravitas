@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import GravitasHomepageClient from "./Components/home/HomeClient";
 
 export const metadata: Metadata = {
-  title: "Gravitas — Pass JAMB, WAEC, ICAN & Every Nigerian Exam. No Excuse.",
+  title:
+    "Gravitas — Pass JAMB, WAEC, ICAN, Nigeri Nursing Council & Every Nigerian Exam. No Excuse.",
 
   description:
     "Nigeria's most powerful exam prep platform. Get pixel-perfect JAMB CBT " +

@@ -5,7 +5,6 @@ export default function PublicLayout({ children }: Readonly<{ children: React.Re
   return (
     <div>
       <PublicNav />
-
       {children}
       <Footer />
     </div>
