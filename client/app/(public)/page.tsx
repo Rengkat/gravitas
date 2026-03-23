@@ -1,44 +1,59 @@
-"use client";
+import type { Metadata } from "next";
+import GravitasHomepageClient from "./Components/home/HomeClient";
 
-import { useEffect } from "react";
-import Hero from "./Components/home/Hero";
-import StatsBar from "./Components/home/StatsBar";
-import Features from "./Components/home/Features";
-import ExamModules from "./Components/home/ExamModules";
-import HowItWorks from "./Components/home/HowItWorks";
-import AITutor from "./Components/home/AITutor";
-import SchoolPortal from "./Components/home/SchoolPortal";
-import Testimonials from "./Components/home/Testimonials";
-import CTA from "./Components/home/CTA";
+export const metadata: Metadata = {
+  title: "Gravitas — Pass JAMB, WAEC, ICAN & Every Nigerian Exam. No Excuse.",
 
-export default function GravitasHomepage() {
-  useEffect(() => {
-    const reveals = document.querySelectorAll(".reveal");
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("visible");
-            observer.unobserve(e.target);
-          }
-        }),
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
-    );
-    reveals.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  description:
+    "Nigeria's most powerful exam prep platform. Get pixel-perfect JAMB CBT " +
+    "simulation, AI-powered Sabi-Explain after every wrong answer, past " +
+    "questions from 10+ years, and deep performance analytics. Free to start. " +
+    "Works offline on 2G. Used by 12,000+ students.",
 
-  return (
-    <>
-      <Hero />
-      <StatsBar />
-      <Features />
-      <ExamModules />
-      <HowItWorks />
-      <AITutor />
-      <SchoolPortal />
-      <Testimonials />
-      <CTA />
-    </>
-  );
+  keywords: [
+    "JAMB CBT simulator 2025",
+    "WAEC past questions",
+    "NECO practice",
+    "Post-UTME preparation",
+    "Nigeria exam app",
+    "UTME prep",
+    "CBT practice",
+    "AI exam tutor Nigeria",
+    "Sabi-Explain AI",
+    "JAMB score improvement",
+    "exam preparation Nigeria free",
+    "WAEC 2026 digital mode",
+  ],
+
+  alternates: {
+    canonical: "https://gravitas.ng",
+  },
+
+  openGraph: {
+    type: "website",
+    url: "https://gravitas.ng",
+    title: "Gravitas — Pass JAMB, WAEC & Every Nigerian Exam. No Excuse.",
+    description:
+      "AI-powered CBT practice for JAMB, WAEC, NECO & Post-UTME. " +
+      "Pixel-perfect exam interfaces, instant AI explanations, works offline.",
+    images: [
+      {
+        url: "/og/homepage.png",
+        width: 1200,
+        height: 630,
+        alt: "Gravitas — Nigeria's #1 Exam Prep Platform",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Gravitas — Pass JAMB, WAEC & Every Nigerian Exam",
+    description: "AI CBT practice. Sabi-Explain AI. Works on 2G. Free to start.",
+    images: ["/og/homepage.png"],
+  },
+};
+
+export default function HomePage() {
+  return <GravitasHomepageClient />;
 }
