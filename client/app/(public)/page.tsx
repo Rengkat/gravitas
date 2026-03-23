@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 import Hero from "./Components/home/Hero";
 import StatsBar from "./Components/home/StatsBar";
+// import ExamModules from "./Components/home/ExamModules";
+import Features from "./Components/home/Features";
 
 export default function GravitasHomepage() {
   useEffect(() => {
@@ -25,6 +27,8 @@ export default function GravitasHomepage() {
     <>
       <Hero />
       <StatsBar />
+      <Features />
+      {/* <ExamModules /> */}
     </>
   );
 }
