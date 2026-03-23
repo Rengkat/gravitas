@@ -8,6 +8,8 @@ import ExamModules from "./Components/home/ExamModules";
 import HowItWorks from "./Components/home/HowItWorks";
 import AITutor from "./Components/home/AITutor";
 import SchoolPortal from "./Components/home/SchoolPortal";
+import Testimonials from "./Components/home/Testimonials";
+import CTA from "./Components/home/CTA";
 
 export default function GravitasHomepage() {
   useEffect(() => {
@@ -35,6 +37,8 @@ export default function GravitasHomepage() {
       <HowItWorks />
       <AITutor />
       <SchoolPortal />
+      <Testimonials />
+      <CTA />
     </>
   );
 }
