@@ -115,7 +115,7 @@ export default function Navbar() {
             <NavBtn href="/login" variant="ghost" testId="nav-login">
               Log In
             </NavBtn>
-            <NavBtn href="/signup" variant="primary" testId="nav-signup">
+            <NavBtn href="/register" variant="primary" testId="nav-register">
               Start Free →
             </NavBtn>
           </div>

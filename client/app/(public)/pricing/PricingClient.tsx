@@ -13,7 +13,7 @@ const PricingPageClient = () => {
       <CompareTable />
       <AddOns />
       <FAQ />
-      {/* <PricingCTA /> */}
+      <PricingCTA />
     </>
   );
 };
