@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 
 interface Props {
   email: string;
@@ -59,8 +59,8 @@ export default function Step3Verify({ email, onVerified }: Props) {
   return (
     <div className="[animation:fadeUp_0.4s_ease_both]">
       <div className="text-center mb-8">
-        <div className="w-20 h-20 rounded-3xl bg-green-800/[0.08] border-2 border-green-800/15 flex items-center justify-center text-4xl mx-auto mb-5 [animation:float_6s_ease-in-out_infinite]">
-          📬
+        <div className="w-20 h-20 rounded-3xl bg-green-800/[0.08] border-2 border-green-800/15 flex items-center justify-center mx-auto mb-5 [animation:float_6s_ease-in-out_infinite]">
+          <Mail size={36} className="text-green-700/60" strokeWidth={1.5} />
         </div>
         <h2 className="font-serif text-[28px] text-green-900 leading-tight tracking-tight mb-3">
           Check your inbox
