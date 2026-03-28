@@ -21,11 +21,11 @@ vi.mock("next/link", () => ({
   ),
 }));
 
-vi.mock("@/lib/gravitas-logo", () => ({
+vi.mock("@/lib/components/gravitas-logo", () => ({
   GravitasWordmark: () => <svg data-testid="gravitas-wordmark" />,
 }));
 
-vi.mock("@/lib/NavUtils", () => ({
+vi.mock("@/lib/constants/NavConstants", () => ({
   NAV_PRODUCTS: [
     { icon: () => <svg />, color: "green", title: "CBT Exam Practice", desc: "desc" },
     { icon: () => <svg />, color: "gold", title: "Gravitas-Tutor AI", desc: "desc" },
@@ -33,9 +33,6 @@ vi.mock("@/lib/NavUtils", () => ({
   NAV_EXAMS: [{ icon: () => <svg />, color: "green", title: "JAMB / UTME", desc: "desc" }],
   NAV_SCHOOLS: [{ icon: () => <svg />, color: "blue", title: "School Portal", desc: "desc" }],
   NAV_RESOURCES: [{ icon: () => <svg />, color: "green", title: "Blog", desc: "desc" }],
-  ICON_CLASSES: { green: "", gold: "", blue: "", orange: "", purple: "" },
-  INLINE_BADGE_CLASSES: { gold: "", new: "" },
-  FOOTER_BADGE_CLASSES: { green: "", gold: "", new: "" },
 }));
 
 vi.mock("../NavItemWithDropdown", () => ({
@@ -98,7 +95,7 @@ describe("Navbar", () => {
     render(<Navbar />);
 
     expect(screen.getByTestId("nav-login")).toBeInTheDocument();
-    expect(screen.getByTestId("nav-signup")).toBeInTheDocument();
+    expect(screen.getByTestId("nav-register")).toBeInTheDocument(); // Fixed: changed from nav-signup
   });
 
   test("mobile menu is hidden by default", () => {
