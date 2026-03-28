@@ -67,7 +67,7 @@ exam preparation that actually works.
 |---|---|---|---|---|
 | Exact CBT interface replication | ✅ JAMB + WAEC 2026 | ❌ | ❌ | Partial |
 | Theory/Essay smart mode | ✅ | ❌ | ❌ | ❌ |
-| AI explanations (Nigerian context) | ✅ Sabi-Explain | ❌ | ❌ | ❌ |
+| AI explanations (Nigerian context) | ✅ Gravitas-Explain | ❌ | ❌ | ❌ |
 | Professional exams (ICAN, Nursing) | ✅ | ❌ | ❌ | ❌ |
 | School white-label portal | ✅ | ❌ | ❌ | ❌ |
 | Parent dashboard + WhatsApp report | ✅ | ❌ | ❌ | ❌ |
@@ -166,7 +166,7 @@ TIER 5 — Content Library             ← Daily retention engine
 
 | Category | Technology | Purpose |
 |---|---|---|
-| Framework | Next.js 15 (App Router) | Full-stack React framework |
+| Framework | Next.js 16 (App Router) | Full-stack React framework |
 | Language | TypeScript (strict) | End-to-end type safety |
 | Styling | Tailwind CSS v3 | Utility-first CSS |
 | Components | shadcn/ui + Radix UI | Accessible UI primitives |
@@ -177,7 +177,7 @@ TIER 5 — Content Library             ← Daily retention engine
 | Forms | React Hook Form + Zod | Validation with shared schemas |
 | Date/Time | date-fns | Timer formatting, scheduling |
 | Charts | Recharts | Score analytics, performance radar |
-| Rich Text | Tiptap | WAEC/ICAN essay interface |
+| Rich Text | Lexical | WAEC/ICAN essay interface |
 | Math | KaTeX + react-katex | Physics, Chemistry, Maths equations |
 | Video | Video.js + hls.js | Adaptive bitrate streaming |
 | Whiteboard | @tldraw/tldraw | Live tutoring collaborative board |
