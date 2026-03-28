@@ -1,4 +1,4 @@
-import { LucideIcon } from "@/lib/NavUtils";
+import { LucideIcon } from "@/lib/constants/NavConstants";
 
 type Feature = {
   Icon: LucideIcon;

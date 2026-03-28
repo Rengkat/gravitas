@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import LoginPage from "./PageClient";
 
 export const metadata: Metadata = {
   title: "Log In to Gravitas",
@@ -38,3 +39,13 @@ export const metadata: Metadata = {
     description: "Continue your JAMB & WAEC exam preparation.",
   },
 };
+
+const page = () => {
+  return (
+    <div>
+      <LoginPage />
+    </div>
+  );
+};
+
+export default page;

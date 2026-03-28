@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import Step1RoleSelect, { RoleId } from "./Step1RoleSelect";
 import LeftPanel from "./LeftPanel";
 import StepIndicator from "./StepIndicator";
 import Step2Details from "./Step2Details";
 import Step3Verify from "./Step3Verify";
 import StepSuccess from "./StepSuccess";
+import { RoleId } from "@/types/registerType";
+import Step1RoleSelect from "./Step1RoleSelect";
 
 type Step = 1 | 2 | 3 | "success";
 

@@ -1,15 +1,14 @@
 "use client";
-import { GravitasWordmark } from "@/lib/gravitas-logo";
+import { GravitasWordmark } from "@/lib/components/gravitas-logo";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import NavItemWithDropdown from "./NavItemWithDropdown";
 import MegaDropdown from "./MegaDropdown";
-import { NAV_EXAMS, NAV_PRODUCTS, NAV_RESOURCES, NAV_SCHOOLS } from "@/lib/NavUtils";
 import NavBtn from "./NavBtn";
 import MobileSectionTitle from "./MobileSectionTitle";
 import MobileLink from "./MobileLink";
 import { BookOpen, CreditCard, HelpCircle } from "lucide-react";
-
+import { NAV_EXAMS, NAV_PRODUCTS, NAV_RESOURCES, NAV_SCHOOLS } from "@/lib/constants/NavConstants";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);

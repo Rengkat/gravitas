@@ -1,4 +1,4 @@
-import { LucideIcon } from "@/lib/NavUtils";
+import { LucideIcon } from "@/lib/constants/NavConstants";
 import Link from "next/dist/client/link";
 
 export default function MobileLink({

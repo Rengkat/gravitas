@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
 import MegaDropdown from "../MegaDropdown";
-import { NavItemData } from "@/lib/NavUtils";
+import { NavItemData } from "@/lib/constants/NavConstants";
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 import { ArrowRight, Mail } from "lucide-react";
 
 interface Props {
@@ -74,35 +74,37 @@ export default function Step3Verify({ email, onVerified }: Props) {
 
       {/* OTP inputs */}
       <div className="flex justify-center gap-3 mb-6">
-        {digits.map((d, i) => (
-          <>
-            {i === 3 && (
-              <div key="sep" className="flex items-center text-green-900/20 font-bold text-xl">
-                —
-              </div>
-            )}
-            <input
-              title="code"
-              key={i}
-              ref={(el) => {
-                inputRefs.current[i] = el;
-              }}
-              type="text"
-              inputMode="numeric"
-              maxLength={1}
-              value={d}
-              onChange={(e) => handleChange(i, e.target.value)}
-              onKeyDown={(e) => handleKeyDown(i, e)}
-              className={`w-12 h-14 text-center text-xl font-bold text-green-900 rounded-xl border-2 bg-white
-                         outline-none transition-all font-mono
-                         ${
-                           verified
-                             ? "border-green-500 bg-green-50"
-                             : "border-green-900/15 focus:border-green-800 focus:shadow-[0_0_0_3px_rgba(26,74,46,0.1)]"
-                         }`}
-            />
-          </>
-        ))}
+        {digits.map((d: any, i: any) => {
+          return (
+            <Fragment key={i}>
+              {i === 3 && (
+                <div key="sep" className="flex items-center text-green-900/20 font-bold text-xl">
+                  —
+                </div>
+              )}
+              <input
+                title="code"
+                key={i}
+                ref={(el) => {
+                  inputRefs.current[i] = el;
+                }}
+                type="text"
+                inputMode="numeric"
+                maxLength={1}
+                value={d}
+                onChange={(e) => handleChange(i, e.target.value)}
+                onKeyDown={(e) => handleKeyDown(i, e)}
+                className={`w-12 h-14 text-center text-xl font-bold text-green-900 rounded-xl border-2 bg-white
+                           outline-none transition-all font-mono
+                           ${
+                             verified
+                               ? "border-green-500 bg-green-50"
+                               : "border-green-900/15 focus:border-green-800 focus:shadow-[0_0_0_3px_rgba(26,74,46,0.1)]"
+                           }`}
+              />
+            </Fragment>
+          );
+        })}
       </div>
 
       {/* Verify button */}

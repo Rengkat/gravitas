@@ -1,4 +1,4 @@
-import { ICON_CLASSES, INLINE_BADGE_CLASSES, NavItemData } from "@/lib/NavUtils";
+import { ICON_CLASSES, INLINE_BADGE_CLASSES, NavItemData } from "@/lib/constants/NavConstants";
 
 export default function DropdownItem({
   icon: Icon,
