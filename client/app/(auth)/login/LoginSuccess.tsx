@@ -1,18 +1,18 @@
-import { Flame, ArrowRight } from "lucide-react";
+import { Flame, ArrowRight, FileText, Bot } from "lucide-react";
 import Link from "next/link";
 
 const SESSIONS = [
   {
-    icon: "📝",
+    icon: FileText,
     iconBg: "bg-green-500/10",
     title: "JAMB Physics Mock — 2023",
     sub: "Question 23 of 40 · Saved 2 days ago",
     cta: "Resume",
   },
   {
-    icon: "🤖",
+    icon: Bot,
     iconBg: "bg-gold/15",
-    title: "Sabi-Tutor — Chemistry",
+    title: "Gravitas-Tutor — Chemistry",
     sub: "Moles & Avogadro · 3 days ago",
     cta: "Continue",
   },
@@ -50,13 +50,13 @@ export default function LoginSuccess({ name }: Props) {
         <p className="text-[10px] font-bold text-green-700/40 tracking-widest uppercase mb-4">
           Continue where you left off
         </p>
-        {SESSIONS.map(({ icon, iconBg, title, sub, cta }) => (
+        {SESSIONS.map(({ icon: Icon, iconBg, title, sub, cta }) => (
           <div
             key={title}
             className="flex items-center gap-3 p-2 rounded-xl cursor-pointer transition-colors duration-200 hover:bg-green-800/[0.04] mt-1 first:mt-0">
             <div
-              className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center text-xl shrink-0`}>
-              {icon}
+              className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center shrink-0`}>
+              <Icon size={20} strokeWidth={1.5} className="text-green-700" />
             </div>
             <div className="flex-1">
               <p className="text-sm font-bold text-green-900">{title}</p>
