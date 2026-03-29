@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, Fragment } from "react";
+import { useState, useRef, useEffect, useCallback, Fragment } from "react";
 import { ArrowRight } from "lucide-react";
 
 interface Props {
@@ -16,17 +16,25 @@ export default function PhoneLoginForm({ onSuccess }: Props) {
   const [resendCount, setResendCount] = useState<number | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+  /* ── resend countdown ── */
   useEffect(() => {
     if (resendCount === null || resendCount <= 0) return;
     const id = setTimeout(() => setResendCount((c) => (c ?? 1) - 1), 1000);
     return () => clearTimeout(id);
   }, [resendCount]);
 
-  useEffect(() => {
+  // FIX: wrap in useCallback so it has a stable reference and can be safely
+  // listed as a useEffect dependency without causing infinite re-renders.
+  const handleAutoVerify = useCallback(() => {
     if (digits.every((d) => d.length === 1) && otpSent) {
       setTimeout(() => onSuccess("Student"), 400);
     }
-  }, [digits]);
+  }, [digits, otpSent, onSuccess]);
+
+  // FIX: deps array now includes all values the effect closes over.
+  useEffect(() => {
+    handleAutoVerify();
+  }, [handleAutoVerify]);
 
   function sendOTP() {
     if (!phone) return;
@@ -95,9 +103,7 @@ export default function PhoneLoginForm({ onSuccess }: Props) {
             {digits.map((d, i) => (
               <Fragment key={i}>
                 {i === 3 && (
-                  <span key="sep" className="flex items-center text-green-900/20 font-bold text-lg">
-                    —
-                  </span>
+                  <span className="flex items-center text-green-900/20 font-bold text-lg">—</span>
                 )}
                 <input
                   title="enter digit"

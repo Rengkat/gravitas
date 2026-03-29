@@ -4,6 +4,7 @@ import Step2Details from "../Step2Details";
 
 // ─── Mock external utils ──────────────────────────────────────────────────────
 vi.mock("@/utils/registerUtils", () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const z = require("zod");
 
   const buildSchema = () =>
