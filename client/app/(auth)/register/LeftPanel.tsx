@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const FEATURES = [
   "Pixel-perfect JAMB & WAEC interface",
   "AI explanations in English & Pidgin",
@@ -49,12 +51,12 @@ export default function LeftPanel() {
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full p-10 xl:p-12">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-3 mb-auto no-underline">
+        <Link href="/" className="flex items-center gap-3 mb-auto no-underline">
           <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center font-serif text-2xl text-gold border border-white/10">
             G
           </div>
           <span className="font-serif text-2xl text-white tracking-tight">Gravitas</span>
-        </a>
+        </Link>
 
         {/* Main pitch */}
         <div className="my-auto">

@@ -1,7 +1,6 @@
 import { RoleId } from "@/types/registerType";
 import { ROLES } from "@/utils/registerUtils";
 import { Check, ArrowRight } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
 interface Props {
   selected: RoleId | null;

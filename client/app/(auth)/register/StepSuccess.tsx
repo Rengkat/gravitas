@@ -1,4 +1,5 @@
 import { ArrowRight, FileText, Bot } from "lucide-react";
+import Link from "next/link";
 
 const NEXT_STEPS = [
   {
@@ -56,14 +57,14 @@ export default function StepSuccess() {
         ))}
       </div>
 
-      <a
+      <Link
         href="/dashboard"
         className="w-full py-4 bg-green-800 text-white font-bold text-[15px] rounded-xl
                    hover:bg-green-700 transition-all duration-200 hover:-translate-y-0.5
                    hover:shadow-[0_8px_24px_rgba(26,74,46,0.3)]
                    flex items-center justify-center gap-2 no-underline">
         Go to My Dashboard →
-      </a>
+      </Link>
     </div>
   );
 }

@@ -48,7 +48,7 @@ export default function ForgotPassword({ onBack }: Props) {
             <div
               key={i}
               className="flex items-start gap-3 p-3.5 rounded-xl bg-white border border-green-900/10 text-sm">
-              <span className="text-green-500 shrink-0 mt-0.5 font-bold">①②③"[i]"</span>
+              <span className="text-green-500 shrink-0 mt-0.5 font-bold">{["①", "②", "③"][i]}</span>
               <span className="text-green-900/70">{step}</span>
             </div>
           ))}

@@ -1,4 +1,5 @@
 import { ICON_CLASSES, INLINE_BADGE_CLASSES, NavItemData } from "@/lib/constants/NavConstants";
+import Link from "next/link";
 
 export default function DropdownItem({
   icon: Icon,
@@ -9,7 +10,7 @@ export default function DropdownItem({
   badgeStyle,
 }: NavItemData) {
   return (
-    <a
+    <Link
       href="#"
       className="group flex items-start gap-3 p-3.5 rounded-lg border border-transparent no-underline transition-all duration-200 hover:bg-green-50 hover:border-green-500/20">
       <div
@@ -29,6 +30,6 @@ export default function DropdownItem({
         </div>
         <p className="text-xs text-text-muted leading-relaxed m-0">{desc}</p>
       </div>
-    </a>
+    </Link>
   );
 }

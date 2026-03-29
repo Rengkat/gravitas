@@ -19,7 +19,7 @@ interface Props {
   onClearError: () => void;
 }
 
-export default function EmailLoginForm({ onSuccess, onForgot, error, onClearError }: Props) {
+export default function EmailLoginForm({ onSuccess, onForgot, onClearError }: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);

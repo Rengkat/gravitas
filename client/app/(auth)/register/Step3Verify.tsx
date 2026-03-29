@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, Fragment } from "react";
+import { useState, useRef, useEffect, useCallback, Fragment } from "react";
 import { ArrowRight, Mail } from "lucide-react";
 
 interface Props {
@@ -14,12 +14,24 @@ export default function Step3Verify({ email, onVerified }: Props) {
   const [resendCount, setResendCount] = useState<number | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+  // FIX 1: wrap in useCallback so it is stable and can be listed as a
+  // useEffect dependency without causing infinite re-renders.
+  // FIX 2: declare BEFORE the useEffect that references it — fixes the
+  // react-hooks/immutability "accessed before declared" error.
+  const handleVerify = useCallback(() => {
+    if (digits.some((d) => !d)) return;
+    // FIX 3: removed dead `const next = ...` that was never used
+    setVerified(true);
+    setTimeout(onVerified, 600);
+  }, [digits, onVerified]);
+
   /* ── auto-verify when all 6 filled ── */
+  // FIX 4: added missing deps `verified` and `handleVerify`
   useEffect(() => {
     if (digits.every((d) => d.length === 1) && !verified) {
       setTimeout(handleVerify, 400);
     }
-  }, [digits]);
+  }, [digits, verified, handleVerify]);
 
   /* ── resend countdown ── */
   useEffect(() => {
@@ -40,14 +52,6 @@ export default function Step3Verify({ email, onVerified }: Props) {
     if (e.key === "Backspace" && !digits[i] && i > 0) {
       inputRefs.current[i - 1]?.focus();
     }
-  }
-
-  function handleVerify() {
-    if (digits.some((d) => !d)) return;
-    const next = [...digits].map(() => "");
-    // simulate correct code — mark verified
-    setVerified(true);
-    setTimeout(onVerified, 600);
   }
 
   function startResend() {
@@ -74,17 +78,15 @@ export default function Step3Verify({ email, onVerified }: Props) {
 
       {/* OTP inputs */}
       <div className="flex justify-center gap-3 mb-6">
-        {digits.map((d: any, i: any) => {
+        {/* FIX 5: replaced (d: any, i: any) with proper types */}
+        {digits.map((d: string, i: number) => {
           return (
             <Fragment key={i}>
               {i === 3 && (
-                <div key="sep" className="flex items-center text-green-900/20 font-bold text-xl">
-                  —
-                </div>
+                <div className="flex items-center text-green-900/20 font-bold text-xl">—</div>
               )}
               <input
                 title="code"
-                key={i}
                 ref={(el) => {
                   inputRefs.current[i] = el;
                 }}

@@ -8,6 +8,7 @@ import LoginSuccess from "./LoginSuccess";
 import ForgotPassword from "./ForgotPassword";
 import EmailLoginForm from "./EmailLoginForm";
 import PhoneLoginForm from "./PhoneLoginForm";
+import Link from "next/link";
 
 type View = "login" | "forgot" | "success";
 type Tab = "email" | "phone";
@@ -63,19 +64,19 @@ export default function LoginPage() {
       <div className="flex-1 flex flex-col min-h-screen overflow-y-auto bg-cream">
         {/* Topbar */}
         <div className="flex items-center justify-between px-6 py-5 lg:px-10 border-b border-green-900/[0.08]">
-          <a href="/" className="flex items-center gap-2 lg:hidden no-underline">
+          <Link href="/" className="flex items-center gap-2 lg:hidden no-underline">
             <div className="w-8 h-8 bg-green-800 rounded-lg flex items-center justify-center font-serif text-xl text-gold">
               G
             </div>
             <span className="font-serif text-xl text-green-800">Gravitas</span>
-          </a>
+          </Link>
           <div className="ml-auto flex items-center gap-2 text-sm text-green-700/60">
             Don&apos;t have an account?{" "}
-            <a
+            <Link
               href="/register"
               className="font-semibold text-green-800 hover:text-green-600 transition-colors underline underline-offset-2">
               Sign up free →
-            </a>
+            </Link>
           </div>
         </div>
 

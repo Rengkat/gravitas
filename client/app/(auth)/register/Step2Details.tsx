@@ -15,7 +15,6 @@ import {
   CreditCard,
   Phone,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import {
   buildSchema,
   EXAM_TARGETS,
@@ -25,6 +24,7 @@ import {
   STATES,
 } from "@/utils/registerUtils";
 import { RoleId } from "@/types/registerType";
+import Link from "next/link";
 
 /* ─── Zod schema factory (role-aware) ───────────────────────── */
 type FormValues = z.infer<ReturnType<typeof buildSchema>>;
@@ -403,17 +403,17 @@ export default function Step2Details({ role, onBack, onSubmit }: Props) {
               <input {...register("agreeTerms")} type="checkbox" className="g-checkbox mt-0.5" />
               <span className="text-[13px] text-green-900/60 leading-relaxed">
                 I agree to Gravitas&apos;s{" "}
-                <a
+                <Link
                   href="#"
                   className="text-green-700 font-semibold hover:text-green-800 underline underline-offset-2">
                   Terms of Service
-                </a>{" "}
+                </Link>{" "}
                 and{" "}
-                <a
+                <Link
                   href="#"
                   className="text-green-700 font-semibold hover:text-green-800 underline underline-offset-2">
                   Privacy Policy
-                </a>
+                </Link>
               </span>
             </label>
             <FieldError msg={errors.agreeTerms?.message} />

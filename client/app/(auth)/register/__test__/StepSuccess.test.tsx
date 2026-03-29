@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, test, expect } from "vitest";
 import StepSuccess from "../StepSuccess";
 

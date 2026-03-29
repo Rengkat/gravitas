@@ -8,6 +8,7 @@ import Step3Verify from "./Step3Verify";
 import StepSuccess from "./StepSuccess";
 import { RoleId } from "@/types/registerType";
 import Step1RoleSelect from "./Step1RoleSelect";
+import Link from "next/link";
 
 type Step = 1 | 2 | 3 | "success";
 
@@ -53,19 +54,19 @@ export default function RegisterPage() {
       <div className="flex-1 flex flex-col min-h-screen overflow-y-auto bg-cream">
         {/* Top bar */}
         <div className="flex items-center justify-between px-6 py-5 lg:px-10 border-b border-green-900/[0.08]">
-          <a href="/" className="flex items-center gap-2 lg:hidden no-underline">
+          <Link href="/" className="flex items-center gap-2 lg:hidden no-underline">
             <div className="w-8 h-8 bg-green-800 rounded-lg flex items-center justify-center font-serif text-lg text-gold">
               G
             </div>
             <span className="font-serif text-xl text-green-800">Gravitas</span>
-          </a>
+          </Link>
           <div className="ml-auto flex items-center gap-2 text-sm text-green-700/70">
             Already have an account?
-            <a
+            <Link
               href="/login"
               className="font-semibold text-green-800 hover:text-green-600 transition-colors underline underline-offset-2">
               Log in →
-            </a>
+            </Link>
           </div>
         </div>
 

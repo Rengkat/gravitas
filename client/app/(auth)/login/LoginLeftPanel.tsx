@@ -1,4 +1,5 @@
 import { Flame } from "lucide-react";
+import Link from "next/link";
 
 const TICKER = [
   { text: "Chukwuemeka just scored 308 in JAMB", sub: "Engineering, ABU — 20 min ago" },
@@ -46,7 +47,7 @@ export default function LoginLeftPanel() {
 
       <div className="relative z-10 flex flex-col h-full p-10 xl:p-12">
         {/* Logo */}
-        <a
+        <Link
           href="/"
           className="flex items-center gap-3 no-underline "
           style={{ marginBottom: "3rem" }}>
@@ -54,7 +55,7 @@ export default function LoginLeftPanel() {
             G
           </div>
           <span className="font-serif text-2xl text-white tracking-tight">Gravitas</span>
-        </a>
+        </Link>
 
         {/* Central content */}
         <div className="my-auto">

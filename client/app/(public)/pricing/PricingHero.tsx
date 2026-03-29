@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { GraduationCap, Zap, School, Check, X, ArrowRight } from "lucide-react";
+import { GraduationCap, Zap, School, Check, X } from "lucide-react";
 
 /* ─── Types ──────────────────────────────────────────────── */
 type Billing = "monthly" | "annual";

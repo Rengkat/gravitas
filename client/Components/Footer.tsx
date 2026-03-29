@@ -55,12 +55,12 @@ const Footer = () => {
             </div>
             <div className="flex flex-col gap-3">
               {links.map((l) => (
-                <a
+                <Link
                   key={l}
                   href="#"
                   className="text-[13.5px] text-white/45 no-underline transition-colors hover:text-white/85 flex items-center gap-1.5">
                   {l}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -73,12 +73,12 @@ const Footer = () => {
         </div>
         <div className="flex gap-6">
           {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((l) => (
-            <a
+            <Link
               key={l}
               href="#"
               className="text-[12px] text-white/25 no-underline transition-colors hover:text-white/60">
               {l}
-            </a>
+            </Link>
           ))}
         </div>
       </div>

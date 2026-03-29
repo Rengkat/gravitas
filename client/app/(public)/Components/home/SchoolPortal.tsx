@@ -1,5 +1,6 @@
 import { School, ClipboardList, Users, FileCheck, ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 
 /* ─── Types ──────────────────────────────────────────────── */
 type CheckItem = { Icon: LucideIcon; title: string; desc: string };
@@ -139,12 +140,12 @@ export default function SchoolPortal() {
 
           {/* CTA */}
           <div className="mt-7">
-            <a
+            <Link
               href="#"
               className="relative overflow-hidden inline-flex items-center gap-2.5 px-8 py-4 bg-green-800 rounded-[10px] text-white font-sans text-[15px] font-bold no-underline transition-all duration-[250ms] before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/15 before:to-transparent hover:bg-green-700 hover:-translate-y-0.5 hover:shadow-[0_12px_36px_rgba(26,74,46,0.35)]">
               Request School Demo
               <ArrowRight size={16} strokeWidth={2.5} />
-            </a>
+            </Link>
           </div>
         </div>
 

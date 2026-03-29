@@ -1,11 +1,26 @@
 import { Flame, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const SESSIONS = [
-  { icon: "📝", iconBg: "bg-green-500/10", title: "JAMB Physics Mock — 2023",  sub: "Question 23 of 40 · Saved 2 days ago", cta: "Resume"   },
-  { icon: "🤖", iconBg: "bg-gold/15",      title: "Sabi-Tutor — Chemistry",    sub: "Moles & Avogadro · 3 days ago",        cta: "Continue" },
+  {
+    icon: "📝",
+    iconBg: "bg-green-500/10",
+    title: "JAMB Physics Mock — 2023",
+    sub: "Question 23 of 40 · Saved 2 days ago",
+    cta: "Resume",
+  },
+  {
+    icon: "🤖",
+    iconBg: "bg-gold/15",
+    title: "Sabi-Tutor — Chemistry",
+    sub: "Moles & Avogadro · 3 days ago",
+    cta: "Continue",
+  },
 ];
 
-interface Props { name: string; }
+interface Props {
+  name: string;
+}
 
 export default function LoginSuccess({ name }: Props) {
   return (
@@ -19,7 +34,9 @@ export default function LoginSuccess({ name }: Props) {
         </div>
       </div>
 
-      <h2 className="font-serif text-[30px] text-green-900 tracking-tight mb-2">You&apos;re back!</h2>
+      <h2 className="font-serif text-[30px] text-green-900 tracking-tight mb-2">
+        You&apos;re back!
+      </h2>
       <p className="text-green-700/55 text-sm mb-2">
         Welcome back, <strong className="text-green-800">{name}</strong>
       </p>
@@ -34,8 +51,11 @@ export default function LoginSuccess({ name }: Props) {
           Continue where you left off
         </p>
         {SESSIONS.map(({ icon, iconBg, title, sub, cta }) => (
-          <div key={title} className="flex items-center gap-3 p-2 rounded-xl cursor-pointer transition-colors duration-200 hover:bg-green-800/[0.04] mt-1 first:mt-0">
-            <div className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center text-xl shrink-0`}>
+          <div
+            key={title}
+            className="flex items-center gap-3 p-2 rounded-xl cursor-pointer transition-colors duration-200 hover:bg-green-800/[0.04] mt-1 first:mt-0">
+            <div
+              className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center text-xl shrink-0`}>
               {icon}
             </div>
             <div className="flex-1">
@@ -49,11 +69,12 @@ export default function LoginSuccess({ name }: Props) {
         ))}
       </div>
 
-      <a href="/dashboard"
+      <Link
+        href="/dashboard"
         className="w-full py-4 bg-green-800 text-white font-bold text-[15px] rounded-xl hover:bg-green-700 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(26,74,46,0.3)] flex items-center justify-center gap-2 no-underline">
         Go to Dashboard
         <ArrowRight size={16} strokeWidth={2.5} />
-      </a>
+      </Link>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect } from "react";
 
 const TRUST_AVATARS = [
@@ -105,7 +106,7 @@ export default function Hero() {
 
         {/* Actions */}
         <div className="flex items-center gap-4 mb-12 [animation:fadeUp_0.6s_0.3s_ease_both]">
-          <a
+          <Link
             href="#"
             className="relative overflow-hidden inline-flex items-center gap-2.5 px-8 py-4 bg-green-800 rounded-[10px] text-white font-sans text-[15px] font-bold no-underline tracking-[0.01em] transition-all duration-[250ms] before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/15 before:to-transparent hover:bg-green-700 hover:-translate-y-0.5 hover:shadow-[0_12px_36px_rgba(26,74,46,0.35)]">
             Start Practising Free
@@ -118,15 +119,15 @@ export default function Hero() {
               strokeWidth="2.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5-5 5M6 12h12" />
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
             className="inline-flex items-center gap-2 px-7 py-4 bg-transparent border-2 border-green-800/25 rounded-[10px] text-green-800 font-sans text-[15px] font-semibold no-underline transition-all duration-[250ms] hover:bg-green-800/[0.06] hover:border-green-600">
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>
             Watch Demo
-          </a>
+          </Link>
         </div>
 
         {/* Trust row */}

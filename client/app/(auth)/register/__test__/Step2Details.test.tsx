@@ -18,9 +18,10 @@ vi.mock("@/utils/registerUtils", () => {
       examTarget: z.string().optional(),
       password: z.string().min(8, "Password must be at least 8 characters"),
       confirm: z.string().min(1, "Please confirm your password"),
+      // FIX: replaced (val: any) with (val: boolean) — eliminates no-explicit-any
       agreeTerms: z
         .boolean()
-        .refine((val: any) => val === true, { message: "You must agree to the terms" }),
+        .refine((val: boolean) => val === true, { message: "You must agree to the terms" }),
       agreeMarketing: z.boolean().optional(),
     });
 
@@ -131,9 +132,6 @@ describe("Step2Details", () => {
     vi.useRealTimers();
   });
 
-  // ───────────────────────────────────────────
-  // Rendering
-  // ───────────────────────────────────────────
   describe("Rendering", () => {
     test("renders header, OAuth buttons, and form for student role", () => {
       render(<Step2Details {...baseProps} />);
@@ -170,9 +168,6 @@ describe("Step2Details", () => {
     });
   });
 
-  // ───────────────────────────────────────────
-  // Conditional Fields
-  // ───────────────────────────────────────────
   describe("Conditional Fields", () => {
     test("student role: does NOT show school name, subject, LGA, or exam target", () => {
       render(<Step2Details {...baseProps} />);
@@ -215,9 +210,6 @@ describe("Step2Details", () => {
     });
   });
 
-  // ───────────────────────────────────────────
-  // Email Validation Indicator
-  // ───────────────────────────────────────────
   describe("Email Validation Indicator", () => {
     test("check icon appears when a valid email is typed", () => {
       render(<Step2Details {...baseProps} />);
@@ -231,9 +223,6 @@ describe("Step2Details", () => {
     });
   });
 
-  // ───────────────────────────────────────────
-  // Password Visibility Toggle
-  // ───────────────────────────────────────────
   describe("Password Visibility Toggle", () => {
     test("password field is hidden by default and toggles to text", () => {
       render(<Step2Details {...baseProps} />);
@@ -278,9 +267,6 @@ describe("Step2Details", () => {
     });
   });
 
-  // ───────────────────────────────────────────
-  // Password Strength
-  // ───────────────────────────────────────────
   describe("Password Strength Indicator", () => {
     test("no strength label shown when password is empty", () => {
       render(<Step2Details {...baseProps} />);
@@ -321,9 +307,6 @@ describe("Step2Details", () => {
     });
   });
 
-  // ───────────────────────────────────────────
-  // Form Validation
-  // ───────────────────────────────────────────
   describe("Form Validation", () => {
     test("shows required errors when submitted with empty fields", async () => {
       render(<Step2Details {...baseProps} />);
@@ -372,7 +355,6 @@ describe("Step2Details", () => {
 
       expect(screen.getByText("First name is required")).toBeInTheDocument();
 
-      // Correcting the field should clear its error on the next RHF validation pass
       await act(async () => {
         fireEvent.change(screen.getByPlaceholderText("Adaeze"), { target: { value: "Ada" } });
       });
@@ -381,15 +363,11 @@ describe("Step2Details", () => {
     });
   });
 
-  // ───────────────────────────────────────────
-  // Submit & Loading State
-  // ───────────────────────────────────────────
   describe("Submit & Loading State", () => {
     test("shows loading spinner and disables button during submission", async () => {
       render(<Step2Details {...baseProps} />);
       await fillValidForm();
 
-      // Submit — do NOT advance timers yet so we catch the loading state
       await act(async () => {
         fireEvent.click(screen.getByRole("button", { name: /create account/i }));
       });
@@ -397,7 +375,6 @@ describe("Step2Details", () => {
       expect(screen.getByText(/creating account/i)).toBeInTheDocument();
       expect(screen.getByRole("button", { name: /creating account/i })).toBeDisabled();
 
-      // Clean up — flush the pending 1800ms timer so it doesn't leak into next test
       await act(async () => {
         vi.advanceTimersByTime(1800);
       });
@@ -407,13 +384,11 @@ describe("Step2Details", () => {
       render(<Step2Details {...baseProps} />);
       await fillValidForm();
 
-      // Submit click — loading starts, onSubmit not called yet
       await act(async () => {
         fireEvent.click(screen.getByRole("button", { name: /create account/i }));
       });
       expect(mockOnSubmit).not.toHaveBeenCalled();
 
-      // Advance past the 1800ms delay
       await act(async () => {
         vi.advanceTimersByTime(1800);
       });
@@ -438,9 +413,6 @@ describe("Step2Details", () => {
     });
   });
 
-  // ───────────────────────────────────────────
-  // Agreements
-  // ───────────────────────────────────────────
   describe("Agreements", () => {
     test("agreeTerms checkbox is unchecked by default", () => {
       render(<Step2Details {...baseProps} />);
@@ -465,19 +437,14 @@ describe("Step2Details", () => {
 
     test("form submits successfully without agreeMarketing checked", async () => {
       render(<Step2Details {...baseProps} />);
-      await fillValidForm(); // agreeMarketing intentionally left unchecked
+      await fillValidForm();
 
-      // FIX: must advance fake timer after submit — onSubmit fires inside
-      // a setTimeout(1800ms), not synchronously after handleSubmit resolves.
       await submitAndFlush();
 
       expect(mockOnSubmit).toHaveBeenCalledTimes(1);
     });
   });
 
-  // ───────────────────────────────────────────
-  // Tutor-specific Fields
-  // ───────────────────────────────────────────
   describe("Tutor-specific fields", () => {
     test("LGA dropdown contains state options", () => {
       render(<Step2Details role="tutor" onBack={mockOnBack} onSubmit={mockOnSubmit} />);
