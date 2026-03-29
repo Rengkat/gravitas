@@ -19,7 +19,6 @@ vi.mock("@/utils/registerUtils", () => {
       examTarget: z.string().optional(),
       password: z.string().min(8, "Password must be at least 8 characters"),
       confirm: z.string().min(1, "Please confirm your password"),
-      // FIX: replaced (val: any) with (val: boolean) — eliminates no-explicit-any
       agreeTerms: z
         .boolean()
         .refine((val: boolean) => val === true, { message: "You must agree to the terms" }),
