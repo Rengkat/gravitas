@@ -168,7 +168,7 @@ interface ProgressBarProps {
   className?: string;
 }
 
-export function ProgressBar({ value, label, height = 6, className = "" }: ProgressBarProps) {
+export function ProgressBar({ value, label, height = 6 }: ProgressBarProps) {
   const isDeterminate = value !== undefined;
   return (
     <>
