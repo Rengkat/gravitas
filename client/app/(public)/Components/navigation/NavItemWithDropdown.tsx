@@ -28,7 +28,8 @@ export default function NavItemWithDropdown({
             : "text-text-muted bg-transparent hover:text-green-800 hover:bg-green-800/[0.06]",
         ].join(" ")}
         aria-haspopup="true"
-        aria-expanded={expanded}>
+        // aria-expanded={open ? "true" : "false"} // Explicit string conversion
+      >
         {label}
         <ChevronDown
           size={13}
