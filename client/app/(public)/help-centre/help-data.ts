@@ -1,4 +1,3 @@
-// components/help/help-data.ts
 import {
   Rocket,
   FileText,
