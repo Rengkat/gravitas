@@ -2,9 +2,6 @@
 import type { Metadata } from "next";
 import HelpCenterClient from "./help-center-client";
 
-/* ─────────────────────────────────────────────────────────
-   PAGE METADATA  (/help)
-───────────────────────────────────────────────────────── */
 export const metadata: Metadata = {
   title: "Help Centre — Gravitas Support & Documentation",
 
