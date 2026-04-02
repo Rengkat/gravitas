@@ -1,8 +1,3 @@
-import { FileText, Bot, CreditCard, Wifi, Key, Upload } from "lucide-react";
-
-/* ─────────────────────────────────────────────────────────
-   SECTION LABEL (shared)
-───────────────────────────────────────────────────────── */
 export default function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <div className="inline-flex items-center gap-2 mb-4">

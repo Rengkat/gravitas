@@ -7,20 +7,11 @@ import {
   Users,
   Star,
   BookOpen,
-  Smartphone,
-  Zap,
   Trophy,
   ChevronRight,
   Calendar,
-  CheckCircle,
   PlayCircle,
   GraduationCap,
-  Target,
-  TrendingUp,
-  MessageSquare,
-  Download,
-  Settings,
-  BarChart3,
 } from "lucide-react";
 import Link from "next/link";
 import SectionLabel from "./SectionLabel";
@@ -235,7 +226,7 @@ export default function VideoTutorialsPage() {
               No videos found
             </h3>
             <p style={{ fontSize: 14, color: "#4a6357" }}>
-              Try adjusting your search or filter to find what you're looking for.
+              {"Try adjusting your search or filter to find what you're looking for."}
             </p>
           </div>
         ) : (

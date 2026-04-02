@@ -56,7 +56,6 @@ export default function RouteProgressBar() {
     );
 
     return clearTimers;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPath]);
 
   if (!visible) return null;

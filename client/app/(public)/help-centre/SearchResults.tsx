@@ -26,7 +26,7 @@ export default function SearchResults({ query }: { query: string }) {
           <Search size={48} strokeWidth={1.5} style={{ color: "#8aab98" }} />
         </div>
         <p style={{ fontSize: 16, fontWeight: 600, color: "#0d2b1a", marginBottom: 8 }}>
-          No results for "{query}"
+          {`No results for "${query}"`}
         </p>
         <p style={{ fontSize: 14, color: "#4a6357" }}>
           Try different words, or browse the categories below.
@@ -45,7 +45,7 @@ export default function SearchResults({ query }: { query: string }) {
           fontFamily: "'JetBrains Mono', monospace",
           letterSpacing: "0.06em",
         }}>
-        {results.length} result{results.length !== 1 ? "s" : ""} for "{query}"
+        {`${results.length} result${results.length !== 1 ? "s" : ""} for "${query}"`}
       </p>
       <div className="flex flex-col gap-2">
         {results.map((r) => (

@@ -11,7 +11,6 @@ export default function NavItemWithDropdown({
   alignRight?: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  const expanded = open ? "true" : "false";
 
   return (
     <div

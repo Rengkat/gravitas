@@ -1,10 +1,5 @@
-import { useState } from "react";
 import { Zap, Trophy, PlayCircle, GraduationCap, Target, TrendingUp } from "lucide-react";
-import Link from "next/link";
 
-/* ─────────────────────────────────────────────────────────
-   VIDEO CATEGORIES
-───────────────────────────────────────────────────────── */
 export const CATEGORIES = [
   { id: "all", label: "All Videos", icon: PlayCircle },
   { id: "getting-started", label: "Getting Started", icon: GraduationCap },
@@ -14,9 +9,6 @@ export const CATEGORIES = [
   { id: "tips-tricks", label: "Tips & Tricks", icon: TrendingUp },
 ];
 
-/* ─────────────────────────────────────────────────────────
-   VIDEO DATA
-───────────────────────────────────────────────────────── */
 export type Video = {
   id: string;
   title: string;

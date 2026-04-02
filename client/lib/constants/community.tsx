@@ -1,23 +1,16 @@
 import {
   Users,
   MessageCircle,
-  Send,
   Users2,
   Share2,
   MessageSquare,
-  ArrowRight,
   CheckCircle,
   Zap,
   Shield,
   Globe,
   Smartphone,
 } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
 
-/* ─────────────────────────────────────────────────────────
-   COMMUNITY STATS
-───────────────────────────────────────────────────────── */
 export const STATS = [
   { icon: Users, value: "12,000+", label: "Active Members" },
   { icon: MessageCircle, value: "500+", label: "Daily Messages" },
@@ -25,9 +18,6 @@ export const STATS = [
   { icon: Zap, value: "10 mins", label: "Avg Response Time" },
 ];
 
-/* ─────────────────────────────────────────────────────────
-   BENEFITS
-───────────────────────────────────────────────────────── */
 export const BENEFITS = [
   {
     icon: CheckCircle,

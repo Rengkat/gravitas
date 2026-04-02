@@ -1,4 +1,4 @@
-import { ArrowRight, Clock, User } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import type { Post } from "./blogData";
 import Link from "next/link";
 

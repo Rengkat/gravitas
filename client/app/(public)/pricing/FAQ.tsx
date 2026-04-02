@@ -5,7 +5,7 @@ import { HelpCircle } from "lucide-react";
 import { ADDITIONAL_FAQS, FAQS, STATS } from "@/lib/constants/pricing";
 import FaqItem from "./FaqItem";
 import SectionLabel from "@/Components/SectionLabel";
-import CategoryBadge from "./CategoryBadge";
+// import CategoryBadge from "./CategoryBadge";
 
 const PRICING_FAQ_CATEGORIES = ["Getting Started", "Billing & Subscription"];
 
@@ -42,7 +42,7 @@ export default function PricingFAQ() {
 
         {/* Stats Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          {STATS.map((stat, i) => {
+          {STATS.map((stat) => {
             const IconComponent = stat.icon;
             return (
               <div
@@ -114,7 +114,7 @@ export default function PricingFAQ() {
             Still have questions?
           </h3>
           <p style={{ fontSize: 14, color: "#4a6357", marginBottom: 20 }}>
-            Can't find the answer you're looking for? Please chat with our friendly team.
+            {"Can't find the answer you're looking for? Please chat with our friendly team."}
           </p>
           <div className="flex gap-3 justify-center">
             <button

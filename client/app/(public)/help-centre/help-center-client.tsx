@@ -199,7 +199,7 @@ export default function HelpCenterClient() {
                   Frequently asked questions
                 </h2>
                 <p style={{ fontSize: 16, color: "#4a6357" }}>
-                  Can't find the answer?{" "}
+                  {"Can't find the answer?"}{" "}
                   <a
                     href="mailto:support@gravitas.ng"
                     style={{ color: "#1a4a2e", fontWeight: 600, textDecoration: "none" }}>

@@ -7,7 +7,7 @@ import { CheckCircle, MessageCircle, Send } from "lucide-react";
 import SectionLabel from "@/Components/SectionLabel";
 
 export default function CommunityPage() {
-  const [activeTab, setActiveTab] = useState<"whatsapp" | "telegram">("whatsapp");
+  // const [activeTab, setActiveTab] = useState<"whatsapp" | "telegram">("whatsapp");
 
   return (
     <div style={{ background: "var(--color-cream)" }}>
@@ -68,7 +68,7 @@ export default function CommunityPage() {
           <div
             className="flex flex-wrap justify-center gap-8 max-w-3xl mx-auto"
             style={{ animation: "fadeUp 0.6s 0.3s ease both" }}>
-            {STATS.map((stat, i) => {
+            {STATS.map((stat) => {
               const IconComponent = stat.icon;
               return (
                 <div key={stat.label} className="flex items-center gap-3">
@@ -131,10 +131,10 @@ export default function CommunityPage() {
                 letterSpacing: "-0.5px",
                 marginBottom: 12,
               }}>
-              What you'll get as a member
+              {"What you'll get as a member"}
             </h2>
             <p style={{ fontSize: 16, color: "#4a6357", maxWidth: 520, margin: "0 auto" }}>
-              More than just a group — it's your support system for exam success.
+              {"More than just a group — it's your support system for exam success."}
             </p>
           </div>
 
@@ -203,7 +203,7 @@ export default function CommunityPage() {
               "Help others when you can",
               "No hate speech or bullying",
               "Share resources that add value",
-            ].map((rule, i) => (
+            ].map((rule) => (
               <div key={rule} className="flex items-start gap-3">
                 <CheckCircle
                   size={16}
