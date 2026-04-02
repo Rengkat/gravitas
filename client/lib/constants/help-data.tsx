@@ -10,6 +10,8 @@ import {
   MessageCircle,
   Mail,
   MessageSquare,
+  Key,
+  Upload,
 } from "lucide-react";
 
 export type ArticleStatus = "new" | "updated" | null;
@@ -44,8 +46,8 @@ export type ContactOption = {
 };
 
 /* ─────────────────────────────────────────────────────────
-   HELP CATEGORIES & ARTICLES
-───────────────────────────────────────────────────────── */
+     HELP CATEGORIES & ARTICLES
+  ───────────────────────────────────────────────────────── */
 export const CATEGORIES: Category[] = [
   {
     icon: Rocket,
@@ -160,8 +162,8 @@ export const CATEGORIES: Category[] = [
 ];
 
 /* ─────────────────────────────────────────────────────────
-   TOP FAQs
-───────────────────────────────────────────────────────── */
+     TOP FAQs
+  ───────────────────────────────────────────────────────── */
 export const FAQS: FaqItem[] = [
   {
     category: "Getting Started",
@@ -233,8 +235,8 @@ export const FAQS: FaqItem[] = [
 ];
 
 /* ─────────────────────────────────────────────────────────
-   CONTACT OPTIONS
-───────────────────────────────────────────────────────── */
+     CONTACT OPTIONS
+  ───────────────────────────────────────────────────────── */
 export const CONTACT_OPTIONS: ContactOption[] = [
   {
     icon: MessageCircle,
@@ -260,4 +262,12 @@ export const CONTACT_OPTIONS: ContactOption[] = [
     cta: "Join community →",
     primary: false,
   },
+];
+export const POPULAR = [
+  { icon: Key, label: "Reset your password", href: "/help/reset-password" },
+  { icon: Wifi, label: "Enable offline mode", href: "/help/enable-offline" },
+  { icon: Upload, label: "Bulk upload students (CSV)", href: "/help/bulk-upload" },
+  { icon: Bot, label: "How Sabi-Explain works", href: "/help/sabi-explain-how" },
+  { icon: CreditCard, label: "Upgrade to Student Pro", href: "/help/upgrade-pro" },
+  { icon: FileText, label: "WAEC essay mode guide", href: "/help/waec-essay-mode" },
 ];
