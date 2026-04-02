@@ -24,9 +24,11 @@ export default function RouteProgressBar() {
     prevPath.current = currentPath;
 
     clearTimers();
-    setVisible(true);
-    setCompleting(false);
-    setProgress(0);
+    setTimeout(() => {
+      setVisible(true);
+      setCompleting(false);
+      setProgress(0);
+    }, 0);
 
     // Eased ticks to ~85 %
     const ticks: [number, number][] = [

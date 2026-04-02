@@ -264,7 +264,7 @@ export default function VideoTutorialsPage() {
               { icon: Users, value: "15,000+", label: "Students Trained" },
               { icon: Star, value: "4.9/5", label: "Average Rating" },
               { icon: Clock, value: "500+", label: "Hours of Content" },
-            ].map((stat, i) => {
+            ].map((stat) => {
               const IconComponent = stat.icon;
               return (
                 <div key={stat.label} className="text-center">

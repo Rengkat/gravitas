@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { BENEFITS, STATS } from "@/lib/constants/community";
 import CommunityCard from "./CommunityCard";
 import { CheckCircle, MessageCircle, Send } from "lucide-react";
