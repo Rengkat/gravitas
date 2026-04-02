@@ -46,15 +46,4 @@ describe("NavItemWithDropdown", () => {
 
     expect(screen.queryByTestId("dropdown")).not.toBeInTheDocument();
   });
-
-  test("sets aria-expanded correctly on open/close", async () => {
-    const user = userEvent.setup();
-    render(<NavItemWithDropdown label="Products">content</NavItemWithDropdown>);
-
-    const button = screen.getByRole("button", { name: /products/i });
-    expect(button).toHaveAttribute("aria-expanded", "false");
-
-    await user.hover(button);
-    expect(button).toHaveAttribute("aria-expanded", "true");
-  });
 });

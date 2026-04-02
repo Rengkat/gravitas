@@ -1,85 +1,140 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { HelpCircle } from "lucide-react";
+import { ADDITIONAL_FAQS, FAQS, STATS } from "@/lib/constants/pricing";
+import FaqItem from "./FaqItem";
+import SectionLabel from "@/Components/SectionLabel";
+// import CategoryBadge from "./CategoryBadge";
 
-type FAQItem = { q: string; a: string };
+const PRICING_FAQ_CATEGORIES = ["Getting Started", "Billing & Subscription"];
 
-const FAQS: FAQItem[] = [
-  {
-    q: "Can I really start for free? What's the catch?",
-    a: "Yes — completely free, forever. No credit card, no trial period. The Free plan gives you 3 subjects, 100 past questions a month, and 2 mock exams. We want you to see results before asking for anything. If you want unlimited access and AI features, that's when Pro makes sense.",
-  },
-  {
-    q: "How does the annual plan work?",
-    a: "The annual plan bills you ₦20,000 upfront for 12 months of Student Pro access — that's ₦1,667/month, saving you 33% versus monthly billing. You get the same features with no interruptions, and you can cancel before your renewal date for a prorated refund.",
-  },
-  {
-    q: "What payment methods do you accept?",
-    a: "We accept all Nigerian bank cards (Visa, Mastercard, Verve), bank transfers, USSD, and Opay/Palmpay. You can also pay via your school if your institution has a School plan — ask your admin.",
-  },
-  {
-    q: "Does it work without internet?",
-    a: "Yes. Student Pro and School plans include offline mode. Download your question banks while on Wi-Fi, then practice anywhere — on the bus, in your hostel, even in areas with no data. Your answers sync when you're back online.",
-  },
-  {
-    q: "How does the School plan work for institutions?",
-    a: "The School plan starts at ₦15,000/month for up to 50 students and scales from there. You get a branded subdomain (yourschool.gravitas.ng), admin dashboard, custom CBT tests, auto-graded report cards, and parent reports. Setup takes less than 24 hours.",
-  },
-  {
-    q: "Can I switch plans or cancel anytime?",
-    a: "Yes. Upgrade, downgrade, or cancel at any time directly from your account settings. If you cancel a paid plan, you keep access until the end of your current billing period, then automatically revert to the Free plan — you never lose your study history.",
-  },
-  {
-    q: "Is my payment data secure?",
-    a: "Absolutely. Payments are processed by Paystack — Nigeria's most trusted payment processor. Gravitas never stores your card details. All data is encrypted in transit and at rest.",
-  },
-  {
-    q: "Do you offer discounts for NYSC members or low-income students?",
-    a: "Yes — we have a scholarship programme for students who can't afford Pro. Apply through our website with a brief explanation of your situation. We review applications weekly and offer full free Pro access for qualified students. No shame, just support.",
-  },
-];
+const PRICING_FAQS = FAQS.filter((faq) => PRICING_FAQ_CATEGORIES.includes(faq.category));
 
-export default function FAQ() {
+const ALL_PRICING_FAQS = [...PRICING_FAQS, ...ADDITIONAL_FAQS];
+
+export default function PricingFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>("all");
 
-  const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
+  const categories = ["all", ...new Set(ALL_PRICING_FAQS.map((f) => f.category))];
+
+  const filteredFaqs =
+    activeCategory === "all"
+      ? ALL_PRICING_FAQS
+      : ALL_PRICING_FAQS.filter((f) => f.category === activeCategory);
 
   return (
-    <section className="px-[5%] pb-[100px]">
-      <div className="max-w-[760px] mx-auto">
+    <section className="px-[5%] py-[100px] bg-cream">
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <SectionLabel>FAQ</SectionLabel>
+          <h2
+            className="font-serif text-green-900 tracking-[-0.8px] mb-3"
+            style={{ fontSize: "clamp(28px, 3.5vw, 44px)" }}>
+            Frequently Asked Questions
+          </h2>
+          <p className="text-base text-text-muted">
+            Everything you need to know about Gravitas pricing and plans.
+          </p>
+        </div>
 
-        <h2
-          className="font-serif text-green-900 text-center tracking-[-0.8px] mb-12"
-          style={{ fontSize: "clamp(28px, 3.5vw, 42px)" }}
-        >
-          Frequently asked questions
-        </h2>
-
-        <div className="flex flex-col">
-          {FAQS.map(({ q, a }, i) => {
-            const isOpen = openIndex === i;
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          {STATS.map((stat) => {
+            const IconComponent = stat.icon;
             return (
-              <div key={q} className="border-b border-cream-border">
-                <button
-                  onClick={() => toggle(i)}
-                  className={`w-full flex items-center justify-between gap-4 py-5 text-left bg-transparent border-none cursor-pointer font-sans text-[15px] font-semibold transition-colors duration-200 ${isOpen ? "text-green-800" : "text-text-main"}`}
-                >
-                  {q}
-                  <div className={`w-5 h-5 rounded-full border-[1.5px] flex items-center justify-center shrink-0 transition-all duration-[250ms] ${isOpen ? "bg-green-800 border-green-800 text-white rotate-180" : "border-cream-border text-text-muted"}`}>
-                    <ChevronDown size={12} strokeWidth={2.5} />
+              <div
+                key={stat.label}
+                className="text-center p-4 rounded-2xl bg-white border"
+                style={{ borderColor: "rgba(30,80,50,0.08)" }}>
+                <div className="flex justify-center mb-2">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: `${stat.color}10` }}>
+                    <IconComponent size={18} strokeWidth={1.8} style={{ color: stat.color }} />
                   </div>
-                </button>
-
-                <div
-                  className="text-sm text-text-muted leading-[1.75] overflow-hidden transition-all duration-[350ms] ease-in-out"
-                  style={{ maxHeight: isOpen ? "300px" : "0px", paddingBottom: isOpen ? "20px" : "0px" }}
-                >
-                  {a}
                 </div>
+                <div style={{ fontSize: 18, fontWeight: 700, color: "#0d2b1a", marginBottom: 4 }}>
+                  {stat.value}
+                </div>
+                <div style={{ fontSize: 11, color: "#4a6357" }}>{stat.label}</div>
               </div>
             );
           })}
+        </div>
+
+        {/* Category Filters */}
+        <div className="flex flex-wrap gap-2 justify-center mb-8">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className="px-4 py-2 rounded-full text-[13px] font-medium transition-all duration-200 capitalize"
+              style={{
+                background: activeCategory === cat ? "#1a4a2e" : "white",
+                color: activeCategory === cat ? "white" : "#4a6357",
+                border: activeCategory === cat ? "none" : "1px solid rgba(30,80,50,0.15)",
+              }}>
+              {cat === "all" ? "All Questions" : cat}
+            </button>
+          ))}
+        </div>
+
+        {/* FAQ Accordion */}
+        <div
+          className="bg-white rounded-2xl border overflow-hidden"
+          style={{ borderColor: "rgba(30,80,50,0.1)" }}>
+          <div className="p-6">
+            {filteredFaqs.map((faq, index) => (
+              <FaqItem
+                key={index}
+                question={faq.question}
+                answer={faq.answer}
+                isOpen={openIndex === index}
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Still have questions */}
+        <div
+          className="mt-12 text-center p-8 rounded-2xl"
+          style={{ background: "white", border: "1px solid rgba(30,80,50,0.08)" }}>
+          <HelpCircle size={32} strokeWidth={1.5} style={{ color: "#1a4a2e", marginBottom: 16 }} />
+          <h3
+            style={{
+              fontFamily: "'DM Serif Display', serif",
+              fontSize: 20,
+              color: "#0d2b1a",
+              marginBottom: 8,
+            }}>
+            Still have questions?
+          </h3>
+          <p style={{ fontSize: 14, color: "#4a6357", marginBottom: 20 }}>
+            {"Can't find the answer you're looking for? Please chat with our friendly team."}
+          </p>
+          <div className="flex gap-3 justify-center">
+            <button
+              className="px-6 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200"
+              style={{
+                background: "#1a4a2e",
+                color: "white",
+              }}>
+              Contact Support
+            </button>
+            <button
+              className="px-6 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 border-2"
+              style={{
+                background: "transparent",
+                borderColor: "rgba(26,74,46,0.2)",
+                color: "#1a4a2e",
+              }}>
+              View All FAQs
+            </button>
+          </div>
         </div>
       </div>
     </section>

@@ -24,9 +24,11 @@ export default function RouteProgressBar() {
     prevPath.current = currentPath;
 
     clearTimers();
-    setVisible(true);
-    setCompleting(false);
-    setProgress(0);
+    setTimeout(() => {
+      setVisible(true);
+      setCompleting(false);
+      setProgress(0);
+    }, 0);
 
     // Eased ticks to ~85 %
     const ticks: [number, number][] = [
@@ -56,7 +58,6 @@ export default function RouteProgressBar() {
     );
 
     return clearTimers;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPath]);
 
   if (!visible) return null;

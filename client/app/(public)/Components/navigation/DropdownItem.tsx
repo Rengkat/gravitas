@@ -8,10 +8,11 @@ export default function DropdownItem({
   desc,
   badge,
   badgeStyle,
+  link,
 }: NavItemData) {
   return (
     <Link
-      href="#"
+      href={link || "#"}
       className="group flex items-start gap-3 p-3.5 rounded-lg border border-transparent no-underline transition-all duration-200 hover:bg-green-50 hover:border-green-500/20">
       <div
         className={`w-9 h-9 shrink-0 rounded-md flex items-center justify-center ${ICON_CLASSES[color]}`}>

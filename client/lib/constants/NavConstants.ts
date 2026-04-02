@@ -31,6 +31,7 @@ export interface NavItemData {
   color: "green" | "gold" | "blue" | "orange" | "purple";
   title: string;
   desc: string;
+  link?: string;
   badge?: string | null;
   badgeStyle?: "gold" | "new" | null;
 }
@@ -158,24 +159,28 @@ export const NAV_RESOURCES: NavItemData[] = [
     color: "green",
     title: "Blog",
     desc: "Study tips, JAMB guides, WAEC strategies",
+    link: "/blog",
   },
   {
     icon: PlayCircle,
     color: "gold",
     title: "Video Tutorials",
     desc: "How to use Gravitas + exam prep masterclasses",
+    link: "/video-tutorials",
   },
   {
     icon: LifeBuoy,
     color: "blue",
     title: "Help Centre",
     desc: "FAQs, troubleshooting, contact support",
+    link: "/help-centre",
   },
   {
     icon: MessageCircle,
     color: "orange",
     title: "Community",
     desc: "Join 12k+ students on WhatsApp & Telegram",
+    link: "/community",
   },
 ];
 
