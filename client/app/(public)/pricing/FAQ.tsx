@@ -1,264 +1,142 @@
-// components/help/help-data.ts
-import {
-  Rocket,
-  FileText,
-  Bot,
-  BarChart3,
-  School,
-  CreditCard,
-  Wifi,
-  Lock,
-  MessageCircle,
-  Mail,
-  MessageSquare,
-} from "lucide-react";
+"use client";
 
-export type ArticleStatus = "new" | "updated" | null;
+import { useState } from "react";
+import { HelpCircle } from "lucide-react";
+import { ADDITIONAL_FAQS, FAQS, STATS } from "@/lib/constants/pricing";
+import FaqItem from "./FaqItem";
+import SectionLabel from "@/Components/SectionLabel";
+import CategoryBadge from "./CategoryBadge";
 
-export type Article = {
-  slug: string;
-  title: string;
-  status?: ArticleStatus;
-};
+const PRICING_FAQ_CATEGORIES = ["Getting Started", "Billing & Subscription"];
 
-export type Category = {
-  icon: React.ElementType; // Changed from string to Lucide icon component
-  title: string;
-  description: string;
-  color: string; // Tailwind-safe hex for icon bg tint
-  articles: Article[];
-};
+const PRICING_FAQS = FAQS.filter((faq) => PRICING_FAQ_CATEGORIES.includes(faq.category));
 
-export type FaqItem = {
-  question: string;
-  answer: string;
-  category: string;
-};
+const ALL_PRICING_FAQS = [...PRICING_FAQS, ...ADDITIONAL_FAQS];
 
-export type ContactOption = {
-  icon: React.ElementType; // Changed from string to Lucide icon component
-  title: string;
-  desc: string;
-  cta: string;
-  href: string;
-  primary: boolean;
-};
+export default function PricingFAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>("all");
 
-/* ─────────────────────────────────────────────────────────
-   HELP CATEGORIES & ARTICLES
-───────────────────────────────────────────────────────── */
-export const CATEGORIES: Category[] = [
-  {
-    icon: Rocket,
-    title: "Getting Started",
-    color: "#2e8b57",
-    description: "Create your account, set up your exam targets, and take your first mock.",
-    articles: [
-      { slug: "create-account", title: "How to create a free account" },
-      {
-        slug: "choose-exam",
-        title: "Choosing your exam type (JAMB, WAEC, Post-UTME)",
-        status: "new",
-      },
-      { slug: "first-mock", title: "Taking your first practice session" },
-      { slug: "set-target-score", title: "Setting a target score and exam date" },
-      { slug: "mobile-app", title: "Using Gravitas on mobile devices" },
-    ],
-  },
-  {
-    icon: FileText,
-    title: "CBT Practice",
-    color: "#1a4a2e",
-    description: "Understand the exam interface, timers, question navigator, and practice modes.",
-    articles: [
-      { slug: "practice-modes", title: "Practice vs Mock vs School Exam modes" },
-      { slug: "question-navigator", title: "Using the question navigator" },
-      { slug: "flag-question", title: "Flagging questions for review" },
-      { slug: "exam-timer", title: "How the exam timer works (and syncing)", status: "updated" },
-      { slug: "submit-exam", title: "Submitting your exam early" },
-      { slug: "waec-essay-mode", title: "WAEC / NECO essay (theory) mode guide", status: "new" },
-    ],
-  },
-  {
-    icon: Bot,
-    title: "Sabi-Explain AI",
-    color: "#f5c842",
-    description: "Get the most out of AI-powered explanations and the Sabi-Tutor chat.",
-    articles: [
-      { slug: "sabi-explain-how", title: "How Sabi-Explain works" },
-      { slug: "sabi-tutor-chat", title: "Chatting with Sabi-Tutor" },
-      { slug: "pidgin-mode", title: "Getting explanations in Pidgin English" },
-      { slug: "voice-input", title: "Using voice input on Android" },
-      { slug: "ai-postmortem", title: "Reading your AI post-exam report", status: "new" },
-    ],
-  },
-  {
-    icon: BarChart3,
-    title: "Performance & Analytics",
-    color: "#6366f1",
-    description: "Track your scores, find your weak topics, and understand your progress charts.",
-    articles: [
-      { slug: "score-dashboard", title: "Understanding your score dashboard" },
-      { slug: "weak-topics", title: "How weak topics are identified" },
-      { slug: "streak-xp", title: "Study streaks and XP explained" },
-      { slug: "leaderboard", title: "National and subject leaderboards" },
-      { slug: "export-results", title: "Exporting your results as PDF" },
-    ],
-  },
-  {
-    icon: School,
-    title: "School Portal",
-    color: "#ec4899",
-    description: "School admins: manage students, build tests, generate report cards.",
-    articles: [
-      { slug: "school-onboarding", title: "Setting up your school portal" },
-      { slug: "bulk-upload", title: "Bulk uploading students via CSV" },
-      { slug: "build-test", title: "Building a custom CBT test", status: "new" },
-      { slug: "report-cards", title: "Generating and downloading PDF report cards" },
-      { slug: "whatsapp-reports", title: "Setting up parent WhatsApp reports" },
-      { slug: "school-branding", title: "Customising your school subdomain and logo" },
-    ],
-  },
-  {
-    icon: CreditCard,
-    title: "Billing & Subscription",
-    color: "#f59e0b",
-    description: "Manage your plan, understand payments, cancel or upgrade at any time.",
-    articles: [
-      { slug: "upgrade-pro", title: "Upgrading to Student Pro" },
-      { slug: "annual-plan", title: "How the annual plan and savings work" },
-      { slug: "payment-methods", title: "Accepted payment methods (Paystack, USSD, etc.)" },
-      { slug: "cancel-subscription", title: "Cancelling or pausing your subscription" },
-      { slug: "refund-policy", title: "Refund policy and how to request one" },
-      { slug: "school-billing", title: "School plan billing and seat limits" },
-    ],
-  },
-  {
-    icon: Wifi,
-    title: "Offline & Mobile",
-    color: "#10b981",
-    description: "Download question banks, practice without data, and sync your answers.",
-    articles: [
-      { slug: "enable-offline", title: "Enabling offline mode", status: "updated" },
-      { slug: "download-questions", title: "Downloading question banks for offline use" },
-      { slug: "offline-sync", title: "How offline answer syncing works" },
-      { slug: "pwa-install", title: "Installing Gravitas as an app (PWA)" },
-    ],
-  },
-  {
-    icon: Lock,
-    title: "Account & Security",
-    color: "#8b5cf6",
-    description: "Password resets, phone OTP, profile settings, and account deletion.",
-    articles: [
-      { slug: "reset-password", title: "Resetting your password" },
-      { slug: "change-phone", title: "Updating your phone number" },
-      { slug: "google-auth", title: "Linking or unlinking Google login" },
-      { slug: "delete-account", title: "Deleting your account and data" },
-      { slug: "two-factor", title: "Setting up two-factor authentication" },
-    ],
-  },
-];
+  const categories = ["all", ...new Set(ALL_PRICING_FAQS.map((f) => f.category))];
 
-/* ─────────────────────────────────────────────────────────
-   TOP FAQs
-───────────────────────────────────────────────────────── */
-export const FAQS: FaqItem[] = [
-  {
-    category: "Getting Started",
-    question: "Can I really use Gravitas for free? What's the catch?",
-    answer:
-      "Completely free, forever — no credit card, no trial expiry. The Free plan gives you 3 subjects, " +
-      "100 past questions per month, and basic performance stats. There is no catch. We want you to " +
-      "see real results before asking you for anything. If you want unlimited access and AI features, " +
-      "that's when Student Pro makes sense at ₦2,500/month.",
-  },
-  {
-    category: "CBT Practice",
-    question: "Is the JAMB interface exactly the same as the real exam?",
-    answer:
-      "Yes — our CBT interface is a pixel-perfect replica of the JAMB UTME interface, including the " +
-      "subject tab switching, the question navigator grid, the flag system, and the countdown timer. " +
-      "WAEC 2026 Digital mode is also replicated exactly, including the theory/essay section.",
-  },
-  {
-    category: "Sabi-Explain AI",
-    question: "What's the difference between Sabi-Explain and Sabi-Tutor?",
-    answer:
-      "Sabi-Explain is the instant AI popup that fires automatically after a wrong answer — it gives " +
-      "you a targeted breakdown of that specific question using Nigerian curriculum context. " +
-      "Sabi-Tutor is the full AI chat assistant you can open at any time to ask any question, " +
-      "request practice questions, or get concept explanations in Pidgin.",
-  },
-  {
-    category: "Offline & Mobile",
-    question: "Does Gravitas work without internet?",
-    answer:
-      "Yes. Student Pro and School plans include offline mode. Download your question banks while on " +
-      "Wi-Fi, then practice anywhere — on the bus, in your hostel, in a village with zero data. " +
-      "Your answers are queued locally and sync automatically when you come back online.",
-  },
-  {
-    category: "School Portal",
-    question: "How do I onboard my school's students in bulk?",
-    answer:
-      "Upload a CSV file with your students' names, email addresses, class, and phone numbers from the " +
-      "School Admin → Students → Upload page. Up to 500 students can be imported in one go. Students " +
-      "receive an SMS with their login details automatically via Termii.",
-  },
-  {
-    category: "Billing & Subscription",
-    question: "What payment methods do you accept?",
-    answer:
-      "We accept all Nigerian bank debit/credit cards (Visa, Mastercard, Verve) via Paystack, " +
-      "bank transfers, USSD (*737#, *901#, etc.), Opay, and Palmpay. We do not require foreign cards. " +
-      "School plans can also be invoiced with 30-day payment terms for institutions.",
-  },
-  {
-    category: "Account & Security",
-    question: "I forgot my password. How do I get back in?",
-    answer:
-      'Go to gravitas.ng/login and click "Forgot password?". Enter your email and we\'ll send a reset ' +
-      'link within 2 minutes. If you signed up with your phone number, tap "Phone OTP" on the login ' +
-      "page instead — you'll receive a 6-digit code by SMS.",
-  },
-  {
-    category: "Performance & Analytics",
-    question: "How does Gravitas identify my weak topics?",
-    answer:
-      "After every session, our AI analyses your answer patterns across all questions. It tracks " +
-      "accuracy per topic, average time per question, and trends over your last 10 sessions. " +
-      "Topics where your accuracy falls below 60% are flagged as weak and prioritised in the " +
-      "AI drill generator on your dashboard.",
-  },
-];
+  const filteredFaqs =
+    activeCategory === "all"
+      ? ALL_PRICING_FAQS
+      : ALL_PRICING_FAQS.filter((f) => f.category === activeCategory);
 
-/* ─────────────────────────────────────────────────────────
-   CONTACT OPTIONS
-───────────────────────────────────────────────────────── */
-export const CONTACT_OPTIONS: ContactOption[] = [
-  {
-    icon: MessageCircle,
-    title: "Live Chat",
-    desc: "Chat with our support team in real-time. Available Monday–Friday, 8am–8pm WAT.",
-    cta: "Start a chat →",
-    href: "#chat",
-    primary: true,
-  },
-  {
-    icon: Mail,
-    title: "Email Support",
-    desc: "Send us a detailed message at support@gravitas.ng. We respond within 4 hours on business days.",
-    cta: "Send an email →",
-    href: "mailto:support@gravitas.ng",
-    primary: false,
-  },
-  {
-    icon: MessageSquare,
-    title: "WhatsApp Community",
-    desc: "Join 12,000+ students on our WhatsApp group for tips, updates, and peer support.",
-    href: "https://wa.me/2348000000000",
-    cta: "Join community →",
-    primary: false,
-  },
-];
+  return (
+    <section className="px-[5%] py-[100px] bg-cream">
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <SectionLabel>FAQ</SectionLabel>
+          <h2
+            className="font-serif text-green-900 tracking-[-0.8px] mb-3"
+            style={{ fontSize: "clamp(28px, 3.5vw, 44px)" }}>
+            Frequently Asked Questions
+          </h2>
+          <p className="text-base text-text-muted">
+            Everything you need to know about Gravitas pricing and plans.
+          </p>
+        </div>
+
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          {STATS.map((stat, i) => {
+            const IconComponent = stat.icon;
+            return (
+              <div
+                key={stat.label}
+                className="text-center p-4 rounded-2xl bg-white border"
+                style={{ borderColor: "rgba(30,80,50,0.08)" }}>
+                <div className="flex justify-center mb-2">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: `${stat.color}10` }}>
+                    <IconComponent size={18} strokeWidth={1.8} style={{ color: stat.color }} />
+                  </div>
+                </div>
+                <div style={{ fontSize: 18, fontWeight: 700, color: "#0d2b1a", marginBottom: 4 }}>
+                  {stat.value}
+                </div>
+                <div style={{ fontSize: 11, color: "#4a6357" }}>{stat.label}</div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Category Filters */}
+        <div className="flex flex-wrap gap-2 justify-center mb-8">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className="px-4 py-2 rounded-full text-[13px] font-medium transition-all duration-200 capitalize"
+              style={{
+                background: activeCategory === cat ? "#1a4a2e" : "white",
+                color: activeCategory === cat ? "white" : "#4a6357",
+                border: activeCategory === cat ? "none" : "1px solid rgba(30,80,50,0.15)",
+              }}>
+              {cat === "all" ? "All Questions" : cat}
+            </button>
+          ))}
+        </div>
+
+        {/* FAQ Accordion */}
+        <div
+          className="bg-white rounded-2xl border overflow-hidden"
+          style={{ borderColor: "rgba(30,80,50,0.1)" }}>
+          <div className="p-6">
+            {filteredFaqs.map((faq, index) => (
+              <FaqItem
+                key={index}
+                question={faq.question}
+                answer={faq.answer}
+                isOpen={openIndex === index}
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Still have questions */}
+        <div
+          className="mt-12 text-center p-8 rounded-2xl"
+          style={{ background: "white", border: "1px solid rgba(30,80,50,0.08)" }}>
+          <HelpCircle size={32} strokeWidth={1.5} style={{ color: "#1a4a2e", marginBottom: 16 }} />
+          <h3
+            style={{
+              fontFamily: "'DM Serif Display', serif",
+              fontSize: 20,
+              color: "#0d2b1a",
+              marginBottom: 8,
+            }}>
+            Still have questions?
+          </h3>
+          <p style={{ fontSize: 14, color: "#4a6357", marginBottom: 20 }}>
+            Can't find the answer you're looking for? Please chat with our friendly team.
+          </p>
+          <div className="flex gap-3 justify-center">
+            <button
+              className="px-6 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200"
+              style={{
+                background: "#1a4a2e",
+                color: "white",
+              }}>
+              Contact Support
+            </button>
+            <button
+              className="px-6 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 border-2"
+              style={{
+                background: "transparent",
+                borderColor: "rgba(26,74,46,0.2)",
+                color: "#1a4a2e",
+              }}>
+              View All FAQs
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

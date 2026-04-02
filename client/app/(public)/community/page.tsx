@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import SectionLabel from "./SectionLabel";
 import { BENEFITS, STATS } from "@/lib/constants/community";
 import CommunityCard from "./CommunityCard";
 import { CheckCircle, MessageCircle, Send } from "lucide-react";
+import SectionLabel from "@/Components/SectionLabel";
 
 export default function CommunityPage() {
   const [activeTab, setActiveTab] = useState<"whatsapp" | "telegram">("whatsapp");
