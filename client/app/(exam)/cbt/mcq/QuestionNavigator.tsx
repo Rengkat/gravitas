@@ -1,9 +1,6 @@
 import { Answer } from "@/lib/constants/mcq";
 import { useMemo } from "react";
 
-/* ─────────────────────────────────────────────────────────
-   QUESTION NAVIGATOR
-───────────────────────────────────────────────────────── */
 export default function QuestionNavigator({
   totalQuestions,
   currentIndex,

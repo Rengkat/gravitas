@@ -1,8 +1,5 @@
 import { AlertCircle, FileText, HelpCircle, Play } from "lucide-react";
 
-/* ─────────────────────────────────────────────────────────
-   INSTRUCTIONS PAGE
-───────────────────────────────────────────────────────── */
 export default function InstructionsPage({ onStart }: { onStart: () => void }) {
   const instructions = [
     {

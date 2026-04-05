@@ -1,6 +1,8 @@
-import React from "react";
-
-const QuestionText = ({ currentQuestion }) => {
+import { Question } from "@/lib/constants/mcq";
+type Props = {
+  currentQuestion: Question;
+};
+const QuestionText = ({ currentQuestion }: Props) => {
   return (
     <div className="p-6">
       <p className="text-[15px] leading-relaxed text-gray-800">{currentQuestion.text}</p>

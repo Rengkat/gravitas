@@ -2,36 +2,17 @@
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
-import Link from "next/link";
-import {
-  Clock,
-  LogOut,
-  Calculator,
-  AlertCircle,
-  ChevronLeft,
-  ChevronRight,
-  CheckCircle,
-  Volume2,
-  VolumeX,
-  Flag,
-  HelpCircle,
-  Monitor,
-  FileText,
-  Send,
-  Play,
-} from "lucide-react";
+
 import { AllAnswers, Answer, SubjectId } from "@/lib/constants/mcq";
 import { buildInitialAnswers } from "./buildInitialAnswers";
 import InstructionsPage from "./Instructions";
-import CalculatorModal from "../CalculatorModal";
 import QuestionNavigator from "./QuestionNavigator";
 import { buildQuestions } from "./buildQuestions";
 import { ExamLoader } from "@/lib/loaders";
-import CbtNav from "../CbtNav";
-import Options from "./Options";
-import QuestionText from "./QuestionText";
 import LeftQuestion from "./LeftQuestion";
 import SubmitModel from "./SubmitModel";
+import CbtNav from "../../CbtNav";
+import CalculatorModal from "../../CalculatorModal";
 
 type Subject = {
   id: string;
@@ -46,9 +27,6 @@ const SUBJECTS: Subject[] = [
   { id: "physics", name: "Physics", questionCount: 100 },
 ];
 
-/* ─────────────────────────────────────────────────────────
-   MAIN CBT EXAM COMPONENT
-───────────────────────────────────────────────────────── */
 export default function CBTExamPage() {
   const params = useParams();
   const router = useRouter();
