@@ -58,7 +58,10 @@ const LeftQuestion = ({
 
         {/* Diagram */}
         {currentQuestion.hasDiagram && currentQuestion.diagramSvg && (
-          <div className="border-b p-6 flex justify-center bg-cream/30" aria-hidden="true">
+          <div
+            data-testid="diagram-container"
+            className="border-b p-6 flex justify-center bg-cream/30"
+            aria-hidden="true">
             <div dangerouslySetInnerHTML={{ __html: currentQuestion.diagramSvg }} />
           </div>
         )}
