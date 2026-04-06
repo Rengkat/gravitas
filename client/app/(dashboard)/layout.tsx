@@ -1,49 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard,
-  BarChart3,
-  Library,
-  Users,
-  Calendar,
-  Bot,
-  Settings,
-  LogOut,
-  Menu,
-  X,
-  ChevronDown,
-  Bell,
-  User,
-  GraduationCap,
-  Target,
-  Flame,
-  Sparkles,
-  CreditCard,
-  UserCircle,
-  Gamepad2,
-} from "lucide-react";
+import { Menu, X, Flame, Sparkles } from "lucide-react";
 import Footer from "./Footer";
-
-const NAV_ITEMS = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard", exact: true },
-  { icon: Target, label: "Practice", href: "/dashboard/practice" },
-  { icon: BarChart3, label: "Reports", href: "/dashboard/reports" },
-  { icon: Library, label: "Library", href: "/dashboard/library" },
-  { icon: Users, label: "Tutors", href: "/dashboard/tutors" },
-  { icon: Calendar, label: "Bookings", href: "/dashboard/bookings" },
-  { icon: Bot, label: "AI Tutor", href: "/dashboard/ai-tutor" },
-  { icon: Gamepad2, label: "Games", href: "/dashboard/games" },
-  { icon: Settings, label: "Settings", href: "/dashboard/settings" },
-];
+import SideBar from "@/Components/SideBar";
+import Notifications from "@/Components/Notifications";
+import UserMenu from "@/Components/UserMenu";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const pathname = usePathname();
   const isParentView = false;
 
   const closeSidebar = () => setSidebarOpen(false);
@@ -64,70 +32,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       )}
 
       {/* Sidebar */}
-      <aside
-        className={`fixed left-0 top-0 h-full w-72 bg-white border-r z-50 transform transition-transform duration-300 lg:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-        style={{ borderColor: "rgba(30,80,50,0.1)" }}>
-        {/* Logo */}
-        <div className="p-6 border-b" style={{ borderColor: "rgba(30,80,50,0.1)" }}>
-          <Link href="/dashboard" onClick={closeSidebar} className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-green-800 flex items-center justify-center">
-              <GraduationCap size={18} className="text-white" />
-            </div>
-            <span className="font-serif text-xl font-bold" style={{ color: "#0d2b1a" }}>
-              Gravitas
-            </span>
-            {isParentView && (
-              <span
-                className="ml-2 px-2 py-0.5 rounded-full text-[10px] font-bold"
-                style={{ background: "#f5c84220", color: "#d4a017" }}>
-                Parent View
-              </span>
-            )}
-          </Link>
-        </div>
-
-        {/* Navigation */}
-        <nav className="p-4 space-y-1">
-          {NAV_ITEMS.map((item) => {
-            const isActive = item.exact ? pathname === item.href : pathname.startsWith(item.href);
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={closeSidebar}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
-                  isActive
-                    ? "bg-green-800 text-white"
-                    : "text-text-muted hover:bg-green-500/5 hover:text-green-800"
-                }`}>
-                <Icon size={18} strokeWidth={1.8} />
-                <span className="text-[14px] font-medium">{item.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* User Section */}
-        <div
-          className="absolute bottom-0 left-0 right-0 py-[0.2rem] px-4 border-t"
-          style={{ borderColor: "rgba(30,80,50,0.1)" }}>
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-cream">
-            <div className="w-10 h-10 rounded-full bg-green-800 flex items-center justify-center">
-              <User size={18} className="text-white" />
-            </div>
-            <div className="flex-1">
-              <div className="text-[13px] font-semibold text-green-900">Oluwaseun Adebayo</div>
-              <div className="text-[11px] text-text-muted">Student Pro • 45 day streak</div>
-            </div>
-            <button title="logout" className="p-1.5 rounded-lg hover:bg-white/50 transition-colors">
-              <LogOut size={16} className="text-text-muted" />
-            </button>
-          </div>
-        </div>
-      </aside>
+      <SideBar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} isParentView={isParentView} />
 
       {/* Main Content */}
       <main className="lg:ml-72 flex-1 flex flex-col">
@@ -146,54 +51,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
 
             {/* Notifications */}
-            <div className="relative">
-              <button
-                title="notification"
-                onClick={() => setNotificationsOpen(!notificationsOpen)}
-                className="p-2 rounded-lg hover:bg-cream transition-colors relative">
-                <Bell size={18} className="text-text-muted" />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500" />
-              </button>
-              {notificationsOpen && (
-                <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border p-4 z-50">
-                  <div className="text-[13px] font-semibold mb-3">Notifications</div>
-                  <div className="space-y-3">
-                    <div className="text-[12px] text-text-muted">No new notifications</div>
-                  </div>
-                </div>
-              )}
-            </div>
+            <Notifications
+              notificationsOpen={notificationsOpen}
+              setNotificationsOpen={setNotificationsOpen}
+            />
 
             {/* User Menu */}
-            <div className="relative">
-              <button
-                title="user menu"
-                onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-cream transition-colors">
-                <div className="w-8 h-8 rounded-full bg-green-800 flex items-center justify-center">
-                  <User size={14} className="text-white" />
-                </div>
-                <ChevronDown size={14} className="text-text-muted" />
-              </button>
-              {userMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border p-2 z-50">
-                  <Link
-                    href="/dashboard/settings"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] hover:bg-cream transition-colors">
-                    <UserCircle size={14} /> Profile
-                  </Link>
-                  <Link
-                    href="/dashboard/settings/billing"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] hover:bg-cream transition-colors">
-                    <CreditCard size={14} /> Billing
-                  </Link>
-                  <div className="h-px my-1 bg-cream-border" />
-                  <button className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] text-red-600 hover:bg-red-50 transition-colors">
-                    <LogOut size={14} /> Sign Out
-                  </button>
-                </div>
-              )}
-            </div>
+            <UserMenu userMenuOpen={userMenuOpen} setUserMenuOpen={setUserMenuOpen} />
           </div>
         </header>
 
