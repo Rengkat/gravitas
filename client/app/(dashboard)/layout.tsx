@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -27,9 +27,6 @@ import {
 } from "lucide-react";
 import Footer from "./Footer";
 
-/* ─────────────────────────────────────────────────────────
-   NAVIGATION ITEMS
-───────────────────────────────────────────────────────── */
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard", exact: true },
   { icon: Target, label: "Practice", href: "/dashboard/practice" },
@@ -42,9 +39,6 @@ const NAV_ITEMS = [
   { icon: Settings, label: "Settings", href: "/dashboard/settings" },
 ];
 
-/* ─────────────────────────────────────────────────────────
-   MAIN LAYOUT COMPONENT
-───────────────────────────────────────────────────────── */
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -52,11 +46,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const pathname = usePathname();
   const isParentView = false;
 
-  const prevPathnameRef = useRef(pathname);
-  if (prevPathnameRef.current !== pathname) {
-    prevPathnameRef.current = pathname;
-    setSidebarOpen(false);
-  }
+  const closeSidebar = () => setSidebarOpen(false);
 
   return (
     <div className="min-h-screen bg-cream flex flex-col">
@@ -70,10 +60,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* Sidebar Overlay */}
       {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
+        <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={closeSidebar} />
       )}
 
       {/* Sidebar */}
@@ -84,7 +71,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         style={{ borderColor: "rgba(30,80,50,0.1)" }}>
         {/* Logo */}
         <div className="p-6 border-b" style={{ borderColor: "rgba(30,80,50,0.1)" }}>
-          <Link href="/dashboard" className="flex items-center gap-2">
+          <Link href="/dashboard" onClick={closeSidebar} className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-green-800 flex items-center justify-center">
               <GraduationCap size={18} className="text-white" />
             </div>
@@ -110,6 +97,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={closeSidebar}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
                   isActive
                     ? "bg-green-800 text-white"
