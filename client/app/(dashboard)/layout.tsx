@@ -1,4 +1,3 @@
-// app/dashboard/layout.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
-  BookOpen,
   BarChart3,
   Library,
   Users,
@@ -23,23 +21,11 @@ import {
   Target,
   Flame,
   Sparkles,
-  Clock,
-  TrendingUp,
-  Award,
-  Zap,
-  PlayCircle,
-  FileText,
-  MessageCircle,
   CreditCard,
-  Lock,
   UserCircle,
   Gamepad2,
-  Trophy,
-  Sword,
-  Crown,
-  Volume2,
 } from "lucide-react";
-import Footer from "./Footer"; // Import the footer component
+import Footer from "./Footer";
 
 /* ─────────────────────────────────────────────────────────
    NAVIGATION ITEMS
@@ -146,7 +132,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <div className="text-[13px] font-semibold text-green-900">Oluwaseun Adebayo</div>
               <div className="text-[11px] text-text-muted">Student Pro • 45 day streak</div>
             </div>
-            <button className="p-1.5 rounded-lg hover:bg-white/50 transition-colors">
+            <button title="logout" className="p-1.5 rounded-lg hover:bg-white/50 transition-colors">
               <LogOut size={16} className="text-text-muted" />
             </button>
           </div>
@@ -172,6 +158,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             {/* Notifications */}
             <div className="relative">
               <button
+                title="notification"
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
                 className="p-2 rounded-lg hover:bg-cream transition-colors relative">
                 <Bell size={18} className="text-text-muted" />
@@ -190,6 +177,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             {/* User Menu */}
             <div className="relative">
               <button
+                title="user menu"
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-cream transition-colors">
                 <div className="w-8 h-8 rounded-full bg-green-800 flex items-center justify-center">

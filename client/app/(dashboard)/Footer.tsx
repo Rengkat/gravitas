@@ -1,9 +1,8 @@
-// components/Footer.tsx
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GraduationCap, Twitter, Linkedin, Instagram, Youtube } from "lucide-react";
+import { Twitter, Linkedin, Instagram, Youtube } from "lucide-react";
 
 const FOOTER_LINKS = {
   Platform: [

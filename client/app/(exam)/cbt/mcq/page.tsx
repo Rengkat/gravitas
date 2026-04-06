@@ -95,10 +95,10 @@ export default function CBTExamPage() {
   // ── Answer helpers ─────────────────────────────────────
   const updateCurrentSubjectAnswers = useCallback(
     (updater: (prev: Answer[]) => Answer[]) => {
-      setAllAnswers((prev: AllAnswers) => {
-        if (prev[currentSubject]) return prev;
-        return { ...prev, [currentSubject]: buildInitialAnswers(currentQuestions) };
-      });
+      setAllAnswers((prev: AllAnswers) => ({
+        ...prev,
+        [currentSubject]: updater(prev[currentSubject] ?? buildInitialAnswers(currentQuestions)),
+      }));
     },
     [currentSubject, currentQuestions],
   );

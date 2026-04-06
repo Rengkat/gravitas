@@ -49,7 +49,7 @@ describe("buildQuestions", () => {
     const poolSize = BASE_QUESTIONS.physics.length;
     const questions = buildQuestions("physics", poolSize);
 
-    questions.forEach((q, i) => {
+    questions.forEach((q) => {
       expect(q.text).not.toContain("Variant");
     });
   });

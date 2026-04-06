@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
@@ -52,7 +52,6 @@ export default function Step2Details({ role, onBack, onSubmit }: Props) {
   const {
     register,
     handleSubmit,
-    watch,
     control,
     formState: { errors },
   } = useForm<FormValues>({
@@ -73,8 +72,8 @@ export default function Step2Details({ role, onBack, onSubmit }: Props) {
     },
   });
 
-  const passwordVal = watch("password") ?? "";
-  const emailVal = watch("email") ?? "";
+  const passwordVal = useWatch({ control, name: "password" }) ?? "";
+  const emailVal = useWatch({ control, name: "email" }) ?? "";
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
 
   const { score: pwScore, label: pwLabel } = getStrength(passwordVal);
