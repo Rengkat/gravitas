@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import { Menu, X, Flame, Sparkles } from "lucide-react";
 import Footer from "./Footer";
 import SideBar from "@/Components/SideBar";
