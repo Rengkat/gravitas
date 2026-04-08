@@ -9,3 +9,4 @@ export type Answer = {
   constructionData?: string;
   uploadData?: { name: string; data: string; type: string } | null;
 };
+export type ExamMode = "practice" | "exam"; // ← NEW
