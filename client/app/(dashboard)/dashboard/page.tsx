@@ -1,19 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Flame,
-  Sparkles,
-  Target,
-  Clock,
-  Award,
-  Zap,
-  ArrowRight,
-  Calendar,
-  AlertCircle,
-  BookOpen,
-  Users,
-} from "lucide-react";
+import { Flame, Sparkles, Target, Clock, Award, Zap, Calendar, AlertCircle } from "lucide-react";
 import StatCard from "@/Components/StatCard";
 import { RECENT_SESSIONS, UPCOMING_BOOKINGS, WEAK_TOPICS } from "@/lib/constants/dashboard";
 import WeakTopicCard from "../components/WeakTopicCard";
