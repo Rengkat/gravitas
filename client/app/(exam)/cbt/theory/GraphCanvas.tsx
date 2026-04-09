@@ -316,6 +316,7 @@ export default function GraphCanvas({
         <div className="h-5 w-px bg-gray-300" />
         {plotColors.map((c) => (
           <button
+            title="color"
             key={c}
             onClick={() => {
               setColor(c);
@@ -329,6 +330,7 @@ export default function GraphCanvas({
         <div className="flex items-center gap-1.5">
           <span className="text-[11px] text-gray-500 font-medium hidden sm:inline">Pen:</span>
           <input
+            title="set brush size"
             type="range"
             min="1"
             max="10"

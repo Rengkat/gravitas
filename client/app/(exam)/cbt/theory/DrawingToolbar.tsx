@@ -1,8 +1,5 @@
 import { Download, Eraser, PenTool } from "lucide-react";
 
-/* ─────────────────────────────────────────────────────────
-   SHARED DRAWING TOOLBAR
-───────────────────────────────────────────────────────── */
 interface DrawingToolbarProps {
   tool: "draw" | "erase";
   setTool: (t: "draw" | "erase") => void;
@@ -64,6 +61,7 @@ export default function DrawingToolbar({
       <div className="flex items-center gap-2">
         <span className="text-[11px] text-gray-500 font-medium">Size:</span>
         <input
+          title="brush"
           type="range"
           min="1"
           max="14"

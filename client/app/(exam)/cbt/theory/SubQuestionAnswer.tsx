@@ -250,6 +250,7 @@ export default function SubQuestionAnswer({
               </p>
               <p className="text-xs text-gray-400 mt-1">Supports images (JPG, PNG) and PDF files</p>
               <input
+                title="upload"
                 ref={fileInputRef}
                 type="file"
                 accept="image/*,application/pdf"
@@ -285,6 +286,7 @@ export default function SubQuestionAnswer({
                   Replace
                 </button>
                 <input
+                  title="image upload"
                   ref={fileInputRef}
                   type="file"
                   accept="image/*,application/pdf"
