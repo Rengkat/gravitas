@@ -1,13 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { Send, AlertCircle } from "lucide-react";
-import { ExamMode } from "@/types/examsTypes";
-
-interface Answer {
-  // Define your answer shape here based on your actual data structure
-  // Example:
-  id?: string;
-  // Add other answer properties as needed
-}
+import { Answer, ExamMode } from "@/types/examsTypes";
 
 interface SubmitModelProps {
   mode: ExamMode;
