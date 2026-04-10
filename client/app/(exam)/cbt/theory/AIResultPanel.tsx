@@ -45,7 +45,7 @@ export default function AIResultPanel({
         {/* Feedback */}
         <p className="text-sm text-gray-700 leading-relaxed">{result.feedback}</p>
         {/* Strengths */}
-        {result.strengths.length > 0 && (
+        {result?.strengths?.length > 0 && (
           <div>
             <p className="text-[11px] font-bold text-green-700 uppercase tracking-wide mb-1.5">
               Strengths
