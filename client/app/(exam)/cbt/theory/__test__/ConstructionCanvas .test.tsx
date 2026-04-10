@@ -44,8 +44,6 @@ function renderCanvas(overrides = {}) {
   return render(<ConstructionCanvas {...defaultProps} {...overrides} />);
 }
 
-// ════════════════════════════════════════════════════════════════
-
 describe("ConstructionCanvas", () => {
   test("renders without crashing", () => {
     renderCanvas();
