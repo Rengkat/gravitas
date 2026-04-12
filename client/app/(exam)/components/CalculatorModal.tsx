@@ -75,7 +75,6 @@ export default function CalculatorModal({ onClose }: { onClose: () => void }) {
       .replace(/÷/g, "/")
       .replace(/π/g, String(Math.PI))
       .replace(/ℯ/g, String(Math.E));
-    // eslint-disable-next-line no-new-func
     return Function(`"use strict"; return (${s})`)() as number;
   };
 

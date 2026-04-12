@@ -13,6 +13,7 @@ import { essayQuestions } from "@/lib/mock/theoryQuestion";
 import { formatTime } from "@/utils/formartTimer";
 import SubQuestionAnswer from "./SubQuestionAnswer";
 import CalculatorModal from "../../components/CalculatorModal";
+import Image from "next/image";
 
 /* ─────────────────────────────────────────────────────────
    AI SCORING  — real Anthropic API call
@@ -79,6 +80,26 @@ Score the student's answer out of ${marks} marks.`;
   }
 }
 
+/* ─────────────────────────────────────────────────────────
+   Helpers
+───────────────────────────────────────────────────────── */
+function buildInitialAnswers(): Answer[] {
+  return essayQuestions.flatMap((q) =>
+    q.subQuestions.map((sub) => ({
+      subQuestionId: sub.id,
+      type: "type" as AnswerType,
+      content: "",
+      whiteboardData: undefined,
+      graphData: undefined,
+      constructionData: undefined,
+      uploadData: null,
+    })),
+  );
+}
+
+/* ─────────────────────────────────────────────────────────
+   Page component
+───────────────────────────────────────────────────────── */
 export default function CBTEssayPage() {
   const params = useParams();
   const sessionId = params.id as string;
@@ -96,23 +117,7 @@ export default function CBTEssayPage() {
 
   const isSubmittedRef = useRef(false);
 
-  useEffect(() => {
-    if (!examStarted) return;
-    setAnswers(
-      essayQuestions.flatMap((q) =>
-        q.subQuestions.map((sub) => ({
-          subQuestionId: sub.id,
-          type: "type" as AnswerType,
-          content: "",
-          whiteboardData: undefined,
-          graphData: undefined,
-          constructionData: undefined,
-          uploadData: null,
-        })),
-      ),
-    );
-  }, [examStarted]);
-
+  // Timer — only runs after exam starts and before submission
   useEffect(() => {
     if (!examStarted || isSubmitted) return;
     const timer = setInterval(() => {
@@ -176,11 +181,13 @@ export default function CBTEssayPage() {
 
   const isLowTime = timeRemaining < 300;
 
+  // Show instructions screen until the student starts
   if (!examStarted)
     return (
       <Instructions
         onStart={(m) => {
           setMode(m);
+          setAnswers(buildInitialAnswers()); // initialise answers on user action, not in an effect
           setExamStarted(true);
         }}
       />
@@ -219,11 +226,15 @@ export default function CBTEssayPage() {
           {/* Mode badge + timer */}
           <div className="flex items-center gap-2">
             <span
-              className={`px-2 py-0.5 rounded text-[11px] font-bold ${mode === "practice" ? "bg-yellow-400 text-yellow-900" : "bg-blue-400 text-blue-900"}`}>
+              className={`px-2 py-0.5 rounded text-[11px] font-bold ${
+                mode === "practice" ? "bg-yellow-400 text-yellow-900" : "bg-blue-400 text-blue-900"
+              }`}>
               {mode === "practice" ? "PRACTICE" : "EXAM"}
             </span>
             <div
-              className={`px-4 py-1.5 rounded-lg font-mono font-bold text-[15px] flex items-center gap-2 transition-colors ${isLowTime ? "bg-red-500 text-white" : "bg-yellow-400 text-green-900"}`}
+              className={`px-4 py-1.5 rounded-lg font-mono font-bold text-[15px] flex items-center gap-2 transition-colors ${
+                isLowTime ? "bg-red-500 text-white" : "bg-yellow-400 text-green-900"
+              }`}
               aria-live="polite"
               aria-label={`Time remaining: ${formatTime(timeRemaining)}`}>
               <Clock size={16} aria-hidden="true" />
@@ -278,8 +289,10 @@ export default function CBTEssayPage() {
               <p className="text-[15px] font-medium text-gray-800 mt-2">{question.title}</p>
               {question.imageUrl && (
                 <div className="mt-3">
-                  <img
+                  <Image
                     src={question.imageUrl}
+                    width={500}
+                    height={500}
                     alt={`Diagram for Question ${question.id}`}
                     className="max-w-full rounded-lg border border-gray-200 max-h-72 object-contain"
                   />
@@ -301,8 +314,10 @@ export default function CBTEssayPage() {
                   </div>
                   {sub.imageUrl && (
                     <div className="mt-2 mb-3">
-                      <img
+                      <Image
                         src={sub.imageUrl}
+                        height={500}
+                        width={500}
                         alt={`Diagram for sub-question ${sub.label}`}
                         className="max-w-full rounded-lg border border-gray-200 max-h-60 object-contain"
                       />

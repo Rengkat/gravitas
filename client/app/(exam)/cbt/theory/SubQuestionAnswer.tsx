@@ -18,6 +18,7 @@ import LinedCanvas from "./LinedCanvas";
 import GraphCanvas from "./GraphCanvas";
 import ConstructionCanvas from "./ConstructionCanvas";
 import AIResultPanel from "./AIResultPanel";
+import Image from "next/image";
 
 export default function SubQuestionAnswer({
   subQuestion,
@@ -191,9 +192,11 @@ export default function SubQuestionAnswer({
         />
       )}
       {isSubmitted && answer.type === "whiteboard" && answer.whiteboardData && (
-        <img
+        <Image
           src={answer.whiteboardData}
           alt="Your whiteboard answer"
+          height={500}
+          width={500}
           className="rounded-xl border max-w-full"
         />
       )}
@@ -207,9 +210,11 @@ export default function SubQuestionAnswer({
         />
       )}
       {isSubmitted && answer.type === "graph" && answer.graphData && (
-        <img
+        <Image
           src={answer.graphData}
           alt="Your graph answer"
+          height={500}
+          width={500}
           className="rounded-xl border max-w-full"
         />
       )}
@@ -223,9 +228,11 @@ export default function SubQuestionAnswer({
         />
       )}
       {isSubmitted && answer.type === "construction" && answer.constructionData && (
-        <img
+        <Image
           src={answer.constructionData}
           alt="Your construction answer"
+          height={500}
+          width={500}
           className="rounded-xl border max-w-full"
         />
       )}
@@ -261,9 +268,11 @@ export default function SubQuestionAnswer({
           ) : (
             <div className="border rounded-xl p-4" style={{ borderColor: "rgba(30,80,50,0.15)" }}>
               {answer.uploadData.type.startsWith("image/") ? (
-                <img
+                <Image
                   src={answer.uploadData.data}
                   alt="Uploaded answer"
+                  height={500}
+                  width={500}
                   className="max-w-full max-h-80 rounded-lg mx-auto object-contain"
                 />
               ) : (
@@ -301,9 +310,11 @@ export default function SubQuestionAnswer({
       {isSubmitted && answer.type === "upload" && answer.uploadData && (
         <div className="border rounded-xl p-4" style={{ borderColor: "rgba(30,80,50,0.15)" }}>
           {answer.uploadData.type.startsWith("image/") ? (
-            <img
+            <Image
               src={answer.uploadData.data}
               alt="Uploaded answer"
+              height={500}
+              width={500}
               className="max-w-full max-h-80 rounded-lg mx-auto object-contain"
             />
           ) : (

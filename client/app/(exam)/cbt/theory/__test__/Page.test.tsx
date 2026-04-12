@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi, beforeEach, describe, test, expect } from "vitest";
 import CBTEssayPage from "../page";
+import { AIResult, Answer, ExamMode, SubQuestion } from "@/types/examsTypes";
 
 // ── mocks ─────────────────────────────────
 
@@ -65,7 +66,16 @@ vi.mock("../SubQuestionAnswer", () => ({
     onAIScore,
     onToggleSolution,
     isSubmitted,
-  }: any) => (
+  }: {
+    subQuestion: SubQuestion;
+    answer: Answer;
+    onAnswerChange: (a: Answer) => void;
+    mode: ExamMode;
+    isSubmitted: boolean;
+    aiResult?: AIResult;
+    onAIScore: () => void;
+    onToggleSolution: () => void;
+  }) => (
     <div data-testid={`sub-answer-${subQuestion.id}`}>
       <input
         title="subquestion answer"

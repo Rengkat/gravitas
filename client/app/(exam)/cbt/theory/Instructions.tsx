@@ -65,7 +65,7 @@ export default function Instructions({ onStart, mode }: InstructionsProps) {
               </>,
               selectedMode === "practice" ? (
                 <>
-                  In <strong>Practice Mode</strong>, click <em>"Score with AI"</em> on any
+                  In <strong>Practice Mode</strong>, click <em>{"Score with AI"}</em> on any
                   sub-question after answering to get instant feedback and the model answer.
                 </>
               ) : (
