@@ -1,4 +1,4 @@
-import { Sparkles, Crown, Check } from "lucide-react";
+import { Crown, Check } from "lucide-react";
 
 const PERKS = [
   "Unlimited downloads",

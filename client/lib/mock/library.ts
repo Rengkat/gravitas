@@ -6,7 +6,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "1",
     type: "ebooks",
     title: "Complete JAMB Mathematics Past Questions & Solutions",
-    description: "2000+ past questions with detailed step-by-step solutions covering all JAMB topics from 2000–2024",
+    description:
+      "2000+ past questions with detailed step-by-step solutions covering all JAMB topics from 2000–2024",
     subject: "mathematics",
     level: "jamb",
     examType: "jamb",
@@ -30,7 +31,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "2",
     type: "ebooks",
     title: "Essential Physics for WAEC & NECO",
-    description: "Comprehensive guide covering the full WAEC/NECO physics syllabus with worked examples and diagrams",
+    description:
+      "Comprehensive guide covering the full WAEC/NECO physics syllabus with worked examples and diagrams",
     subject: "physics",
     level: "sss3",
     examType: "waec",
@@ -55,7 +57,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "3",
     type: "ebooks",
     title: "Chemistry Made Easy: SSCE Edition",
-    description: "Simplified chemistry concepts with practice questions and model answers for SSS students",
+    description:
+      "Simplified chemistry concepts with practice questions and model answers for SSS students",
     subject: "chemistry",
     level: "sss2",
     examType: "waec",
@@ -79,7 +82,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "4",
     type: "ebooks",
     title: "English Language: Comprehension & Summary Mastery",
-    description: "Master comprehension passages, summary writing techniques and essay composition for exams",
+    description:
+      "Master comprehension passages, summary writing techniques and essay composition for exams",
     subject: "english",
     level: "sss3",
     examType: "waec",
@@ -103,7 +107,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "13",
     type: "ebooks",
     title: "Advanced Biology: Genetics & Heredity",
-    description: "Deep-dive into genetics, DNA, Mendelian inheritance and biotechnology for university entrance",
+    description:
+      "Deep-dive into genetics, DNA, Mendelian inheritance and biotechnology for university entrance",
     subject: "biology",
     level: "jamb",
     examType: "jamb",
@@ -152,7 +157,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "15",
     type: "ebooks",
     title: "JAMB Economics: Theory & Practice",
-    description: "Complete economics textbook with market structures, demand & supply, national income and more",
+    description:
+      "Complete economics textbook with market structures, demand & supply, national income and more",
     subject: "economics",
     level: "jamb",
     examType: "jamb",
@@ -202,7 +208,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "6",
     type: "videos",
     title: "How to Solve Quadratic Equations Fast",
-    description: "Quick methods and tricks to solve quadratic equations confidently in under 2 minutes",
+    description:
+      "Quick methods and tricks to solve quadratic equations confidently in under 2 minutes",
     subject: "mathematics",
     level: "sss2",
     examType: "waec",
@@ -225,7 +232,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "7",
     type: "videos",
     title: "Organic Chemistry Reactions Masterclass",
-    description: "In-depth masterclass covering all organic chemistry reactions for NECO and WAEC — 10 modules",
+    description:
+      "In-depth masterclass covering all organic chemistry reactions for NECO and WAEC — 10 modules",
     subject: "chemistry",
     level: "sss3",
     examType: "neco",
@@ -249,7 +257,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "8",
     type: "videos",
     title: "Literature in English: Analyzing African Poetry",
-    description: "Deep dive into African poetry analysis, themes, imagery and literary devices for literature students",
+    description:
+      "Deep dive into African poetry analysis, themes, imagery and literary devices for literature students",
     subject: "literature",
     level: "sss3",
     examType: "waec",
@@ -272,7 +281,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "16",
     type: "videos",
     title: "WAEC Economics: Demand & Supply Explained",
-    description: "Visual step-by-step explanation of demand and supply curves with real Nigerian market examples",
+    description:
+      "Visual step-by-step explanation of demand and supply curves with real Nigerian market examples",
     subject: "economics",
     level: "sss3",
     examType: "waec",
@@ -295,7 +305,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "17",
     type: "videos",
     title: "Biology Practical Skills: Microscopy & Slides",
-    description: "Step-by-step WAEC biology practical guide — preparing slides, using a microscope and drawing cells",
+    description:
+      "Step-by-step WAEC biology practical guide — preparing slides, using a microscope and drawing cells",
     subject: "biology",
     level: "sss3",
     examType: "waec",
@@ -321,7 +332,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "9",
     type: "images",
     title: "Periodic Table of Elements — High Resolution",
-    description: "Print-ready high-quality periodic table with all 118 elements, atomic numbers, masses and groups",
+    description:
+      "Print-ready high-quality periodic table with all 118 elements, atomic numbers, masses and groups",
     subject: "chemistry",
     level: "sss1",
     examType: "all",
@@ -343,7 +355,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "10",
     type: "images",
     title: "Mathematics Formula Sheet for JAMB",
-    description: "All essential JAMB mathematics formulas on one poster: algebra, trig, sequences, stats and more",
+    description:
+      "All essential JAMB mathematics formulas on one poster: algebra, trig, sequences, stats and more",
     subject: "mathematics",
     level: "jamb",
     examType: "jamb",
@@ -365,7 +378,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "11",
     type: "images",
     title: "Physics Equations & Constants Reference Card",
-    description: "Full-color reference sheet with all key physics equations, constants and SI units for WAEC/JAMB",
+    description:
+      "Full-color reference sheet with all key physics equations, constants and SI units for WAEC/JAMB",
     subject: "physics",
     level: "sss3",
     examType: "waec",
@@ -387,7 +401,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "18",
     type: "images",
     title: "Human Body Systems — Anatomy Diagrams Pack",
-    description: "Labelled diagrams of all 11 human body systems: circulatory, respiratory, nervous and more",
+    description:
+      "Labelled diagrams of all 11 human body systems: circulatory, respiratory, nervous and more",
     subject: "biology",
     level: "sss2",
     examType: "waec",
@@ -412,7 +427,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "12",
     type: "documents",
     title: "WAEC Biology Practical Guide 2024",
-    description: "Step-by-step WAEC biology practical manual with diagrams, expected results and marking guide",
+    description:
+      "Step-by-step WAEC biology practical manual with diagrams, expected results and marking guide",
     subject: "biology",
     level: "sss3",
     examType: "waec",
@@ -436,8 +452,9 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "19",
     type: "documents",
     title: "JAMB Syllabus 2024 — All Subjects",
-    description: "Official compiled JAMB 2024 syllabus for Mathematics, English, Physics, Chemistry and Biology",
-    subject: "all" as any,
+    description:
+      "Official compiled JAMB 2024 syllabus for Mathematics, English, Physics, Chemistry and Biology",
+    subject: "all",
     level: "jamb",
     examType: "jamb",
     pages: 80,
@@ -459,7 +476,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "20",
     type: "documents",
     title: "Chemistry Lab Safety & Procedures Manual",
-    description: "Standard operating procedures for chemistry lab work including safety rules, reagent handling and waste disposal",
+    description:
+      "Standard operating procedures for chemistry lab work including safety rules, reagent handling and waste disposal",
     subject: "chemistry",
     level: "sss2",
     examType: "waec",
@@ -483,7 +501,8 @@ export const LIBRARY_ITEMS: LibraryItem[] = [
     id: "21",
     type: "documents",
     title: "NECO Mathematics Marking Scheme — 10 Years",
-    description: "Official-style marking schemes for NECO mathematics from 2014–2023 with full worked solutions",
+    description:
+      "Official-style marking schemes for NECO mathematics from 2014–2023 with full worked solutions",
     subject: "mathematics",
     level: "sss3",
     examType: "neco",

@@ -2,7 +2,7 @@ import { BookOpen, Check, Info, Search, X } from "lucide-react";
 import { useState } from "react";
 
 export default function SubjectSelector({
-  examType,
+  // examType,
   subjects,
   isJamb,
   selected,

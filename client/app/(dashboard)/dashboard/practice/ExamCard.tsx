@@ -1,24 +1,36 @@
 import { SECONDARY_EXAMS } from "@/lib/constants/practice";
 import { Check } from "lucide-react";
 
+// Define the type properly
+type Exam = (typeof SECONDARY_EXAMS)[0];
+
+// Extend the type to include optional badge property
+type ExamWithOptionalBadge = Exam & {
+  badge?: string;
+};
+
 export default function ExamCard({
   exam,
   selected,
   onClick,
 }: {
-  exam: (typeof SECONDARY_EXAMS)[0];
+  exam: ExamWithOptionalBadge;
   selected: boolean;
   onClick: () => void;
 }) {
   const Icon = exam.icon;
+
+  // Type-safe badge check
+  const hasBadge = "badge" in exam && exam.badge;
+
   return (
     <button
       onClick={onClick}
       className={`group relative w-full text-left rounded-2xl border-2 p-5 transition-all duration-200 ${selected ? "border-green-600 bg-green-50 shadow-lg shadow-green-100" : "border-gray-100 bg-white hover:border-gray-200 hover:shadow-md"}`}>
-      {(exam as any).badge && (
+      {hasBadge && (
         <div className="absolute -top-2.5 left-4">
           <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-green-800 text-white tracking-wide">
-            {(exam as any).badge}
+            {exam.badge}
           </span>
         </div>
       )}

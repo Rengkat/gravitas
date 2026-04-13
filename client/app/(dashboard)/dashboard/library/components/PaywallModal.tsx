@@ -1,9 +1,8 @@
 "use client";
 
-import { X, Crown, Lock, Check, Sparkles } from "lucide-react";
+import { X, Crown, Lock, Check } from "lucide-react";
 import { LibraryItem } from "@/types/library";
 import { formatPrice } from "@/lib/constants/helpers";
-import { TypeIcon } from "./ui";
 
 interface PaywallModalProps {
   item: LibraryItem;
@@ -28,9 +27,9 @@ export default function PaywallModal({ item, onClose, onUpgrade, onBuySingle }: 
         <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-6 text-white relative overflow-hidden">
           <div className="absolute -top-6 -right-6 w-32 h-32 bg-white/10 rounded-full" />
           <button
+            title="close"
             onClick={onClose}
-            className="absolute top-4 right-4 p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
-          >
+            className="absolute top-4 right-4 p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
             <X size={16} />
           </button>
           <div className="flex items-center gap-3 mb-3">
@@ -67,8 +66,7 @@ export default function PaywallModal({ item, onClose, onUpgrade, onBuySingle }: 
           <div className="space-y-3">
             <button
               onClick={onUpgrade}
-              className="w-full py-3 bg-green-800 text-white font-bold text-sm rounded-xl hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-md"
-            >
+              className="w-full py-3 bg-green-800 text-white font-bold text-sm rounded-xl hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-md">
               <Crown size={16} className="text-amber-400" />
               Upgrade to Premium — from ₦2,500/mo
             </button>
@@ -76,16 +74,14 @@ export default function PaywallModal({ item, onClose, onUpgrade, onBuySingle }: 
             {item.price && onBuySingle && (
               <button
                 onClick={onBuySingle}
-                className="w-full py-3 bg-amber-50 text-amber-800 font-bold text-sm rounded-xl hover:bg-amber-100 transition-colors border border-amber-200 flex items-center justify-center gap-2"
-              >
+                className="w-full py-3 bg-amber-50 text-amber-800 font-bold text-sm rounded-xl hover:bg-amber-100 transition-colors border border-amber-200 flex items-center justify-center gap-2">
                 Buy this resource — {formatPrice(item.price)}
               </button>
             )}
 
             <button
               onClick={onClose}
-              className="w-full py-2.5 text-gray-500 text-[13px] font-semibold hover:text-gray-700 transition-colors"
-            >
+              className="w-full py-2.5 text-gray-500 text-[13px] font-semibold hover:text-gray-700 transition-colors">
               {item.previewAvailable ? "View Free Preview Instead" : "Maybe Later"}
             </button>
           </div>
