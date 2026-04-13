@@ -3,6 +3,7 @@ import SubjectChip from "./SubjectChip";
 import { Subject } from "@/types/ai-tutor";
 import { ElementType, useEffect, useRef } from "react";
 import { SUBJECTS } from "@/lib/constants/ai-tutor";
+import Link from "next/link";
 type SubjectObject = (typeof SUBJECTS)[number];
 
 type HeaderProps = {
@@ -50,11 +51,12 @@ const Header = ({
         </button>
 
         <div className="flex items-center gap-2">
-          <div
+          <Link
+            href={"/dashboard"}
             aria-hidden="true"
             className="w-[34px] h-[34px] rounded-[9px] bg-gold/15 border border-gold/25 flex items-center justify-center font-serif text-lg text-gold">
             G
-          </div>
+          </Link>
           <div>
             <div className="text-[15px] font-bold text-white font-serif tracking-tight leading-none">
               Sabi-Tutor

@@ -1,3 +1,4 @@
+import GravitasLogoMark from "@/lib/components/gravitas-logo";
 import { NAV_ITEMS } from "@/lib/constants/dashboard";
 import { GraduationCap, LogOut, User } from "lucide-react";
 import Link from "next/link";
@@ -20,9 +21,7 @@ const SideBar = ({ sidebarOpen, closeSidebar, isParentView }: SideBarProps) => {
       {/* Logo */}
       <div className="p-6 border-b" style={{ borderColor: "rgba(30,80,50,0.1)" }}>
         <Link href="/dashboard" onClick={closeSidebar} className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-green-800 flex items-center justify-center">
-            <GraduationCap size={18} className="text-white" />
-          </div>
+          <GravitasLogoMark />
           <span className="font-serif text-xl font-bold" style={{ color: "#0d2b1a" }}>
             Gravitas
           </span>
