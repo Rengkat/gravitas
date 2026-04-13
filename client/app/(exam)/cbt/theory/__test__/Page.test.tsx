@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { vi, beforeEach, describe, test, expect } from "vitest";
 import CBTEssayPage from "../page";
 import { AIResult, Answer, ExamMode, SubQuestion } from "@/types/examsTypes";
+import { Dispatch, SetStateAction } from "react";
 
 // ── mocks ─────────────────────────────────
 
@@ -97,7 +98,13 @@ vi.mock("../SubQuestionAnswer", () => ({
 
 // from __test__/ that becomes "../../../components/SubmitModel"
 vi.mock("../../../components/SubmitModel", () => ({
-  default: ({ confirmSubmit, setShowSubmitModal }: any) => (
+  default: ({
+    confirmSubmit,
+    setShowSubmitModal,
+  }: {
+    setShowSubmitModal: Dispatch<SetStateAction<boolean>>;
+    confirmSubmit: () => void;
+  }) => (
     <div data-testid="submit-modal">
       <button onClick={confirmSubmit}>Confirm Submit</button>
       <button onClick={() => setShowSubmitModal(false)}>Cancel</button>
@@ -107,7 +114,7 @@ vi.mock("../../../components/SubmitModel", () => ({
 
 // from __test__/ that becomes "../../../components/TimeUpModal"
 vi.mock("../../../components/TimeUpModal", () => ({
-  default: ({ setShowTimeUpModal }: any) => (
+  default: ({ setShowTimeUpModal }: { setShowTimeUpModal: Dispatch<SetStateAction<boolean>> }) => (
     <div data-testid="time-up-modal">
       <button onClick={() => setShowTimeUpModal(false)}>Close</button>
     </div>

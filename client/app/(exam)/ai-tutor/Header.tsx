@@ -1,7 +1,7 @@
 import { Menu, Trash2 } from "lucide-react";
 import SubjectChip from "./SubjectChip";
 import { Subject } from "@/types/ai-tutor";
-import { ElementType, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { SUBJECTS } from "@/lib/constants/ai-tutor";
 import Link from "next/link";
 type SubjectObject = (typeof SUBJECTS)[number];

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback, type KeyboardEvent } from "react";
-import { Send, Mic, MicOff, Settings, Loader2, Menu } from "lucide-react";
+import { Send, Mic, MicOff, Settings, Loader2 } from "lucide-react";
 import { sendChatMessage, SUBJECTS, WELCOME_MESSAGE } from "@/lib/constants/ai-tutor";
 import { Conversation, Difficulty, Message, ResponseStyle, Subject } from "@/types/ai-tutor";
 import { buildSystemPrompt, QUICK_PROMPTS, SUGGESTIONS } from "@/lib/mock/ai-tutor";

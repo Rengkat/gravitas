@@ -8,7 +8,7 @@ export default function AIResultPanel({
   result,
   modelAnswer,
   onToggleSolution,
-  mode,
+  // mode,
 }: {
   result: AIResult;
   modelAnswer?: string;
@@ -16,7 +16,7 @@ export default function AIResultPanel({
   mode: ExamMode;
 }) {
   const pct = Math.round((result.score / result.maxScore) * 100);
-  const color = pct >= 70 ? "text-green-700" : pct >= 50 ? "text-yellow-600" : "text-red-600";
+  // const color = pct >= 70 ? "text-green-700" : pct >= 50 ? "text-yellow-600" : "text-red-600";
   const barColor = pct >= 70 ? "bg-green-600" : pct >= 50 ? "bg-yellow-500" : "bg-red-500";
 
   return (
