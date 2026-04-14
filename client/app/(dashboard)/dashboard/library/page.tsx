@@ -3,16 +3,7 @@
 import { useState, useMemo, useCallback } from "react";
 import { X } from "lucide-react";
 
-import {
-  ContentType,
-  Subject,
-  Level,
-  ExamType,
-  SortMode,
-  ViewMode,
-  LibraryFilters,
-  LibraryItem,
-} from "@/types/library";
+import { ViewMode, LibraryFilters, LibraryItem } from "@/types/library";
 
 import LibraryHero from "./components/LibraryHero";
 import SearchBar from "./components/SearchBar";

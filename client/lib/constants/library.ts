@@ -12,10 +12,11 @@ import {
   Users,
   Bookmark,
   FolderOpen,
+  LucideIcon,
 } from "lucide-react";
 import { ContentType, ExamType, Level, Subject } from "@/types/library";
 
-export const SUBJECTS: { id: Subject; name: string; icon: any }[] = [
+export const SUBJECTS: { id: Subject; name: string; icon: LucideIcon }[] = [
   { id: "all", name: "All Subjects", icon: FolderOpen },
   { id: "mathematics", name: "Mathematics", icon: Calculator },
   { id: "english", name: "English", icon: BookOpen },
@@ -45,7 +46,7 @@ export const EXAM_TYPES: { id: ExamType; name: string }[] = [
   { id: "professional", name: "Professional" },
 ];
 
-export const CONTENT_TABS: { id: ContentType; name: string; icon: any }[] = [
+export const CONTENT_TABS: { id: ContentType; name: string; icon: LucideIcon }[] = [
   { id: "all", name: "All", icon: LibraryIcon },
   { id: "ebooks", name: "eBooks", icon: BookOpen },
   { id: "videos", name: "Videos", icon: Video },

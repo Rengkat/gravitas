@@ -1,6 +1,6 @@
 import GravitasLogoMark from "@/lib/components/gravitas-logo";
 import { NAV_ITEMS } from "@/lib/constants/dashboard";
-import { GraduationCap, LogOut, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 type SideBarProps = {

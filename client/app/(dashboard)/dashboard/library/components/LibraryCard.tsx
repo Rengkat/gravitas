@@ -11,10 +11,15 @@ import {
   Flame,
   Lock,
   Crown,
-  Sparkles,
 } from "lucide-react";
 import { LibraryItem } from "@/types/library";
-import { typeColor, typeLabel, formatNumber, formatPrice, accessLabel } from "@/lib/constants/helpers";
+import {
+  typeColor,
+  typeLabel,
+  formatNumber,
+  formatPrice,
+  accessLabel,
+} from "@/lib/constants/helpers";
 import { SUBJECT_GRADIENTS } from "@/lib/constants/library";
 import { TypeIcon, StarRating } from "./ui";
 
@@ -43,15 +48,15 @@ export default function LibraryCard({
     <div className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex flex-col">
       {/* Illustration / thumbnail area */}
       <div
-        className={`relative h-40 bg-gradient-to-br ${SUBJECT_GRADIENTS[item.subject] ?? SUBJECT_GRADIENTS.all} flex items-center justify-center`}
-      >
+        className={`relative h-40 bg-gradient-to-br ${SUBJECT_GRADIENTS[item.subject] ?? SUBJECT_GRADIENTS.all} flex items-center justify-center`}>
         {/* Watermark icon */}
         <div className="opacity-10 absolute inset-0 flex items-center justify-center">
           <TypeIcon type={item.type} size={100} />
         </div>
 
         {/* Centre icon */}
-        <div className={`relative w-14 h-14 rounded-2xl ${colors.bg} flex items-center justify-center shadow-sm`}>
+        <div
+          className={`relative w-14 h-14 rounded-2xl ${colors.bg} flex items-center justify-center shadow-sm`}>
           <TypeIcon type={item.type} size={26} />
         </div>
 
@@ -101,7 +106,8 @@ export default function LibraryCard({
         </div>
 
         {/* Top-right: type pill */}
-        <div className={`absolute top-3 right-3 flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${colors.bg} ${colors.text}`}>
+        <div
+          className={`absolute top-3 right-3 flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${colors.bg} ${colors.text}`}>
           <div className={`w-1.5 h-1.5 rounded-full ${colors.dot}`} />
           {typeLabel(item.type)}
         </div>
@@ -159,25 +165,28 @@ export default function LibraryCard({
             <button
               onClick={onLike}
               className={`p-1.5 rounded-lg transition-all ${liked ? "text-red-500 bg-red-50" : "text-gray-400 hover:text-red-400 hover:bg-red-50"}`}
-              aria-label="Like"
-            >
+              aria-label="Like">
               <Heart size={14} fill={liked ? "currentColor" : "none"} />
             </button>
             <button
               onClick={onBookmark}
               className={`p-1.5 rounded-lg transition-all ${bookmarked ? "text-blue-500 bg-blue-50" : "text-gray-400 hover:text-blue-400 hover:bg-blue-50"}`}
-              aria-label="Bookmark"
-            >
+              aria-label="Bookmark">
               {/* Bookmark icon inline to avoid import issues */}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill={bookmarked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill={bookmarked ? "currentColor" : "none"}
+                stroke="currentColor"
+                strokeWidth="2">
                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
               </svg>
             </button>
             <button
               onClick={onShare}
               className="p-1.5 rounded-lg text-gray-400 hover:text-green-600 hover:bg-green-50 transition-all"
-              aria-label="Share"
-            >
+              aria-label="Share">
               <Share2 size={14} />
             </button>
           </div>
@@ -188,8 +197,7 @@ export default function LibraryCard({
               item.isPremium
                 ? "bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200"
                 : "bg-green-50 text-green-700 hover:bg-green-100"
-            }`}
-          >
+            }`}>
             {item.isPremium && <Lock size={11} />}
             {accessLabel(item)}
           </button>
