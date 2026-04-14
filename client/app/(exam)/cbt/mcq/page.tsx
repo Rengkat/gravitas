@@ -11,8 +11,8 @@ import { buildQuestions } from "./buildQuestions";
 import { ExamLoader } from "@/lib/loaders";
 import LeftQuestion from "./LeftQuestion";
 import SubmitModel from "./SubmitModel";
-import CbtNav from "../../CbtNav";
-import CalculatorModal from "../../CalculatorModal";
+import CbtNav from "../../components/CbtNav";
+import CalculatorModal from "../../components/CalculatorModal";
 
 type Subject = {
   id: string;

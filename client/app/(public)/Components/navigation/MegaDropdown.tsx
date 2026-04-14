@@ -1,5 +1,3 @@
-// ─── MegaDropdown ─────────────────────────────────────────────────────────────
-
 import { FOOTER_BADGE_CLASSES, NavItemData } from "@/lib/constants/NavConstants";
 import DropdownItem from "./DropdownItem";
 import FooterCta from "./FooterCta";
