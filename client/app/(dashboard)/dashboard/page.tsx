@@ -62,7 +62,6 @@ export default function DashboardHome() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column - Recent Sessions & Weak Topics */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Recent Sessions */}
           <div
             className="p-6 rounded-2xl bg-white border"
             style={{ borderColor: "rgba(30,80,50,0.08)" }}>
