@@ -9,7 +9,7 @@ import {
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { Expose } from 'class-transformer';
-import { NigerianState } from 'src/common/enums';
+import { NigerianState, Subject } from 'src/common/enums';
 import { CreateUserDto } from './create-user.dto';
 import { UserResponseDto } from './user-response.dto';
 
@@ -104,7 +104,7 @@ export class CreateClassAdminDto extends CreateUserDto {
     example: ['physics', 'mathematics'],
   })
   @IsOptional()
-  subjects?: string[];
+  subjects?: Subject[];
 }
 
 // ─────────────────────────────────────────────
@@ -179,7 +179,7 @@ export class ClassAdminResponseDto extends UserResponseDto {
 
   @Expose()
   @ApiPropertyOptional({ type: [String] })
-  subjects?: string[];
+  subjects?: Subject[];
 }
 
 // ─────────────────────────────────────────────

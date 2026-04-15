@@ -15,6 +15,7 @@ export enum AuthProvider {
   APPLE = 'apple',
   FACEBOOK = 'facebook',
   PHONE = 'phone',
+  EMAIL = 'email',
 }
 
 export enum SubscriptionTier {
