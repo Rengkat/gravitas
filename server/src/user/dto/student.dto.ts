@@ -4,20 +4,18 @@ import {
   IsEnum,
   IsInt,
   IsArray,
-  IsBoolean,
   IsUUID,
   Min,
   Max,
   MaxLength,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Transform, Type } from 'class-transformer';
 import { Expose } from 'class-transformer';
 import {
   ExamType,
   DifficultyLevel,
-  NigerianState,
-  SubscriptionTier,
+  // NigerianState,
+  // SubscriptionTier,
 } from 'src/common/enums';
 import { CreateUserDto } from './create-user.dto';
 import { UserResponseDto } from './user-response.dto';

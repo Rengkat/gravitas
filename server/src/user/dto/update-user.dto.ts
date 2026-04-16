@@ -20,6 +20,7 @@ import {
   SubscriptionTier,
   UserRole,
 } from 'src/common/enums';
+import { normalizeEmail, trimString } from 'src/common/transforms';
 
 // ─────────────────────────────────────────────
 // UPDATE USER DTO
@@ -42,14 +43,14 @@ export class UpdateUserDto {
   @IsString()
   @IsNotEmpty()
   @MaxLength(100)
-  @Transform(({ value }) => value?.trim())
+  @Transform(trimString)
   lastName?: string;
 
   @ApiPropertyOptional({ example: 'Chiamaka' })
   @IsOptional()
   @IsString()
   @MaxLength(100)
-  @Transform(({ value }) => value?.trim())
+  @Transform(trimString)
   middleName?: string;
 
   @ApiPropertyOptional({ example: '+2348012345678' })
@@ -106,7 +107,7 @@ export class AdminUpdateUserDto extends UpdateUserDto {
   @ApiPropertyOptional({ example: 'new@example.com' })
   @IsOptional()
   @Matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: 'Must be a valid email' })
-  @Transform(({ value }) => value?.toLowerCase().trim())
+  @Transform(normalizeEmail)
   email?: string;
 
   // Admin-only: can change role

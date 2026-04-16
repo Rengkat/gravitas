@@ -7,7 +7,6 @@ import {
   Matches,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
 import { Expose } from 'class-transformer';
 import { NigerianState, Subject } from 'src/common/enums';
 import { CreateUserDto } from './create-user.dto';

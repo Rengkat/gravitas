@@ -12,6 +12,7 @@ import {
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import { Gender, NigerianState } from 'src/common/enums';
+import { normalizeEmail, trimString } from 'src/common/transforms';
 
 /**
  * BaseUserDto — shared fields across all user creation DTOs.
@@ -25,26 +26,26 @@ export abstract class BaseUserDto {
   @IsString()
   @IsNotEmpty()
   @MaxLength(100)
-  @Transform(({ value }) => value?.trim())
+  @Transform(trimString)
   firstName!: string;
 
   @ApiProperty({ example: 'Okonkwo' })
   @IsString()
   @IsNotEmpty()
   @MaxLength(100)
-  @Transform(({ value }) => value?.trim())
+  @Transform(trimString)
   lastName!: string;
 
   @ApiPropertyOptional({ example: 'Chiamaka' })
   @IsOptional()
   @IsString()
   @MaxLength(100)
-  @Transform(({ value }) => value?.trim())
+  @Transform(trimString)
   middleName?: string;
 
   @ApiProperty({ example: 'adaeze@example.com' })
   @IsEmail({}, { message: 'Provide a valid email address' })
-  @Transform(({ value }) => value?.toLowerCase().trim())
+  @Transform(normalizeEmail)
   email!: string;
 
   @ApiPropertyOptional({ example: '+2348012345678' })

@@ -16,6 +16,7 @@ import {
   NigerianState,
   Gender,
 } from 'src/common/enums';
+import { toBoolean, toFloat, toInt } from 'src/common/transforms';
 
 // ─────────────────────────────────────────────
 // USER FILTER DTO
@@ -55,11 +56,7 @@ export class UserFilterDto {
   })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => {
-    if (value === 'true') return true;
-    if (value === 'false') return false;
-    return value;
-  })
+  @Transform(toBoolean)
   isActive?: boolean;
 
   @ApiPropertyOptional({
@@ -68,11 +65,7 @@ export class UserFilterDto {
   })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => {
-    if (value === 'true') return true;
-    if (value === 'false') return false;
-    return value;
-  })
+  @Transform(toBoolean)
   emailVerified?: boolean;
 
   @ApiPropertyOptional({
@@ -134,7 +127,7 @@ export class UserFilterDto {
   @IsOptional()
   @IsInt()
   @Min(1)
-  @Transform(({ value }) => parseInt(value))
+  @Transform(toInt)
   page?: number = 1;
 
   @ApiPropertyOptional({ example: 20, description: 'Items per page (max 100)' })
@@ -142,7 +135,7 @@ export class UserFilterDto {
   @IsInt()
   @Min(1)
   @Max(100)
-  @Transform(({ value }) => parseInt(value))
+  @Transform(toInt)
   limit?: number = 20;
 }
 
@@ -172,7 +165,7 @@ export class StudentFilterDto {
   @ApiPropertyOptional({ example: true })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => value === 'true' || value === true)
+  @Transform(toBoolean)
   isActive?: boolean;
 
   @ApiPropertyOptional({
@@ -198,7 +191,7 @@ export class StudentFilterDto {
   @IsOptional()
   @IsInt()
   @Min(1)
-  @Transform(({ value }) => parseInt(value))
+  @Transform(toInt)
   page?: number = 1;
 
   @ApiPropertyOptional({ example: 20 })
@@ -206,7 +199,7 @@ export class StudentFilterDto {
   @IsInt()
   @Min(1)
   @Max(100)
-  @Transform(({ value }) => parseInt(value))
+  @Transform(toInt)
   limit?: number = 20;
 }
 
@@ -240,7 +233,7 @@ export class TutorFilterDto {
   })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => value === 'true' || value === true)
+  @Transform(toBoolean)
   isVerified?: boolean;
 
   @ApiPropertyOptional({
@@ -249,7 +242,7 @@ export class TutorFilterDto {
   })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => value === 'true' || value === true)
+  @Transform(toBoolean)
   isOnline?: boolean;
 
   @ApiPropertyOptional({
@@ -258,7 +251,7 @@ export class TutorFilterDto {
   })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => value === 'true' || value === true)
+  @Transform(toBoolean)
   canTeachOnline?: boolean;
 
   @ApiPropertyOptional({
@@ -267,7 +260,7 @@ export class TutorFilterDto {
   })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => value === 'true' || value === true)
+  @Transform(toBoolean)
   canTeachInPerson?: boolean;
 
   @ApiPropertyOptional({
@@ -277,12 +270,12 @@ export class TutorFilterDto {
   @IsOptional()
   @IsInt()
   @Min(0)
-  @Transform(({ value }) => parseInt(value))
+  @Transform(toInt)
   maxHourlyRate?: number;
 
   @ApiPropertyOptional({ example: 4.0, description: 'Minimum rating (0–5)' })
   @IsOptional()
-  @Transform(({ value }) => parseFloat(value))
+  @Transform(toFloat)
   minRating?: number;
 
   @ApiPropertyOptional({
@@ -302,7 +295,7 @@ export class TutorFilterDto {
   @IsOptional()
   @IsInt()
   @Min(1)
-  @Transform(({ value }) => parseInt(value))
+  @Transform(toInt)
   page?: number = 1;
 
   @ApiPropertyOptional({ example: 20 })
@@ -310,6 +303,6 @@ export class TutorFilterDto {
   @IsInt()
   @Min(1)
   @Max(50)
-  @Transform(({ value }) => parseInt(value))
+  @Transform(toInt)
   limit?: number = 20;
 }

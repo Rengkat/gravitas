@@ -6,7 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne,
-  OneToMany,
+  // OneToMany,
   Index,
 } from 'typeorm';
 import { StudentProfile } from './student-profile.entity';
