@@ -14,6 +14,8 @@ import { User } from './user.entity';
 import { ExamType } from 'src/common/enums';
 import { WeakTopic } from './weak-topic.entity';
 import { StudyStreak } from './study-streak.entity';
+import { StudyActivity } from './study-activity.entity';
+import { TopicMasteryHistory } from './topic-mastery-history.entity';
 
 @Entity('student_profiles')
 export class StudentProfile {
@@ -84,9 +86,15 @@ export class StudentProfile {
   //   @ManyToOne(() => SchoolClass, (c) => c.students, { nullable: true })
   //   schoolClass: SchoolClass | null;
 
+  @OneToMany(() => TopicMasteryHistory, (history) => history.studentProfile)
+  topicMasteryHistory: TopicMasteryHistory[];
+
   @OneToMany(() => StudyStreak, (s) => s.studentProfile)
   streakHistory: StudyStreak[];
 
   @OneToMany(() => WeakTopic, (w) => w.studentProfile)
   weakTopics: WeakTopic[];
+
+  @OneToMany(() => StudyActivity, (activity) => activity.studentProfile)
+  studyActivities: StudyActivity[];
 }

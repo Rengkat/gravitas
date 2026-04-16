@@ -29,7 +29,7 @@ export class SchoolAdmin {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  /* ── Relations ── */ later;
+  /* ── Relations ── later;*/
   @OneToOne(() => User, (u) => u.schoolAdmin)
   @JoinColumn()
   user: User;

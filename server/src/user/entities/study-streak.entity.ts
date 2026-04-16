@@ -9,15 +9,10 @@ import {
   Index,
 } from 'typeorm';
 import { StudentProfile } from './student-profile.entity';
-
-export enum StreakStatus {
-  ACTIVE = 'active',
-  BROKEN = 'broken',
-  ACHIEVED = 'achieved', // For milestone achievements (e.g., 7-day, 30-day)
-}
+import { StreakStatus } from 'src/common/enums';
 
 @Entity('study_streaks')
-@Index(['studentProfileId', 'date'])
+@Index(['studentProfileId', 'lastStudyDate'])
 export class StudyStreak {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
@@ -85,43 +80,4 @@ export class StudyStreak {
 
   @UpdateDateColumn()
   updatedAt!: Date;
-}
-
-// For tracking daily study activity (more granular)
-@Entity('study_activities')
-@Index(['studentProfileId', 'date'])
-export class StudyActivity {
-  @PrimaryGeneratedColumn('uuid')
-  id!: string;
-
-  @Column({ type: 'uuid' })
-  studentProfileId!: string;
-
-  @ManyToOne(() => StudentProfile)
-  @JoinColumn({ name: 'student_profile_id' })
-  studentProfile!: StudentProfile;
-
-  @Column({ type: 'date' })
-  date!: Date;
-
-  @Column({ type: 'int', default: 0 })
-  minutesStudied!: number;
-
-  @Column({ type: 'int', default: 0 })
-  questionsAttempted!: number;
-
-  @Column({ type: 'int', default: 0 })
-  questionsCorrect!: number;
-
-  @Column({ type: 'float', default: 0 })
-  sessionScore!: number;
-
-  @Column({ type: 'jsonb', nullable: true })
-  subjects?: { subject: string; minutes: number }[];
-
-  @Column({ type: 'boolean', default: false })
-  isStreakDay!: boolean;
-
-  @CreateDateColumn()
-  createdAt!: Date;
 }

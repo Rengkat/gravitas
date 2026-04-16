@@ -1,13 +1,27 @@
 POST http://localhost:3000/api/v1/users
 Content-Type: application/json
-
 {
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
+  "firstName": "Adaeze",
+  "lastName": "Okonkwo",
+  "email": "adaeze.okonkwo@example.com",
+  "phoneNumber": "+2348012345678",
+  "passwordHash": "Student@2024",
   "role": "student",
-  "password": "StrongPass123",
-  "subscriptionTier": "free",
-  "skipEmailVerification": false,
-  "sendWelcomeEmail": true
+  "authProvider": "email",
+  "avatarUrl": "https://randomuser.me/api/portraits/women/1.jpg",
+  "isEmailVerified": true,
+  "isPhoneVerified": true,
+  "isActive": true,
+  "studentProfile": {
+    "targetScore": 350,
+    "examDate": "2025-05-15",
+    "examTargets": ["JAMB", "WAEC"],
+    "targetUniversity": "UNILAG",
+    "targetCourse": "Computer Science",
+    "totalXp": 0,
+    "currentStreak": 0,
+    "longestStreak": 0,
+    "stateCode": "LA",
+    "lga": "Ikeja"
+  }
 }

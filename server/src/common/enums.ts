@@ -142,7 +142,7 @@ export enum SessionStatus {
 export enum SessionMode {
   ONLINE = 'online',
   IN_PERSON = 'in_person',
-  BOTH = 'both',
+  HYBRID = 'hybrid',
 }
 
 export enum SessionDuration {
@@ -162,6 +162,18 @@ export enum RecurringPattern {
   BI_WEEKLY = 'bi_weekly',
   MONTHLY = 'monthly',
   CUSTOM = 'custom',
+}
+export enum StreakStatus {
+  ACTIVE = 'active',
+  BROKEN = 'broken',
+  ACHIEVED = 'achieved', // For milestone achievements (e.g., 7-day, 30-day)
+}
+
+export enum WeakTopicStatus {
+  ACTIVE = 'active',
+  IMPROVING = 'improving',
+  MASTERED = 'mastered',
+  NEEDS_REVIEW = 'needs_review',
 }
 
 // =============== PAYMENT================
@@ -395,4 +407,10 @@ export enum NigerianState {
 export enum AdminRole {
   SCHOOL_ADMIN = 'school_admin', // the school that signed up
   TEACHER = 'teacher', // can build tests and view results
+}
+
+export enum TutorStatus {
+  PENDING = 'pending', // awaiting verification
+  ACTIVE = 'active',
+  SUSPENDED = 'suspended',
 }

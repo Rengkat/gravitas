@@ -1,4 +1,4 @@
-import { SessionMode } from 'src/common/enums';
+import { SessionMode, TutorStatus } from 'src/common/enums';
 import {
   Column,
   CreateDateColumn,
@@ -10,11 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from './user.entity';
-export enum TutorStatus {
-  PENDING = 'pending', // awaiting verification
-  ACTIVE = 'active',
-  SUSPENDED = 'suspended',
-}
+
 @Entity('tutor_profiles')
 export class TutorProfile {
   @PrimaryGeneratedColumn('uuid')
