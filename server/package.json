@@ -87,6 +87,10 @@
     "testEnvironment": "node",
     "moduleNameMapper": {
       "^src/(.*)$": "<rootDir>/$1"
-    }
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      ".*\\.spec\\.ts$"
+    ]
   }
 }
