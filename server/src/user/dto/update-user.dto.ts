@@ -35,7 +35,7 @@ export class UpdateUserDto {
   @IsString()
   @IsNotEmpty()
   @MaxLength(100)
-  @Transform(({ value }) => value?.trim())
+  @Transform(trimString)
   firstName?: string;
 
   @ApiPropertyOptional({ example: 'Okonkwo' })
