@@ -9,9 +9,9 @@ import {
   OneToMany,
   Index,
 } from 'typeorm';
-// import { StudentProfile } from './student-profile.entity';
-// import { TutorProfile } from './tutor-profile.entity';
-// import { SchoolAdmin } from './school-admin.entity';
+import { StudentProfile } from './student-profile.entity';
+import { TutorProfile } from './tutor-profile.entity';
+import { SchoolAdmin } from './school-admin.entity';
 // import { Subscription } from './subscription.entity';
 // import { Notification } from './notification.entity';
 // import { AiChatSession } from './ai-chat-session.entity';
@@ -76,14 +76,14 @@ export class User {
   updatedAt!: Date;
 
   /* ── Relations ── */
-  //   @OneToOne(() => StudentProfile, (p) => p.user, { nullable: true })
-  //   studentProfile: StudentProfile | null;
+  @OneToOne(() => StudentProfile, (p) => p.user, { nullable: true })
+  studentProfile: StudentProfile | null;
 
-  //   @OneToOne(() => TutorProfile, (p) => p.user, { nullable: true })
-  //   tutorProfile: TutorProfile | null;
+  @OneToOne(() => TutorProfile, (p) => p.user, { nullable: true })
+  tutorProfile: TutorProfile | null;
 
-  //   @OneToOne(() => SchoolAdmin, (a) => a.user, { nullable: true })
-  //   schoolAdmin: SchoolAdmin | null;
+  @OneToOne(() => SchoolAdmin, (a) => a.user, { nullable: true })
+  schoolAdmin: SchoolAdmin | null;
 
   //   @OneToMany(() => Subscription, (s) => s.user)
   //   subscriptions: Subscription[];

@@ -140,11 +140,9 @@ export enum SessionStatus {
 }
 
 export enum SessionMode {
-  LIVE = 'live',
-  RECORDED = 'recorded',
-  INTERACTIVE = 'interactive',
-  PRACTICE = 'practice',
-  REVISION = 'revision',
+  ONLINE = 'online',
+  IN_PERSON = 'in_person',
+  BOTH = 'both',
 }
 
 export enum SessionDuration {
@@ -392,4 +390,9 @@ export enum NigerianState {
   YOBE = 'Yobe',
   ZAMFARA = 'Zamfara',
   FCT_ABUJA = 'Federal Capital Territory',
+}
+//======= FOR SCHOOL ===========
+export enum AdminRole {
+  SCHOOL_ADMIN = 'school_admin', // the school that signed up
+  TEACHER = 'teacher', // can build tests and view results
 }
