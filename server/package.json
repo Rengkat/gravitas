@@ -90,7 +90,8 @@
     },
     "testPathIgnorePatterns": [
       "/node_modules/",
-      ".*\\.spec\\.ts$"
+      "user/user.controller.spec.ts",
+      "user/user.service.spec.ts"
     ]
   }
 }
