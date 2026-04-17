@@ -135,6 +135,7 @@ export class UserService {
     // this.logger.log(`User deactivated: ${id}`);
     return { message: 'Account deactivated successfully' };
   }
+
   create(createUserDto: CreateUserDto) {
     return createUserDto;
   }
