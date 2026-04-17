@@ -44,7 +44,11 @@ export default function LibraryPage() {
   const toggleLike = useCallback((id: string) => {
     setLikedItems((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
       return next;
     });
   }, []);
@@ -52,7 +56,11 @@ export default function LibraryPage() {
   const toggleBookmark = useCallback((id: string) => {
     setBookmarkedItems((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
       return next;
     });
   }, []);

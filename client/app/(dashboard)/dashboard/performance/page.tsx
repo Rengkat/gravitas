@@ -2,7 +2,6 @@
 
 import { PERFORMANCE_DATA } from "@/lib/mock/performance";
 import { CheckCircle, Clock, Target, Zap, Calendar } from "lucide-react";
-import { useState } from "react";
 import {
   Area,
   AreaChart,
