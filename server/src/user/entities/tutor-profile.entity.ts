@@ -46,12 +46,6 @@ export class TutorProfile {
   @Column({ type: 'jsonb', default: [] })
   qualifications: { title: string; institution: string; year: number }[];
 
-  @Column({ type: 'varchar', length: 10, nullable: true })
-  stateCode: string | null;
-
-  @Column({ type: 'varchar', length: 100, nullable: true })
-  lga: string | null;
-
   /** Escrow balance in kobo — released after session completion */
   @Column({ type: 'int', default: 0 })
   escrowBalanceKobo: number;

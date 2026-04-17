@@ -28,6 +28,9 @@ export class User {
   firstName!: string | null;
 
   @Column({ type: 'varchar', length: 100, nullable: true })
+  middleName?: string | null;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
   lastName!: string | null;
 
   @Column({ type: 'varchar', length: 255, nullable: true, name: 'email' })
@@ -41,6 +44,13 @@ export class User {
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.STUDENT })
   role!: UserRole;
+
+  /** State code e.g. "LA", "KN" for matching in-person tutors */
+  @Column({ type: 'varchar', length: 10, nullable: true })
+  stateOfResidence: string | null;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  lga: string | null;
 
   @Column({ type: 'enum', enum: AuthProvider, default: AuthProvider.EMAIL })
   authProvider!: AuthProvider;

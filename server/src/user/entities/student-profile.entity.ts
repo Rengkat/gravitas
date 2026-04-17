@@ -57,13 +57,6 @@ export class StudentProfile {
   @Column({ type: 'timestamptz', nullable: true })
   lastStudyDate: Date | null;
 
-  /** State code e.g. "LA", "KN" for matching in-person tutors */
-  @Column({ type: 'varchar', length: 10, nullable: true })
-  stateCode: string | null;
-
-  @Column({ type: 'varchar', length: 100, nullable: true })
-  lga: string | null;
-
   /** National leaderboard rank — cached by cron */
   @Column({ type: 'int', nullable: true })
   leaderboardRank: number | null;
