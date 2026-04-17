@@ -1,15 +1,7 @@
-import {
-  BookOpen,
-  TrendingUp,
-  Zap,
-  Leaf,
-  Briefcase,
-  Users,
-  Globe,
-} from "lucide-react";
+import { BookOpen, TrendingUp, Zap, Leaf, Briefcase, Users, Globe, LucideIcon } from "lucide-react";
 import { Subject, Experience, PriceRange, Availability, SortMode } from "@/types/tutors";
 
-export const SUBJECTS: { id: Subject; name: string; icon?: any }[] = [
+export const SUBJECTS: { id: Subject; name: string; icon?: LucideIcon }[] = [
   { id: "all", name: "All Subjects" },
   { id: "mathematics", name: "Mathematics", icon: TrendingUp },
   { id: "physics", name: "Physics", icon: Zap },

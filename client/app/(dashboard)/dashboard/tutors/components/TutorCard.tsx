@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Star, Heart, Award, Clock, CheckCircle, Users, ChevronRight, Zap } from "lucide-react";
+import { Star, Heart, Award, Clock, CheckCircle, Users, ChevronRight } from "lucide-react";
 import { Tutor } from "@/types/tutors";
 import { formatPrice, getInitials, subjectLabel } from "./helper";
 interface TutorCardProps {

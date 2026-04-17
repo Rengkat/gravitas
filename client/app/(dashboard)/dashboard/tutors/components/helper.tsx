@@ -35,7 +35,7 @@ export function matchesPrice(tutor: Tutor, range: TutorFilters["priceRange"]): b
 }
 
 export function applyFilters(tutors: Tutor[], filters: TutorFilters): Tutor[] {
-  let result = tutors.filter((t) => {
+  const result = tutors.filter((t) => {
     const q = filters.searchQuery.toLowerCase();
     if (
       q &&

@@ -1,18 +1,34 @@
 import { Tutor } from "@/types/tutors";
 
-const BASE_PACKAGES = [
-  { name: "Single Session", duration: "1 hour", price: 0, savings: 0 },
-  { name: "5 Sessions Pack", duration: "5 hours", price: 0, savings: 0, popular: true },
-  { name: "10 Sessions Pack", duration: "10 hours", price: 0, savings: 0 },
-  { name: "Monthly Plan", duration: "8 hrs/month", price: 0, savings: 0 },
-];
+// const BASE_PACKAGES = [
+//   { name: "Single Session", duration: "1 hour", price: 0, savings: 0 },
+//   { name: "5 Sessions Pack", duration: "5 hours", price: 0, savings: 0, popular: true },
+//   { name: "10 Sessions Pack", duration: "10 hours", price: 0, savings: 0 },
+//   { name: "Monthly Plan", duration: "8 hrs/month", price: 0, savings: 0 },
+// ];
 
 function buildPackages(hourly: number) {
   return [
     { name: "Single Session", duration: "1 hour", price: hourly, savings: 0 },
-    { name: "5 Sessions Pack", duration: "5 hours", price: hourly * 5 - Math.round(hourly * 0.07), savings: Math.round(hourly * 0.35), popular: true },
-    { name: "10 Sessions Pack", duration: "10 hours", price: hourly * 10 - Math.round(hourly * 1.5), savings: Math.round(hourly * 1.5) },
-    { name: "Monthly Plan", duration: "8 hrs/month", price: Math.round(hourly * 8 * 0.8), savings: Math.round(hourly * 8 * 0.2) },
+    {
+      name: "5 Sessions Pack",
+      duration: "5 hours",
+      price: hourly * 5 - Math.round(hourly * 0.07),
+      savings: Math.round(hourly * 0.35),
+      popular: true,
+    },
+    {
+      name: "10 Sessions Pack",
+      duration: "10 hours",
+      price: hourly * 10 - Math.round(hourly * 1.5),
+      savings: Math.round(hourly * 1.5),
+    },
+    {
+      name: "Monthly Plan",
+      duration: "8 hrs/month",
+      price: Math.round(hourly * 8 * 0.8),
+      savings: Math.round(hourly * 8 * 0.2),
+    },
   ];
 }
 
