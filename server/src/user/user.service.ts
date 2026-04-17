@@ -24,6 +24,47 @@ export class UserService {
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
+  /**
+   * Find user by email for auth purposes.
+   * Selects passwordHash (excluded by default in other queries).
+   * Returns null instead of throwing — caller decides how to handle.
+   */
+  async findByEmailForAuth(email: string): Promise<User | null> {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .addSelect('user.passwordHas')
+      .addSelect('user.refreshToken') // normally excluded
+      .addSelect('user.otpCode') // normally excluded
+      .addSelect('user.otpExpiresAt')
+      .where('LOWER(user.email) = LOWER(:email)', { email })
+      .andWhere('user.deletedAt IS NULL')
+      .getOne();
+  }
+
+  /**
+   * Find by phone — for phone OTP login.
+   */
+  async findByPhone(phone: string): Promise<User | null> {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .addSelect('user.otpCode')
+      .addSelect('user.otpExpiresAt')
+      .where('user.phone = :phone', { phone })
+      .andWhere('user.deletedAt IS NULL')
+      .getOne();
+  }
+  /**
+   * Find by password reset token — for reset-password flow.
+   */
+  async findByResetToken(token: string): Promise<User | null> {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .addSelect('user.passwordResetToken')
+      .addSelect('user.passwordResetExpiresAt')
+      .where('user.passwordResetToken = :token', { token })
+      .andWhere('user.deletedAt IS NULL')
+      .getOne();
+  }
 
   create(createUserDto: CreateUserDto) {
     return createUserDto;

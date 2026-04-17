@@ -6,8 +6,8 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
-import appConfig from './common/appConfig';
-import databaseConfig from './common/databaseConfig';
+import appConfig from './config/appConfig';
+import databaseConfig from './config/databaseConfig';
 
 const ENV = process.env.NODE_ENV;
 

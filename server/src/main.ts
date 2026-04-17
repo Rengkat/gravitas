@@ -1,18 +1,17 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const nodeEnv = 'production';
-  const port = 3000;
-  // const port = config.get<number>('app.port', 5000);
-  // const nodeEnv = config.get<string>('app.nodeEnv', 'development');
-  // const frontendUrl = config.get<string>(
-  //   'app.frontendUrl',
-  //   'http://localhost:3000',
-  // );
+
+  // ── Get ConfigService from the DI container ──
+  const configService = app.get(ConfigService);
+
+  const port = configService.get<number>('app.port', 5000);
+  const nodeEnv = configService.get<string>('appConfig.env', 'production');
 
   //======== Global prefix ==========
   app.setGlobalPrefix('api/v1');
@@ -20,16 +19,16 @@ async function bootstrap() {
   //======== Validation pipe =========
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true, // strip unknown fields
-      forbidNonWhitelisted: false, // don't throw on extra fields
-      transform: true, // auto-transform types
+      whitelist: true,
+      forbidNonWhitelisted: false,
+      transform: true,
       transformOptions: {
         enableImplicitConversion: true,
       },
     }),
   );
 
-  // ── Swagger (dev + staging only) ──────────
+  // ── Swagger (dev + staging only) ────────────
   if (nodeEnv !== 'production') {
     const swaggerConfig = new DocumentBuilder()
       .setTitle('Gravitas API')
@@ -59,6 +58,6 @@ async function bootstrap() {
     });
   }
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(port);
 }
 bootstrap();
