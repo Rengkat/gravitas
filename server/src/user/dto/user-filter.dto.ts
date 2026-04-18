@@ -136,7 +136,7 @@ export class UserFilterDto {
   @Min(1)
   @Max(100)
   @Transform(toInt)
-  limit?: number = 20;
+  limit?: number = 10;
 }
 
 // ─────────────────────────────────────────────

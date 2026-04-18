@@ -32,6 +32,8 @@ import {
 } from './dto/user-response.dto';
 import { plainToInstance } from 'class-transformer';
 import { UserFilterDto } from './dto';
+import { PaginatedResult } from 'src/common/pagination/pagination.interface';
+import { PaginationProvider } from 'src/common/pagination/pagination.provider';
 
 @Injectable()
 export class UserService {
@@ -43,6 +45,8 @@ export class UserService {
     private readonly hashProvider: HashProvider,
 
     private readonly bulkCreateUserProvider: BulkCreateUsersProvider,
+
+    private readonly paginationProvider: PaginationProvider,
   ) {}
 
   // FIND HELPERS — used internally + by AuthService
@@ -289,10 +293,8 @@ export class UserService {
     };
   }
 
-  async findAll(query: UserFilterDto) {
+  async findAll(query: UserFilterDto): Promise<PaginatedResult<User>> {
     const {
-      page = 1,
-      limit = 20,
       role,
       subscriptionTier,
       state,
@@ -310,61 +312,61 @@ export class UserService {
       .createQueryBuilder('user')
       .where('user.deletedAt IS NULL');
 
-    // ── Filters ──────────────────────────────
+    // ── Filters ────────────────────────────────────────────────────────────
     if (role) qb.andWhere('user.role = :role', { role });
+
     if (subscriptionTier)
       qb.andWhere('user.subscriptionTier = :subscriptionTier', {
         subscriptionTier,
       });
+
     if (state) qb.andWhere('user.stateOfResidence = :state', { state });
+
     if (gender) qb.andWhere('user.gender = :gender', { gender });
 
-    if (isActive !== undefined) {
+    if (isActive !== undefined)
       qb.andWhere('user.isActive = :isActive', { isActive });
-    }
-    if (emailVerified !== undefined) {
-      qb.andWhere('user.emailVerified = :emailVerified', { emailVerified });
-    }
+
+    if (emailVerified !== undefined)
+      qb.andWhere('user.isEmailVerified = :emailVerified', { emailVerified });
     if (search) {
       qb.andWhere(
         `(
-          user.firstName    ILIKE :s OR
-          user.lastName     ILIKE :s OR
-          user.email        ILIKE :s OR
-          user.phone        ILIKE :s
+          user.firstName ILIKE :s OR
+          user.lastName  ILIKE :s OR
+          user.email     ILIKE :s OR
+          user.phoneNumber ILIKE :s  
         )`,
         { s: `%${search}%` },
       );
     }
-    if (createdFrom) {
+
+    if (createdFrom)
       qb.andWhere('user.createdAt >= :createdFrom', {
         createdFrom: new Date(createdFrom),
       });
-    }
-    if (createdTo) {
+
+    if (createdTo)
       qb.andWhere('user.createdAt <= :createdTo', {
         createdTo: new Date(createdTo),
       });
-    }
 
-    // ── Sort ─────────────────────────────────
+    // ── Sort ───────────────────────────────────────────────────────────────
     const sortableFields: Record<string, string> = {
       createdAt: 'user.createdAt',
       firstName: 'user.firstName',
       lastName: 'user.lastName',
       email: 'user.email',
-      streakCount: 'user.streakCount',
-      xpPoints: 'user.xpPoints',
     };
+
     const orderField = sortableFields[sortBy] ?? 'user.createdAt';
     qb.orderBy(orderField, sortOrder);
 
-    const [data, total] = await qb
-      .skip((page - 1) * limit)
-      .take(limit)
-      .getManyAndCount();
-
-    // return paginate(data, total, page, limit);
+    // ── Paginate ───────────────────────────────────────────────────────────
+    return this.paginationProvider.paginateQueryBuilder(qb, {
+      page: query.page,
+      limit: query.limit,
+    });
   }
   private generateTempPassword(): string {
     const year = new Date().getFullYear();

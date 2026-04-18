@@ -21,7 +21,11 @@ import {
   SubscriptionTier,
   UserRole,
 } from 'src/common/enums/enums';
-import { normalizeEmail, trimString } from 'src/common/transforms/transforms';
+import {
+  normalizeEmail,
+  toBoolean,
+  trimString,
+} from 'src/common/transforms/transforms';
 
 // ─────────────────────────────────────────────
 // UPDATE USER DTO
@@ -130,7 +134,7 @@ export class AdminUpdateUserDto extends UpdateUserDto {
   })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => value === true || value === 'true')
+  @Transform(toBoolean)
   isEmailVerified?: boolean;
 
   // Admin-only: force-verify phone without OTP
@@ -140,14 +144,14 @@ export class AdminUpdateUserDto extends UpdateUserDto {
   })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => value === true || value === 'true')
+  @Transform(toBoolean)
   isPhoneVerified?: boolean;
 
   // Admin-only: activate/deactivate
   @ApiPropertyOptional({ example: true })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => value === true || value === 'true')
+  @Transform(toBoolean)
   isActive?: boolean;
 
   // Admin-only: manually set XP (migration)
@@ -189,7 +193,7 @@ export class AdminResetPasswordDto {
   @ApiPropertyOptional({ default: true })
   @IsOptional()
   @IsBoolean()
-  @Transform(({ value }) => value !== false && value !== 'false')
+  @Transform(toBoolean)
   notifyUser?: boolean = true;
 }
 
