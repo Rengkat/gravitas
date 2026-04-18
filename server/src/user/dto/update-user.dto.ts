@@ -11,6 +11,7 @@ import {
   MaxLength,
   Matches,
   Min,
+  ValidateIf,
 } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
@@ -196,18 +197,26 @@ export class AdminResetPasswordDto {
 // CHANGE PASSWORD DTO
 // Who calls it: Any authenticated user via PATCH /users/me/password
 // ─────────────────────────────────────────────
-export class ChangePasswordDto {
-  @ApiPropertyOptional({ example: 'OldPassword123!' })
-  @IsString()
-  @IsNotEmpty()
-  currentPassword!: string;
 
-  @ApiPropertyOptional({ example: 'NewPassword123!' })
+export class ChangePasswordDto {
+  @IsString()
+  @MinLength(6)
+  @MaxLength(50)
+  currentPassword: string;
+
   @IsString()
   @MinLength(8)
-  @MaxLength(64)
-  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, {
-    message: 'Password must contain uppercase, lowercase, and a number',
+  @MaxLength(50)
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/, {
+    message:
+      'Password too weak. Must contain uppercase, lowercase, number, and special character',
   })
-  newPassword!: string;
+  newPassword: string;
+
+  @IsString()
+  @ValidateIf((o) => o.newPassword !== undefined)
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/, {
+    message: 'Password too weak',
+  })
+  confirmPassword?: string;
 }

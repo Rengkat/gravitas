@@ -12,11 +12,13 @@ import { TopicMasteryHistory } from './entities/topic-mastery-history.entity';
 import { WeakTopic } from './entities/weak-topic.entity';
 import { HashProvider } from 'src/auth/providers/Hash.provider';
 import { BcryptProvider } from 'src/auth/providers/Bcrypt.provider';
+import { BulkCreateUsersProvider } from './providers/BulkCreateUsersProvider';
 
 @Module({
   controllers: [UserController],
   providers: [
     UserService,
+    BulkCreateUsersProvider,
     {
       provide: HashProvider,
       useClass: BcryptProvider,

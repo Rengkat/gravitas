@@ -2,18 +2,26 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  Logger,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { ChangePasswordDto, UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { HashProvider } from 'src/auth/providers/Hash.provider';
+import { BulkCreateUsersProvider } from './providers/BulkCreateUsersProvider';
 
 @Injectable()
 export class UserService {
+  private readonly logger = new Logger(UserService.name);
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+
+    private readonly hashProvider: HashProvider,
+
+    private readonly bulkCreateUser: BulkCreateUsersProvider,
   ) {}
 
   // FIND HELPERS — used internally + by AuthService
@@ -94,46 +102,46 @@ export class UserService {
     return this.userRepository.save(user);
   }
 
-  // async changePassword(
-  //   id: string,
-  //   dto: ChangePasswordDto,
-  // ): Promise<{ message: string }> {
-  //   const user = await this.userRepository
-  //     .createQueryBuilder('user')
-  //     .addSelect('user.passwordHash')
-  //     .where('user.id = :id', { id })
-  //     .getOne();
+  async changePassword(
+    id: string,
+    dto: ChangePasswordDto,
+  ): Promise<{ message: string }> {
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .addSelect('user.passwordHash')
+      .where('user.id = :id', { id })
+      .getOne();
 
-  //   if (!user) throw new NotFoundException('User not found');
-  //   if (!user.passwordHash) {
-  //     throw new BadRequestException(
-  //       'This account uses social login. Please use the forgot password flow to set a password.',
-  //     );
-  //   }
+    if (!user) throw new NotFoundException('User not found');
+    if (!user.passwordHash) {
+      throw new BadRequestException(
+        'This account uses social login. Please use the forgot password flow to set a password.',
+      );
+    }
 
-  //   const isCorrect = await this.hashProvider.compare(
-  //     dto.currentPassword,
-  //     user.passwordHash,
-  //   );
-  //   if (!isCorrect)
-  //     throw new BadRequestException('Current password is incorrect');
+    const isCorrect = await this.hashProvider.comparePassword(
+      dto.currentPassword,
+      user.passwordHash,
+    );
+    if (!isCorrect)
+      throw new BadRequestException('Current password is incorrect');
 
-  //   if (dto.currentPassword === dto.newPassword) {
-  //     throw new BadRequestException(
-  //       'New password must be different from your current password',
-  //     );
-  //   }
+    if (dto.currentPassword === dto.newPassword) {
+      throw new BadRequestException(
+        'New password must be different from your current password',
+      );
+    }
 
-  //   user.passwordHash = await this.hashProvider.hash(dto.newPassword);
-  //   await this.userRepo.save(user);
+    user.passwordHash = await this.hashProvider.hashPassword(dto.newPassword);
+    await this.userRepository.save(user);
 
-  //   return { message: 'Password changed successfully' };
-  // }
+    return { message: 'Password changed successfully' };
+  }
 
   async deactivate(id: string): Promise<{ message: string }> {
     await this.findById(id);
     await this.userRepository.update(id, { isActive: false });
-    // this.logger.log(`User deactivated: ${id}`);
+    this.logger.log(`User deactivated: ${id}`);
     return { message: 'Account deactivated successfully' };
   }
 
