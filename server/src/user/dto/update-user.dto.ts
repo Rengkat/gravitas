@@ -131,7 +131,7 @@ export class AdminUpdateUserDto extends UpdateUserDto {
   @IsOptional()
   @IsBoolean()
   @Transform(({ value }) => value === true || value === 'true')
-  emailVerified?: boolean;
+  isEmailVerified?: boolean;
 
   // Admin-only: force-verify phone without OTP
   @ApiPropertyOptional({
@@ -141,7 +141,7 @@ export class AdminUpdateUserDto extends UpdateUserDto {
   @IsOptional()
   @IsBoolean()
   @Transform(({ value }) => value === true || value === 'true')
-  phoneVerified?: boolean;
+  isPhoneVerified?: boolean;
 
   // Admin-only: activate/deactivate
   @ApiPropertyOptional({ example: true })

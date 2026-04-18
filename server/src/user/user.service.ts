@@ -10,7 +10,11 @@ import {
   BulkCreateUsersResponseDto,
   CreateUserDto,
 } from './dto/create-user.dto';
-import { ChangePasswordDto, UpdateUserDto } from './dto/update-user.dto';
+import {
+  AdminUpdateUserDto,
+  ChangePasswordDto,
+  UpdateUserDto,
+} from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -212,14 +216,41 @@ export class UserService {
     };
   }
 
+  // create bulk by admin
   async bulkCreateUsers(
     dto: BulkCreateUsersDto,
   ): Promise<BulkCreateUsersResponseDto> {
     return this.bulkCreateUserProvider.execute(dto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async adminUpdateUser(id: string, dto: AdminUpdateUserDto): Promise<User> {
+    const user = await this.findById(id);
+
+    // Profile fields
+    if (dto.firstName !== undefined) user.firstName = dto.firstName;
+    if (dto.lastName !== undefined) user.lastName = dto.lastName;
+    if (dto.middleName !== undefined) user.middleName = dto.middleName ?? null;
+    if (dto.phoneNumber !== undefined)
+      user.phoneNumber = dto.phoneNumber ?? null;
+    if (dto.avatar !== undefined) user.avatarUrl = dto.avatar ?? null;
+    if (dto.dateOfBirth !== undefined)
+      user.dateOfBirth = dto.dateOfBirth ?? null;
+    if (dto.gender !== undefined) user.gender = dto.gender ?? null;
+    if (dto.stateOfResidence !== undefined)
+      user.stateOfResidence = dto.stateOfResidence ?? null;
+    if (dto.lga !== undefined) user.lga = dto.lga ?? null;
+
+    // Admin-only fields
+    if (dto.email !== undefined) user.email = dto.email.toLowerCase().trim();
+    if (dto.role !== undefined) user.role = dto.role;
+    if (dto.isEmailVerified !== undefined)
+      user.isEmailVerified = dto.isEmailVerified;
+    if (dto.isPhoneVerified !== undefined)
+      user.isPhoneVerified = dto.isPhoneVerified;
+    if (dto.isActive !== undefined) user.isActive = dto.isActive;
+    const saved = await this.userRepository.save(user);
+    this.logger.log(`Admin updated user ${id}`);
+    return saved;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
