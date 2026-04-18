@@ -5,7 +5,7 @@ import {
   NigerianState,
   SubscriptionTier,
   UserRole,
-} from 'src/common/enums';
+} from 'src/common/enums/enums';
 
 /**
  * UserResponseDto — the shape returned in every API response.

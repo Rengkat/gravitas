@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 import { User } from './user.entity';
 // import { SchoolClass } from './school-admin.entity';
-import { ExamType } from 'src/common/enums';
+import { ExamType } from 'src/common/enums/enums';
 import { WeakTopic } from './weak-topic.entity';
 import { StudyStreak } from './study-streak.entity';
 import { StudyActivity } from './study-activity.entity';

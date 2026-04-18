@@ -11,6 +11,7 @@ import {
   CreateUserDto,
 } from './dto/create-user.dto';
 import {
+  AdminResetPasswordDto,
   AdminUpdateUserDto,
   ChangePasswordDto,
   UpdateUserDto,
@@ -20,12 +21,17 @@ import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HashProvider } from 'src/auth/providers/Hash.provider';
 import { BulkCreateUsersProvider } from './providers/BulkCreateUsersProvider';
-import { AuthProvider, SubscriptionTier, UserRole } from 'src/common/enums';
+import {
+  AuthProvider,
+  SubscriptionTier,
+  UserRole,
+} from 'src/common/enums/enums';
 import {
   CreateUserResponseDto,
   UserResponseDto,
 } from './dto/user-response.dto';
 import { plainToInstance } from 'class-transformer';
+import { UserFilterDto } from './dto';
 
 @Injectable()
 export class UserService {
@@ -253,10 +259,113 @@ export class UserService {
     return saved;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return updateUserDto;
+  async adminResetPassword(
+    id: string,
+    dto: AdminResetPasswordDto,
+  ): Promise<{ message: string; tempPassword?: string }> {
+    const user = await this.findById(id);
+
+    const rawPassword = dto.newPassword ?? this.generateTempPassword();
+    user.passwordHash = await this.hashProvider.hashPassword(rawPassword);
+
+    // Force user to change on next login
+    user.passwordResetToken = null;
+    user.passwordResetExpiresAt = null;
+
+    await this.userRepository.save(user);
+    this.logger.log(`Admin reset password for user ${id}`);
+
+    if (dto.notifyUser !== false) {
+      // NotificationsService handles the email — injected via event or direct call at controller level
+      return {
+        message: `Password reset. Notification queued for ${user.email}.`,
+      };
+    }
+
+    // Return temp password only when notifyUser is false (admin sees it)
+    return {
+      message: 'Password reset successfully.',
+      tempPassword: rawPassword,
+    };
   }
 
+  async findAll(query: UserFilterDto) {
+    const {
+      page = 1,
+      limit = 20,
+      role,
+      subscriptionTier,
+      state,
+      gender,
+      isActive,
+      emailVerified,
+      search,
+      createdFrom,
+      createdTo,
+      sortBy = 'createdAt',
+      sortOrder = 'DESC',
+    } = query;
+
+    const qb = this.userRepository
+      .createQueryBuilder('user')
+      .where('user.deletedAt IS NULL');
+
+    // ── Filters ──────────────────────────────
+    if (role) qb.andWhere('user.role = :role', { role });
+    if (subscriptionTier)
+      qb.andWhere('user.subscriptionTier = :subscriptionTier', {
+        subscriptionTier,
+      });
+    if (state) qb.andWhere('user.stateOfResidence = :state', { state });
+    if (gender) qb.andWhere('user.gender = :gender', { gender });
+
+    if (isActive !== undefined) {
+      qb.andWhere('user.isActive = :isActive', { isActive });
+    }
+    if (emailVerified !== undefined) {
+      qb.andWhere('user.emailVerified = :emailVerified', { emailVerified });
+    }
+    if (search) {
+      qb.andWhere(
+        `(
+          user.firstName    ILIKE :s OR
+          user.lastName     ILIKE :s OR
+          user.email        ILIKE :s OR
+          user.phone        ILIKE :s
+        )`,
+        { s: `%${search}%` },
+      );
+    }
+    if (createdFrom) {
+      qb.andWhere('user.createdAt >= :createdFrom', {
+        createdFrom: new Date(createdFrom),
+      });
+    }
+    if (createdTo) {
+      qb.andWhere('user.createdAt <= :createdTo', {
+        createdTo: new Date(createdTo),
+      });
+    }
+
+    // ── Sort ─────────────────────────────────
+    const sortableFields: Record<string, string> = {
+      createdAt: 'user.createdAt',
+      firstName: 'user.firstName',
+      lastName: 'user.lastName',
+      email: 'user.email',
+      streakCount: 'user.streakCount',
+      xpPoints: 'user.xpPoints',
+    };
+    const orderField = sortableFields[sortBy] ?? 'user.createdAt';
+    qb.orderBy(orderField, sortOrder);
+
+    const [data, total] = await qb
+      .skip((page - 1) * limit)
+      .take(limit)
+      .getManyAndCount();
+
+    // return paginate(data, total, page, limit);
+  }
   private generateTempPassword(): string {
     const year = new Date().getFullYear();
     const chars = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#';

@@ -9,7 +9,7 @@ import {
   Index,
 } from 'typeorm';
 import { StudentProfile } from './student-profile.entity';
-import { DifficultyLevel, WeakTopicStatus } from 'src/common/enums';
+import { DifficultyLevel, WeakTopicStatus } from 'src/common/enums/enums';
 
 @Entity('weak_topics')
 @Index(['studentProfileId', 'subject', 'topic'])

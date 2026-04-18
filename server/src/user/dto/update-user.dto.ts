@@ -20,8 +20,8 @@ import {
   NigerianState,
   SubscriptionTier,
   UserRole,
-} from 'src/common/enums';
-import { normalizeEmail, trimString } from 'src/common/transforms';
+} from 'src/common/enums/enums';
+import { normalizeEmail, trimString } from 'src/common/transforms/transforms';
 
 // ─────────────────────────────────────────────
 // UPDATE USER DTO

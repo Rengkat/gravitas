@@ -11,8 +11,8 @@ import {
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
-import { Gender, NigerianState } from 'src/common/enums';
-import { normalizeEmail, trimString } from 'src/common/transforms';
+import { Gender, NigerianState } from 'src/common/enums/enums';
+import { normalizeEmail, trimString } from 'src/common/transforms/transforms';
 
 /**
  * BaseUserDto — shared fields across all user creation DTOs.

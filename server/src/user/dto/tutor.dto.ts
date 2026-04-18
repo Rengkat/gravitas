@@ -15,7 +15,7 @@ import {
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
-import { NigerianState, SessionType } from 'src/common/enums';
+import { NigerianState, SessionType } from 'src/common/enums/enums';
 import { CreateUserDto } from './create-user.dto';
 import { UserResponseDto } from './user-response.dto';
 

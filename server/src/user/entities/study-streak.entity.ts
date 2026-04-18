@@ -9,7 +9,7 @@ import {
   Index,
 } from 'typeorm';
 import { StudentProfile } from './student-profile.entity';
-import { StreakStatus } from 'src/common/enums';
+import { StreakStatus } from 'src/common/enums/enums';
 
 @Entity('study_streaks')
 @Index(['studentProfileId', 'lastStudyDate'])

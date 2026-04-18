@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { StudentProfile } from './student-profile.entity';
-import { DifficultyLevel } from 'src/common/enums';
+import { DifficultyLevel } from 'src/common/enums/enums';
 
 // For tracking topic mastery over time (historical data)
 @Entity('topic_mastery_history')

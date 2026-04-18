@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
-import { NigerianState, Subject } from 'src/common/enums';
+import { NigerianState, Subject } from 'src/common/enums/enums';
 import { CreateUserDto } from './create-user.dto';
 import { UserResponseDto } from './user-response.dto';
 

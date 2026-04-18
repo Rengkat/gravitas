@@ -1,4 +1,4 @@
-import { SessionMode, TutorStatus } from 'src/common/enums';
+import { SessionMode, TutorStatus } from 'src/common/enums/enums';
 import {
   Column,
   CreateDateColumn,

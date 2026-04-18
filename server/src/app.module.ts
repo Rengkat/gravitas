@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PaginationModule } from './common/pagination/pagination.module';
 import * as Joi from 'joi';
 import appConfig from './config/appConfig';
 import databaseConfig from './config/databaseConfig';
@@ -42,6 +43,7 @@ const ENV = process.env.NODE_ENV;
     }),
     UserModule,
     AuthModule,
+    PaginationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -3,7 +3,7 @@ import {
   Gender,
   NigerianState,
   UserRole,
-} from 'src/common/enums';
+} from 'src/common/enums/enums';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -56,33 +56,50 @@ export class User {
   })
   phoneNumber?: string | null;
 
+  // ── Auth ───────────────────────────────────────────────────────────────
   @Column({ type: 'varchar', nullable: false, select: false })
   passwordHash!: string;
-
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.STUDENT })
-  role!: UserRole;
-
-  @Column({ type: 'date', nullable: true })
-  dateOfBirth: Date | null;
-
-  @Column({ type: 'enum', enum: Gender, nullable: true })
-  gender: Gender | null;
-
-  /** State for matching in-person tutors */
-  @Column({ type: 'enum', enum: NigerianState, nullable: true })
-  stateOfResidence: NigerianState | null;
-
-  @Column({ type: 'varchar', length: 100, nullable: true })
-  lga: string | null;
 
   @Column({ type: 'enum', enum: AuthProvider, default: AuthProvider.EMAIL })
   authProvider!: AuthProvider;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: 'varchar', nullable: true, select: false })
   googleId?: string | null;
 
-  @Column({ type: 'varchar', nullable: true })
-  avatarUrl?: string | null;
+  // ── OTP — email/phone verification & 2FA ──────────────────────────────
+  @Column({ type: 'varchar', length: 6, nullable: true, select: false })
+  otpCode: string | null;
+
+  @Column({ type: 'timestamptz', nullable: true })
+  otpExpiresAt: Date | null;
+
+  @Column({ type: 'int', default: 0 })
+  otpAttempts: number; // brute-force protection — reset on new OTP
+
+  // ── Email verification (link-based) ───────────────────────────────────
+  @Column({ type: 'varchar', nullable: true, select: false })
+  verificationToken: string | null;
+
+  @Column({ type: 'timestamptz', nullable: true })
+  verificationTokenExpiresAt: Date | null;
+
+  // ── Password reset ─────────────────────────────────────────────────────
+  @Column({ type: 'varchar', nullable: true, select: false })
+  passwordResetToken: string | null;
+
+  @Column({ type: 'timestamptz', nullable: true })
+  passwordResetExpiresAt: Date | null;
+
+  // ── Two-factor auth ────────────────────────────────────────────────────
+  @Column({ type: 'varchar', nullable: true, select: false })
+  twoFactorSecret?: string | null;
+
+  @Column({ type: 'boolean', default: false })
+  twoFactorEnabled?: boolean;
+
+  // ── Role & status ──────────────────────────────────────────────────────
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.STUDENT })
+  role!: UserRole;
 
   @Column({ type: 'boolean', default: false })
   isEmailVerified!: boolean;
@@ -93,15 +110,26 @@ export class User {
   @Column({ type: 'boolean', default: true })
   isActive!: boolean;
 
+  // ── Profile ────────────────────────────────────────────────────────────
+  @Column({ type: 'date', nullable: true })
+  dateOfBirth: Date | null;
+
+  @Column({ type: 'enum', enum: Gender, nullable: true })
+  gender: Gender | null;
+
+  @Column({ type: 'enum', enum: NigerianState, nullable: true })
+  stateOfResidence: NigerianState | null;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  lga: string | null;
+
+  @Column({ type: 'varchar', nullable: true })
+  avatarUrl?: string | null;
+
   @Column({ type: 'timestamptz', nullable: true })
   lastLoginAt!: Date | null;
 
-  @Column({ type: 'varchar', nullable: true, select: false })
-  twoFactorSecret?: string | null;
-
-  @Column({ type: 'boolean', default: false })
-  twoFactorEnabled?: boolean;
-
+  // ── Timestamps ─────────────────────────────────────────────────────────
   @CreateDateColumn()
   createdAt!: Date;
 

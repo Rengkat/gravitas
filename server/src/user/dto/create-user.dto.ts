@@ -13,7 +13,7 @@ import {
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
-import { SubscriptionTier, UserRole } from 'src/common/enums';
+import { SubscriptionTier, UserRole } from 'src/common/enums/enums';
 import { BaseUserDto } from './base-user.dto';
 
 // ─────────────────────────────────────────────

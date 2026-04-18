@@ -18,7 +18,7 @@ import {
   SubscriptionTier,
   // NigerianState,
   // SubscriptionTier,
-} from 'src/common/enums';
+} from 'src/common/enums/enums';
 import { CreateUserDto } from './create-user.dto';
 import { UserResponseDto } from './user-response.dto';
 

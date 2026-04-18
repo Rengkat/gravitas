@@ -15,8 +15,8 @@ import {
   SubscriptionTier,
   NigerianState,
   Gender,
-} from 'src/common/enums';
-import { toBoolean, toFloat, toInt } from 'src/common/transforms';
+} from 'src/common/enums/enums';
+import { toBoolean, toFloat, toInt } from 'src/common/transforms/transforms';
 
 // ─────────────────────────────────────────────
 // USER FILTER DTO

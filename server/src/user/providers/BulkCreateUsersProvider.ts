@@ -10,7 +10,7 @@ import {
   GeneratedPasswordDto,
 } from '../dto/create-user.dto';
 import { HashProvider } from 'src/auth/providers/Hash.provider';
-import { AuthProvider, UserRole } from 'src/common/enums';
+import { AuthProvider, UserRole } from 'src/common/enums/enums';
 
 @Injectable()
 export class BulkCreateUsersProvider {

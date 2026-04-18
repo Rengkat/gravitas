@@ -1,4 +1,4 @@
-import { AdminRole } from 'src/common/enums';
+import { AdminRole } from 'src/common/enums/enums';
 import {
   Entity,
   PrimaryGeneratedColumn,
