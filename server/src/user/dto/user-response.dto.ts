@@ -31,7 +31,7 @@ export class UserResponseDto {
 
   @Expose()
   @ApiPropertyOptional({ example: 'Chiamaka' })
-  middleName?: string;
+  middleName?: string | null;
 
   /** Computed from firstName + middleName + lastName */
   @Expose()
@@ -55,26 +55,22 @@ export class UserResponseDto {
   role!: UserRole;
 
   @Expose()
-  @ApiProperty({ enum: SubscriptionTier })
-  subscriptionTier!: SubscriptionTier;
-
-  @Expose()
   @ApiProperty({ example: true })
   isActive!: boolean;
 
   @Expose()
   @ApiProperty({ example: true })
-  emailVerified!: boolean;
+  isEmailVerified!: boolean;
 
   @Expose()
   @ApiProperty({ example: false })
-  phoneVerified!: boolean;
+  isPhoneVerified!: boolean;
 
   @Expose()
   @ApiPropertyOptional({
     example: 'https://res.cloudinary.com/gravitas/avatar.jpg',
   })
-  avatar?: string;
+  avatarUrl?: string;
 
   @Expose()
   @ApiPropertyOptional({ example: '2000-08-14T00:00:00.000Z' })
@@ -86,10 +82,6 @@ export class UserResponseDto {
 
   @Expose()
   @ApiPropertyOptional({ enum: NigerianState })
-  stateOfOrigin?: NigerianState;
-
-  @Expose()
-  @ApiPropertyOptional({ enum: NigerianState })
   stateOfResidence?: NigerianState;
 
   @Expose()
@@ -97,16 +89,8 @@ export class UserResponseDto {
   lga?: string;
 
   @Expose()
-  @ApiProperty({ example: 14 })
-  streakCount!: number;
-
-  @Expose()
-  @ApiProperty({ example: 1200 })
-  xpPoints!: number;
-
-  @Expose()
   @ApiPropertyOptional()
-  lastActiveAt?: Date;
+  lastLoginAt?: Date;
 
   @Expose()
   @ApiProperty()
@@ -126,7 +110,20 @@ export class UserSummaryDto {
   @ApiProperty() firstName!: string;
   @ApiProperty() lastName!: string;
   @ApiProperty() email!: string;
-  @ApiPropertyOptional() avatar?: string;
+  @ApiPropertyOptional() avatarUrl?: string;
   @ApiProperty({ enum: UserRole }) role!: UserRole;
   @ApiProperty() isActive!: boolean;
+}
+
+export class CreateUserResponseDto {
+  @ApiProperty({ type: () => UserResponseDto })
+  user!: UserResponseDto;
+
+  @ApiPropertyOptional({
+    example: 'Gravitas@2026xR3!mQ',
+    description:
+      'Only returned when no password was supplied at creation. ' +
+      'Share this with the student — it is never stored in plaintext.',
+  })
+  temporaryPassword?: string;
 }

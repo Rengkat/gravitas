@@ -8,12 +8,14 @@ import {
   Min,
   Max,
   MaxLength,
+  Matches,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import {
   ExamType,
   DifficultyLevel,
+  SubscriptionTier,
   // NigerianState,
   // SubscriptionTier,
 } from 'src/common/enums';
@@ -29,20 +31,13 @@ import { UserResponseDto } from './user-response.dto';
 //
 // The base CreateUserDto handles all common fields.
 // This adds student-specific fields.
-// ─────────────────────────────────────────────
 export class CreateStudentDto extends CreateUserDto {
-  /**
-   * Name of the school/institution the student attends.
-   * Not the same as a School entity — this is a free-text field
-   * for students who are not enrolled through the school portal.
-   */
   @ApiPropertyOptional({ example: 'Kings College Lagos' })
   @IsOptional()
   @IsString()
   @MaxLength(200)
   school?: string;
 
-  /** Expected year of graduation/finishing secondary school */
   @ApiPropertyOptional({ example: 2026 })
   @IsOptional()
   @IsInt()
@@ -50,10 +45,6 @@ export class CreateStudentDto extends CreateUserDto {
   @Max(new Date().getFullYear() + 10)
   graduationYear?: number;
 
-  /**
-   * Exam types the student is preparing for.
-   * Multiple allowed: a student can prepare for JAMB + WAEC simultaneously.
-   */
   @ApiPropertyOptional({
     enum: ExamType,
     isArray: true,
@@ -64,10 +55,6 @@ export class CreateStudentDto extends CreateUserDto {
   @IsEnum(ExamType, { each: true })
   examTypes?: ExamType[];
 
-  /**
-   * Subjects the student is focusing on.
-   * Uses subject slugs: 'physics', 'mathematics', etc.
-   */
   @ApiPropertyOptional({
     type: [String],
     example: ['physics', 'mathematics', 'chemistry'],
@@ -77,10 +64,6 @@ export class CreateStudentDto extends CreateUserDto {
   @IsString({ each: true })
   subjects?: string[];
 
-  /**
-   * Target score the student wants to achieve.
-   * Used to personalise the dashboard and set study goals.
-   */
   @ApiPropertyOptional({
     example: 320,
     description: 'JAMB target score (0–400)',
@@ -91,33 +74,29 @@ export class CreateStudentDto extends CreateUserDto {
   @Max(400)
   targetScore?: number;
 
-  // School portal fields — only relevant when a school admin creates the student
-  /** School portal enrollment: admission/reg number */
+  // ── School portal fields ───────────────────────────────────────────────
   @ApiPropertyOptional({ example: 'KCL/SS2A/2025/042' })
   @IsOptional()
   @IsString()
   @MaxLength(50)
   admissionNo?: string;
 
-  /** School portal enrollment: parent/guardian name */
   @ApiPropertyOptional({ example: 'Mrs. Ngozi Okonkwo' })
   @IsOptional()
   @IsString()
   @MaxLength(200)
   parentName?: string;
 
-  /** School portal enrollment: parent WhatsApp for weekly reports */
   @ApiPropertyOptional({ example: '+2348098765432' })
   @IsOptional()
+  @Matches(/^\+234[0-9]{10}$/)
   parentPhone?: string;
 
-  /** School class UUID if enrolling into a school portal class */
   @ApiPropertyOptional({ example: 'uuid-of-school-class' })
   @IsOptional()
   @IsUUID('4')
   schoolClassId?: string;
 }
-
 // ─────────────────────────────────────────────
 // UPDATE STUDENT DTO
 // Student updates their own exam preferences.
@@ -181,6 +160,14 @@ export class StudentResponseDto extends UserResponseDto {
   @Expose()
   @ApiPropertyOptional({ type: [String] })
   subjects?: string[];
+
+  @Expose()
+  @ApiProperty({ example: 14 })
+  streakCount!: number;
+
+  @Expose()
+  @ApiProperty({ example: 1200 })
+  xpPoints!: number;
 
   @Expose()
   @ApiPropertyOptional({ example: 320 })

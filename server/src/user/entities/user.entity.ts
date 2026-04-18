@@ -1,4 +1,9 @@
-import { AuthProvider, UserRole } from 'src/common/enums';
+import {
+  AuthProvider,
+  Gender,
+  NigerianState,
+  UserRole,
+} from 'src/common/enums';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -57,9 +62,15 @@ export class User {
   @Column({ type: 'enum', enum: UserRole, default: UserRole.STUDENT })
   role!: UserRole;
 
+  @Column({ type: 'date', nullable: true })
+  dateOfBirth: Date | null;
+
+  @Column({ type: 'enum', enum: Gender, nullable: true })
+  gender: Gender | null;
+
   /** State for matching in-person tutors */
-  @Column({ type: 'varchar', length: 10, nullable: true })
-  stateOfResidence: string | null;
+  @Column({ type: 'enum', enum: NigerianState, nullable: true })
+  stateOfResidence: NigerianState | null;
 
   @Column({ type: 'varchar', length: 100, nullable: true })
   lga: string | null;

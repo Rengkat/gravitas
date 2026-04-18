@@ -3,14 +3,25 @@ import {
   Injectable,
   NotFoundException,
   Logger,
+  ConflictException,
 } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import {
+  BulkCreateUsersDto,
+  BulkCreateUsersResponseDto,
+  CreateUserDto,
+} from './dto/create-user.dto';
 import { ChangePasswordDto, UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HashProvider } from 'src/auth/providers/Hash.provider';
 import { BulkCreateUsersProvider } from './providers/BulkCreateUsersProvider';
+import { AuthProvider, SubscriptionTier, UserRole } from 'src/common/enums';
+import {
+  CreateUserResponseDto,
+  UserResponseDto,
+} from './dto/user-response.dto';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class UserService {
@@ -21,7 +32,7 @@ export class UserService {
 
     private readonly hashProvider: HashProvider,
 
-    private readonly bulkCreateUser: BulkCreateUsersProvider,
+    private readonly bulkCreateUserProvider: BulkCreateUsersProvider,
   ) {}
 
   // FIND HELPERS — used internally + by AuthService
@@ -145,12 +156,66 @@ export class UserService {
     return { message: 'Account deactivated successfully' };
   }
 
-  create(createUserDto: CreateUserDto) {
-    return createUserDto;
+  // ADMIN — super admin operations
+  // ══════════════════════════════════════════
+  async createUser(dto: CreateUserDto): Promise<CreateUserResponseDto> {
+    // ── 1. Check email uniqueness ──────────────────────────────────────────
+    const existing = await this.userRepository
+      .createQueryBuilder('u')
+      .where('LOWER(u.email) = LOWER(:email)', { email: dto.email })
+      .getOne();
+
+    if (existing) {
+      throw new ConflictException(
+        `An account with email ${dto.email} already exists`,
+      );
+    }
+
+    // ── 2. Password — generate if not supplied ─────────────────────────────
+    const wasGenerated = !dto.password;
+    const rawPassword = dto.password ?? this.generateTempPassword();
+    const passwordHash = await this.hashProvider.hashPassword(rawPassword);
+
+    // ── 3. Build and save the user ─────────────────────────────────────────
+    const user = this.userRepository.create({
+      firstName: dto.firstName,
+      lastName: dto.lastName,
+      middleName: dto.middleName ?? null,
+      email: dto.email.toLowerCase().trim(),
+      phoneNumber: dto.phoneNumber ?? null,
+      avatarUrl: dto.avatar ?? null,
+      dateOfBirth: dto.dateOfBirth ?? null,
+      gender: dto.gender ?? null,
+      stateOfResidence: dto.stateOfResidence ?? null,
+      lga: dto.lga ?? null,
+      passwordHash,
+      role: dto.role ?? UserRole.STUDENT,
+      isEmailVerified: dto.skipEmailVerification ?? false,
+      isActive: true,
+      authProvider: AuthProvider.EMAIL,
+    });
+
+    const saved = await this.userRepository.save(user);
+
+    this.logger.log(
+      `Admin created user ${saved.id} (${saved.email}) with role ${saved.role}` +
+        (wasGenerated ? ' — password was auto-generated' : ''),
+    );
+
+    const userDto = plainToInstance(UserResponseDto, saved, {
+      excludeExtraneousValues: true,
+    });
+
+    return {
+      user: userDto,
+      ...(wasGenerated && { temporaryPassword: rawPassword }),
+    };
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async bulkCreateUsers(
+    dto: BulkCreateUsersDto,
+  ): Promise<BulkCreateUsersResponseDto> {
+    return this.bulkCreateUserProvider.execute(dto);
   }
 
   findOne(id: number) {
@@ -161,7 +226,13 @@ export class UserService {
     return updateUserDto;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  private generateTempPassword(): string {
+    const year = new Date().getFullYear();
+    const chars = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#';
+    const random = Array.from(
+      { length: 6 },
+      () => chars[Math.floor(Math.random() * chars.length)],
+    ).join('');
+    return `Gravitas@${year}${random}`;
   }
 }

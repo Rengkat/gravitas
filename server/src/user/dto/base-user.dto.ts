@@ -78,11 +78,6 @@ export abstract class BaseUserDto {
   @IsEnum(Gender)
   gender?: Gender;
 
-  @ApiPropertyOptional({ enum: NigerianState, description: 'State of origin' })
-  @IsOptional()
-  @IsEnum(NigerianState)
-  stateOfOrigin?: NigerianState;
-
   @ApiPropertyOptional({
     enum: NigerianState,
     description: 'Current state of residence',
