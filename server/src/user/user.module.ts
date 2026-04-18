@@ -10,11 +10,19 @@ import { StudyActivity } from './entities/study-activity.entity';
 import { StudyStreak } from './entities/study-streak.entity';
 import { TopicMasteryHistory } from './entities/topic-mastery-history.entity';
 import { WeakTopic } from './entities/weak-topic.entity';
+import { HashProvider } from 'src/auth/providers/Hash.provider';
+import { BcryptProvider } from 'src/auth/providers/Bcrypt.provider';
 
 @Module({
   controllers: [UserController],
-  providers: [UserService],
-  exports: [UserService],
+  providers: [
+    UserService,
+    {
+      provide: HashProvider,
+      useClass: BcryptProvider,
+    },
+  ],
+  exports: [UserService, HashProvider],
   imports: [
     TypeOrmModule.forFeature([
       User,

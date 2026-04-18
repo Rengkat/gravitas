@@ -167,6 +167,18 @@ export class BulkCreateUsersDto {
   sendWelcomeEmails?: boolean = false;
 }
 
+export class GeneratedPasswordDto {
+  @ApiPropertyOptional({ example: 'Email' })
+  @IsOptional()
+  @IsString()
+  identifier: string;
+
+  @ApiPropertyOptional({ example: 'Temp20241fhg' })
+  @IsOptional()
+  @IsString()
+  temporaryPassword: string;
+}
+
 // ─────────────────────────────────────────────
 // BULK CREATE RESPONSE
 // ─────────────────────────────────────────────
@@ -174,9 +186,19 @@ export class BulkCreateUsersResponseDto {
   @ApiProperty({ example: 47 }) created!: number;
   @ApiProperty({ example: 2 }) skipped!: number;
   @ApiProperty({ example: 1 }) failed!: number;
+
   @ApiProperty({
     type: [String],
     example: ['Row 12 (bad@email): email already exists'],
   })
   errors!: string[];
+
+  @ApiProperty({
+    type: [GeneratedPasswordDto],
+    example: [
+      { identifier: 'ada@school.ng', temporaryPassword: 'Gravitas@2026xR3!mQ' },
+      { identifier: '08012345678', temporaryPassword: 'Gravitas@2026kP9#nZ' },
+    ],
+  })
+  generatedPasswords!: GeneratedPasswordDto[];
 }

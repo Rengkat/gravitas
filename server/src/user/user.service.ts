@@ -19,7 +19,7 @@ export class UserService {
   // FIND HELPERS — used internally + by AuthService
   // ══════════════════════════════════════════
 
-  //  * Default: does NOT select sensitive columns (passwordHash etc).
+  //  Default: does NOT select sensitive columns (passwordHash etc).
 
   async findById(id: string): Promise<User> {
     const user = await this.userRepository.findOne({
@@ -83,7 +83,8 @@ export class UserService {
     if (dto.firstName) user.firstName = dto.firstName;
     if (dto.lastName) user.lastName = dto.lastName;
     if (dto.middleName !== undefined) user.middleName = dto.middleName ?? null;
-    if (dto.phone !== undefined) user.phoneNumber = dto.phone ?? null;
+    if (dto.phoneNumber !== undefined)
+      user.phoneNumber = dto.phoneNumber ?? null;
     if (dto.avatar !== undefined) user.avatarUrl = dto.avatar ?? null;
     if (dto.dateOfBirth !== undefined)
       if (dto.stateOfResidence !== undefined)

@@ -48,7 +48,7 @@ export class UserResponseDto {
 
   @Expose()
   @ApiPropertyOptional({ example: '+2348012345678' })
-  phone?: string;
+  phoneNumber?: string;
 
   @Expose()
   @ApiProperty({ enum: UserRole })

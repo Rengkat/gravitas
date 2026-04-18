@@ -53,7 +53,7 @@ export abstract class BaseUserDto {
   @Matches(/^\+234[0-9]{10}$/, {
     message: 'Phone must be a valid Nigerian number: +234XXXXXXXXXX',
   })
-  phone?: string;
+  phoneNumber?: string;
 
   @ApiPropertyOptional({
     example: 'https://res.cloudinary.com/gravitas/avatar.jpg',
